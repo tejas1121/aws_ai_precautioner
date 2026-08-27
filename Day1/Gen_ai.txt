@@ -1,0 +1,349 @@
+2. Generative AI Basics
+2.1 What is Generative AI?
+Definition
+
+Generative Artificial Intelligence (Generative AI) refers to AI systems that can generate new content based on patterns learned from training data.
+
+Unlike traditional AI systems that primarily classify, predict, or analyze existing data, Generative AI can produce new outputs.
+
+Types of content it can generate
+
+Generative AI can generate:
+
+Text → articles, summaries, answers, emails
+Images → artwork, illustrations, realistic images
+Audio → speech, music, sound
+Video → generated or modified video
+Code → programs, functions, scripts
+Other structured content → depending on the model
+Example
+
+Traditional ML:
+
+"Is this email spam?"
+
+Output:
+
+Spam
+
+Generative AI:
+
+"Write a reply to this email."
+
+Output:
+
+A newly generated email
+
+So the key difference is:
+
+Traditional ML → predicts/classifies
+
+Generative AI → creates new content
+
+How does Generative AI work?
+
+At a high level:
+
+Large amount of training data
+            ↓
+       Model training
+            ↓
+    Foundation Model
+            ↓
+       User prompt
+            ↓
+    Model generates output
+
+The model learns statistical patterns and relationships from its training data.
+
+When given a prompt, it uses those learned patterns to generate an appropriate response.
+
+Important point
+
+Generative AI does not simply copy and paste training data every time it generates an answer.
+
+It uses the patterns learned during training to generate new output.
+
+2.2 LLM Basics
+What is an LLM?
+
+LLM = Large Language Model
+
+An LLM is a machine learning model trained on a very large amount of text data to understand and generate human language.
+
+LLMs are a major type of foundation model.
+
+What can an LLM do?
+
+LLMs can perform tasks such as:
+
+Question answering
+Text generation
+Summarization
+Translation
+Classification
+Information extraction
+Code generation
+Conversational interactions
+
+For example:
+
+Prompt:
+
+Explain cloud computing in simple terms.
+
+LLM:
+
+Cloud computing allows users to access computing resources over the internet...
+
+The model generates this response based on patterns it learned during training.
+
+How does an LLM generate text?
+
+A simplified view is:
+
+User Prompt
+     ↓
+Tokenization
+     ↓
+Tokens
+     ↓
+LLM
+     ↓
+Predict next token
+     ↓
+Predict next token
+     ↓
+Predict next token
+     ↓
+Generated response
+
+This is why tokens are important.
+
+Tokens
+
+A token is a unit of text processed by the model.
+
+A token could be:
+
+A complete word
+Part of a word
+Punctuation
+Another piece of text
+
+For example:
+
+"AWS is powerful"
+
+could be represented as several tokens.
+
+The exact tokenization depends on the model.
+
+LLMs and next-token prediction
+
+One fundamental mechanism behind language models is next-token prediction.
+
+Suppose the model receives:
+
+"The capital of France is"
+
+The model predicts that the next token is likely:
+
+"Paris"
+
+Then it continues generating the response token by token.
+
+This is also why perplexity is associated with language-model evaluation.
+
+2.3 Foundation Models
+What is a Foundation Model?
+
+A Foundation Model (FM) is a large, pre-trained model that can be adapted and used for a wide variety of downstream tasks.
+
+Instead of building a model from scratch for every application, developers can start with an existing foundation model.
+
+Traditional approach
+Specific task
+     ↓
+Collect data
+     ↓
+Build model
+     ↓
+Train model
+     ↓
+Deploy model
+Foundation-model approach
+Pre-trained Foundation Model
+            ↓
+ ┌──────────┼──────────┐
+ ↓          ↓          ↓
+Prompting   RAG     Fine-tuning
+ ↓          ↓          ↓
+Application / Use Case
+
+This dramatically reduces the effort required to build many AI applications.
+
+Why are they called "Foundation" Models?
+
+Because they provide a foundation on which many different AI applications can be built.
+
+One foundation model may be adapted for:
+
+Chatbots
+Summarization
+Question answering
+Content generation
+Code generation
+Classification
+Other specialized applications
+Foundation Model vs LLM
+
+This distinction is important for AIF-C01.
+
+Foundation Model
+
+Broader category.
+
+Foundation models can be designed for different modalities and purposes, including:
+
+Text
+Images
+Audio
+Multimodal tasks
+LLM
+
+A Large Language Model is primarily focused on understanding and generating language.
+
+Therefore:
+
+An LLM can be a type of foundation model, but foundation models are not limited to LLMs.
+
+Think:
+
+Foundation Models
+│
+├── Language models
+│
+├── Image models
+│
+├── Audio models
+│
+└── Multimodal models
+2.4 Amazon Bedrock
+
+Now we connect foundation models to AWS.
+
+What is Amazon Bedrock?
+
+Amazon Bedrock is a fully managed AWS service that provides access to foundation models through APIs for building generative AI applications.
+
+The important exam idea is:
+
+Bedrock allows developers to use foundation models without having to manage the underlying infrastructure required to run those models.
+
+Why would you use Bedrock?
+
+Suppose you want to create an AI chatbot.
+
+Without a managed service, you might need to worry about:
+
+GPUs
+Model deployment
+Infrastructure
+Scaling
+Availability
+Model serving
+
+With Bedrock, you can interact with supported foundation models through AWS-managed capabilities.
+
+Simplified:
+
+Your Application
+       ↓
+Amazon Bedrock
+       ↓
+Foundation Model
+       ↓
+Generated Response
+Multiple foundation models
+
+One important characteristic of Amazon Bedrock is that it provides access to foundation models from Amazon and various model providers.
+
+This gives organizations flexibility in selecting a model based on factors such as:
+
+Performance
+Cost
+Latency
+Modality
+Context requirements
+Specific use case
+Exam idea
+
+If you see:
+
+"A company wants to use foundation models from different providers through a managed AWS service."
+
+Think:
+
+Amazon Bedrock.
+
+Bedrock is not a foundation model
+
+This is an important distinction.
+
+Amazon Bedrock = AWS service
+
+Foundation Model = AI model
+
+For example:
+
+Amazon Bedrock
+      │
+      ├── Model A
+      ├── Model B
+      ├── Amazon Titan
+      └── Other supported FMs
+
+So don't answer "Bedrock is an LLM."
+
+It isn't.
+
+Bedrock is the service through which you can access and use foundation models.
+
+2.5 Amazon Titan
+
+Now we come to Amazon Titan.
+
+What is Amazon Titan?
+
+Amazon Titan is a family of foundation models developed by Amazon and available through Amazon Bedrock.
+
+This distinction is extremely important:
+
+Bedrock = service
+
+Titan = family of foundation models
+What can Titan models do?
+
+Depending on the specific Titan model, they can support capabilities such as:
+
+Text generation
+Text embeddings
+Image generation
+
+For AIF-C01, focus on understanding what Titan is and its relationship with Bedrock, rather than memorizing every model name.
+
+Titan and Bedrock relationship
+
+Think of it this way:
+
+                 Amazon Bedrock
+                       │
+        ┌──────────────┼──────────────┐
+        ↓              ↓              ↓
+   Amazon Titan    Provider X     Provider Y
+    models          models          models
+
+Bedrock provides the managed environment/API access.
+
+Titan represents Amazon's own family of foundation models.
