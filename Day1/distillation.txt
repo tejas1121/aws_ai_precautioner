@@ -1,0 +1,132 @@
+5.1 Teacher Model
+
+The teacher model is the larger and usually more capable model.
+
+It already has strong capabilities and is used to provide knowledge or guidance to the smaller model.
+
+Think:
+
+Teacher = large, powerful model
+
+Example:
+
+Large Foundation Model
+        ↓
+   Teacher Model
+
+The teacher doesn't necessarily get deployed for the final application. Its role is to teach the student.
+
+5.2 Student Model
+
+The student model is the smaller model that learns from the teacher.
+
+The goal is for the student to reproduce important capabilities of the teacher while being:
+
+Smaller
+Faster
+Less expensive to run
+
+Think:
+
+Student = smaller, efficient model
+
+5.3 How Knowledge Distillation Works
+
+Simplified process:
+
+             Teacher Model
+            (Large Model)
+                  ↓
+        Provides knowledge /
+        outputs / guidance
+                  ↓
+             Student Model
+            (Small Model)
+                  ↓
+       Learns useful behavior
+                  ↓
+       Smaller final model
+
+The student is trained to reproduce useful behavior from the teacher.
+
+Example
+
+Imagine you have a very large LLM that gives excellent customer-support responses.
+
+However, running it for every customer request is expensive.
+
+You could use it as the teacher and train a smaller model as the student.
+
+The smaller model learns to produce similar useful responses.
+
+Then you deploy the smaller model.
+
+5.4 Why Use Model Distillation?
+1. Lower Cost 💰
+
+Smaller models generally require fewer computational resources.
+
+Therefore:
+
+Smaller model → potentially lower inference cost
+
+This is particularly useful when the model handles a large number of requests.
+
+2. Lower Latency ⚡
+
+A smaller model generally requires less computation.
+
+Therefore it can often produce responses faster.
+
+Smaller model → potentially faster inference
+
+This is important for applications requiring quick responses.
+
+3. More Efficient Inference
+
+The smaller model can require:
+
+Less memory
+Less compute
+Fewer resources
+
+This makes deployment more efficient.
+
+4. Easier Deployment
+
+A smaller model may be easier to deploy in environments where computational resources are limited.
+
+For example, applications with strict latency or infrastructure constraints.
+
+Teacher vs Student
+Teacher Model	Student Model
+Larger	Smaller
+More capable	Less capable but optimized
+Provides knowledge/guidance	Learns from teacher
+More computationally expensive	More efficient
+Usually higher performance	Attempts to retain useful performance
+🔥 The key trade-off
+
+Distillation is not magic.
+
+The student may not completely match the teacher.
+
+You are usually trading some model capability for:
+
+Lower cost + lower latency + efficiency
+
+Think:
+
+Large Teacher
+     ↓
+   Distill
+     ↓
+Small Student
+     ↓
+Less resource usage
+     +
+Faster inference
+     +
+Lower cost
+     -
+Potentially some loss in capability
