@@ -1,0 +1,129 @@
+3. Custom Models
+3.1 Custom Models in Amazon Bedrock
+What is a Custom Model?
+
+A custom model is a foundation model that has been adapted/customized for a specific use case using an organization's own training data.
+
+Instead of using the foundation model exactly as it comes, you customize it so that it performs better for your particular requirements.
+
+Basic flow
+Pre-trained Foundation Model
+            ↓
+       Your Data
+            ↓
+     Customization
+            ↓
+       Custom Model
+
+For example, suppose a company uses a general-purpose language model.
+
+The company wants the model to understand its:
+
+Industry terminology
+Product information
+Customer-support style
+Domain-specific requirements
+
+It can customize the foundation model using appropriate training data.
+
+3.2 Why Customize a Foundation Model?
+
+A general-purpose foundation model is trained to handle a wide range of tasks.
+
+But your application may have a very specific requirement.
+
+Customization allows you to make the model more suitable for that requirement.
+
+Common reasons
+1. Improve domain-specific performance
+
+Suppose you have a model that understands general English but struggles with legal terminology.
+
+You can customize it using relevant domain-specific data.
+
+Goal → better performance in a specific domain
+
+2. Improve performance for a specific task
+
+A foundation model may be capable of many tasks, but you may want it to perform particularly well at one task.
+
+For example:
+
+Customer-support response generation
+
+You can provide suitable training examples so the model learns the desired behavior.
+
+3. Adapt the model's behavior
+
+You may want the model to follow a particular style or format.
+
+For example:
+
+Input:
+Customer complaint
+
+Desired behavior:
+Generate a short,
+professional,
+empathetic response.
+
+Customization can help the model consistently produce outputs suited to your requirements.
+
+4. Use organization-specific knowledge/patterns
+
+A company may have specialized terminology, formats, or examples that aren't adequately represented in the general model's behavior.
+
+Customization can help the model better handle those requirements.
+
+Custom Model vs Foundation Model
+
+This distinction is important.
+
+Foundation Model
+
+A pre-trained, general-purpose model that can be adapted to many tasks.
+
+Custom Model
+
+A foundation model that has been further customized for a specific requirement.
+
+Think:
+
+Foundation Model
+      ↓
+Customization
+      ↓
+Custom Model
+🔥 AIF-C01 exam perspective
+
+If you see:
+
+"A company wants to adapt an existing foundation model to perform better for its specific domain."
+
+Think:
+
+Model customization
+
+If the question specifically says:
+
+"Use labeled examples to further train the foundation model."
+
+Think:
+
+Supervised Fine-Tuning
+
+If it says:
+
+"Use rewards/feedback to optimize the model's behavior."
+
+Think:
+
+Reinforcement Fine-Tuning
+
+And if it says:
+
+"Create a smaller model that retains useful behavior from a larger model."
+
+Think:
+
+Knowledge Distillation
