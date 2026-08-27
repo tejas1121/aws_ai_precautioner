@@ -1,0 +1,114 @@
+4. Fine-Tuning ⭐⭐⭐⭐⭐
+4.1 What is Fine-Tuning?
+
+Fine-tuning is the process of taking a pre-trained foundation model and training it further on a smaller, task-specific dataset to adapt its behavior or improve its performance for a particular use case.
+
+Instead of training a model from scratch:
+
+Large general training data
+          ↓
+  Pre-trained Foundation Model
+          ↓
+   Additional training data
+          ↓
+       Fine-tuning
+          ↓
+     Customized Model
+Example
+
+Suppose you have a general-purpose LLM that can answer normal questions.
+
+You want it to become a customer-support model that consistently responds in your company's preferred style.
+
+You provide examples such as:
+
+Customer: My order hasn't arrived.
+
+Desired response:
+"We're sorry for the delay. Let me check
+your order status..."
+
+The model learns from these examples during fine-tuning.
+
+4.2 Why Fine-Tune a Foundation Model?
+
+A foundation model is general-purpose, so it may not perform optimally for a specialized task.
+
+Fine-tuning can help you:
+
+Improve performance on a specific task
+Adapt the model to a specific domain
+Teach desired patterns or behavior
+Make responses more consistent with a particular use case
+Key idea
+
+Fine-tuning adapts an existing foundation model rather than training a completely new model from scratch.
+
+4.3 Supervised Fine-Tuning (SFT)
+
+Supervised Fine-Tuning uses labeled training examples to teach the model the desired behavior.
+
+You provide:
+
+Input → Desired output
+
+For example:
+
+Input	Desired output
+"What is S3?"	"Amazon S3 is an object storage service."
+"What is EC2?"	"Amazon EC2 provides resizable compute capacity."
+
+The model learns from these examples.
+
+Flow
+Foundation Model
+       ↓
+Labeled examples
+(Input + desired output)
+       ↓
+Supervised Fine-Tuning
+       ↓
+Customized Model
+🔑 Remember
+
+SFT → labeled examples → desired outputs
+
+4.4 Reinforcement Fine-Tuning (RFT)
+
+Reinforcement Fine-Tuning uses rewards or feedback to optimize the model's behavior toward a desired outcome.
+
+Instead of always providing one exact correct answer, the model's responses can be evaluated according to a reward function or feedback signal.
+
+Simplified:
+
+Foundation Model
+       ↓
+Generate response
+       ↓
+Evaluate response
+       ↓
+Reward / Feedback
+   ↙           ↘
+Good          Bad
+ ↑             ↓
+Higher        Lower
+reward        reward
+       ↓
+Model improves behavior
+Example
+
+Suppose an AI model is solving complex reasoning problems.
+
+You want responses that are:
+
+Correct
+Well-reasoned
+Relevant
+
+The model's outputs can be evaluated, and better responses receive higher rewards.
+
+Over time, the model is optimized toward the desired behavior.
+
+🔑 Remember
+
+RFT → rewards/feedback → optimize behavior
