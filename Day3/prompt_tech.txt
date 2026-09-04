@@ -1,0 +1,121 @@
+1. Zero-Shot Prompting
+
+Zero-shot prompting means asking the model to perform a task without providing any examples.
+
+Example
+
+Classify this review as Positive, Negative, or Neutral:
+"The product arrived late and was damaged."
+
+No examples are provided.
+
+The model uses its existing capabilities to perform the task.
+
+🧠 Remember
+
+Zero-shot = 0 examples
+
+2. Few-Shot Prompting
+
+Few-shot prompting provides the model with a small number of examples before asking it to perform the task.
+
+Example:
+
+Review: "Amazing product!"
+Sentiment: Positive
+
+Review: "Terrible quality."
+Sentiment: Negative
+
+Review: "The product is okay."
+Sentiment: Neutral
+
+Review: "I really liked it."
+Sentiment:
+
+The first examples teach the model the expected pattern.
+
+Why use it?
+
+Few-shot prompting can help the model:
+
+Understand the task
+Follow a desired format
+Produce more consistent outputs
+Handle specialized classification/extraction patterns
+🧠 Remember
+
+Few-shot = few examples → demonstrate the desired behavior
+
+3. Chain-of-Thought (CoT) Prompting
+
+Chain-of-thought prompting encourages the model to perform a problem through multiple reasoning steps rather than immediately producing an answer.
+
+Example:
+
+Instead of:
+
+What is 17 × 24?
+
+You can structure the prompt to encourage step-by-step reasoning.
+
+The general idea:
+
+Problem
+   ↓
+Reasoning steps
+   ↓
+Intermediate conclusions
+   ↓
+Final answer
+Why use it?
+
+It can be useful for tasks requiring:
+
+Mathematical reasoning
+Logical reasoning
+Multi-step problem solving
+Complex analysis
+🧠 Exam memory
+
+Chain-of-thought → multi-step reasoning
+
+Don't confuse this with RAG. CoT is about reasoning, while RAG is about retrieving external information.
+
+4. RAG as a Prompt Engineering / Augmentation Technique
+
+You've already studied RAG separately, but here it appears in the context of improving prompts.
+
+RAG = Retrieval-Augmented Generation.
+
+Relevant information is retrieved from an external knowledge source and provided as context to the model.
+
+Example:
+
+User Question
+      ↓
+Retrieve relevant documents
+      ↓
+Relevant context
+      ↓
+Prompt + Context
+      ↓
+Foundation Model
+      ↓
+Answer
+Example
+
+User:
+
+"What is our company's refund policy?"
+
+The model doesn't need to rely solely on its pretrained knowledge.
+
+The application retrieves the company's current refund policy and places the relevant information into the prompt.
+
+Why use RAG?
+Private/company-specific information
+Frequently changing information
+Domain-specific knowledge
+Reduce reliance on model's pretrained knowledge
+Answer questions using external sources
