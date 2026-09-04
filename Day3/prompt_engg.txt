@@ -1,0 +1,72 @@
+1. What is Prompt Engineering?
+
+Prompt engineering is the process of designing and refining prompts to guide a foundation model toward the desired output.
+
+A prompt can contain:
+
+Instructions
+Context
+Questions
+Examples
+Constraints
+Desired output format
+Example
+
+Weak:
+
+Explain AWS.
+
+Improved:
+
+Explain Amazon S3 to a beginner in 5 bullet points. Include its purpose, two use cases, and one limitation.
+
+The second prompt gives the model clearer instructions, so the output is more controlled.
+
+2. How to Improve a Prompt
+
+The goal is to make the prompt clear, specific, and unambiguous.
+
+Common ways to improve it
+
+1. Give clear instructions
+
+❌ Tell me about RAG.
+
+✅ Explain RAG in simple terms and give one example.
+
+2. Provide context
+
+You are explaining AWS concepts to a beginner preparing for the AIF-C01 exam.
+
+Now the model knows the context and target audience.
+
+3. Specify the desired format
+
+Answer in a table with three columns: Concept, Purpose, Example.
+
+4. Specify constraints
+
+Explain in no more than 100 words.
+
+5. Give examples
+
+Showing the model examples of the desired input/output can guide its behavior. This leads into few-shot prompting, which you'll likely cover next.
+
+3. Negative Prompting
+
+Negative prompting tells the model what you don't want in the output.
+
+Example:
+
+Generate a product description for a laptop.
+Do not mention competitor brands. Do not use technical jargon.
+
+Here:
+
+"Generate a product description..." → what you want
+"Do not mention competitor brands..." → what you don't want
+Another example
+
+Summarize this document in 5 bullet points. Do not include information that isn't present in the document.
+
+This is a negative instruction because you're telling the model what to avoid.
