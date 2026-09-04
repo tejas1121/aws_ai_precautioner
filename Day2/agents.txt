@@ -1,0 +1,111 @@
+Amazon Bedrock Agents
+
+An Amazon Bedrock Agent is a fully managed capability that uses a foundation model to reason about a user's request, decide what actions are needed, and execute those actions using connected resources.
+
+The easiest way to remember it:
+
+RAG gives the model information. An Agent can take actions.
+
+Simple example
+
+Suppose you build a customer-support agent.
+
+User says:
+
+"My order hasn't arrived. Check my order and cancel it if it's eligible."
+
+A normal LLM can explain how cancellation works.
+
+An Agent can:
+
+User request
+     ↓
+Agent understands the goal
+     ↓
+Decides what needs to be done
+     ↓
+Calls appropriate API/action
+     ↓
+Gets result
+     ↓
+Responds to user
+
+For example:
+
+"Check my order"
+       ↓
+Call Order API
+       ↓
+Get order status
+       ↓
+"Order is eligible for cancellation"
+       ↓
+Call Cancellation API
+       ↓
+Cancel order
+       ↓
+Tell user the result
+What makes an Agent different?
+
+An Agent can coordinate multiple steps rather than simply generating text.
+
+Think:
+
+LLM
+→ generates an answer
+
+RAG
+→ retrieves information + generates an answer
+
+Agent
+→ reasons about the task + retrieves information and/or takes actions
+
+Main components you should know
+1. Foundation Model
+
+The Agent uses an FM to understand the request and determine what to do.
+
+2. Instructions
+
+You provide instructions defining the Agent's behavior and objectives.
+
+Example:
+
+"You are a customer-support assistant. Help customers check orders and process eligible cancellations."
+
+3. Knowledge Bases
+
+An Agent can use a Knowledge Base to retrieve relevant information.
+
+For example:
+
+Customer asks:
+"What is your return policy?"
+
+Agent
+ ↓
+Knowledge Base
+ ↓
+Return-policy document
+ ↓
+Answer
+4. Action Groups
+
+This is very important for the exam.
+
+Action Groups allow an Agent to perform actions by calling APIs/functions.
+
+Example:
+
+Action Group
+ ├── CheckOrderStatus
+ ├── CancelOrder
+ └── CreateRefund
+
+So if the question says:
+
+"The Agent needs to interact with an external application or API."
+
+Think:
+
+👉 Action Groups
