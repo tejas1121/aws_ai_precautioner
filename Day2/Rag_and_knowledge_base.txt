@@ -1,0 +1,285 @@
+1. What is RAG?
+
+RAG = Retrieval-Augmented Generation
+
+RAG combines:
+
+Retrieval + Generation
+
+Instead of relying only on the knowledge already learned by the foundation model, RAG retrieves relevant information from an external data source and provides it to the model as context.
+
+Simple flow
+User Question
+      ↓
+Retrieve relevant information
+      ↓
+External Knowledge Base
+      ↓
+Relevant context
+      ↓
+Foundation Model
+      ↓
+Generated Answer
+Example
+
+Suppose a company has 10,000 internal documents.
+
+User asks:
+
+"What is our company's refund policy?"
+
+The foundation model may not know the company's private policy.
+
+With RAG:
+
+Question
+   ↓
+Search company documents
+   ↓
+Find refund-policy document
+   ↓
+Give relevant content to LLM
+   ↓
+LLM generates answer
+Exam keyword
+
+RAG = retrieve relevant external information before generating the response.
+
+2. Why use RAG?
+
+The major reason is to allow an LLM to use external or private, up-to-date knowledge without having to retrain the model.
+
+Common use cases:
+
+Company internal documents
+Customer support
+Product documentation
+Legal documents
+Financial reports
+Healthcare information
+Knowledge portals
+Question answering over documents
+Very important distinction
+
+RAG ≠ Fine-tuning
+
+RAG	Fine-tuning
+Retrieves information at inference time	Trains model further
+Good for changing/up-to-date knowledge	Good for adapting behavior/task
+Can use private external data	Uses training/customization data
+Doesn't modify model weights	Updates model parameters
+
+Exam clue:
+
+"Company frequently updates its documentation and wants the AI to answer using the latest information."
+
+👉 RAG
+
+3. What is a Knowledge Base?
+
+A Knowledge Base is a collection of information that an AI application can retrieve information from to answer user queries.
+
+In Amazon Bedrock, Knowledge Bases can be used to implement RAG.
+
+Simplified:
+
+Documents
+   ↓
+Knowledge Base
+   ↓
+Embeddings
+   ↓
+Vector Database
+   ↓
+Retrieve relevant information
+   ↓
+Foundation Model
+   ↓
+Answer
+
+So don't think:
+
+Knowledge Base = LLM
+
+Instead:
+
+Knowledge Base = external knowledge that the application can retrieve from.
+
+4. What is an Embedding?
+
+This is one of the most important concepts.
+
+An embedding converts data such as text into a numerical representation called a vector.
+
+For example:
+
+"How do I reset my password?"
+             ↓
+      Embedding Model
+             ↓
+[0.21, -0.73, 0.44, 0.18, ...]
+
+The vector represents the semantic meaning of the text.
+
+The important idea isn't the actual numbers.
+
+It's:
+
+Similar meanings → similar vectors
+
+For example:
+
+"How can I change my password?"
+             ↓
+          Vector A
+
+"I forgot my password. How do I reset it?"
+             ↓
+          Vector B
+
+A vector database can determine that A and B are semantically similar.
+
+5. Vector Database
+
+A vector database stores and searches vectors/embeddings.
+
+Instead of searching only for exact words, it can perform similarity search.
+
+Example:
+
+User asks:
+
+"I can't remember my login password."
+
+The database can retrieve a document saying:
+
+"Steps to reset your forgotten password"
+
+Even though the exact words aren't identical.
+
+That's the power of semantic search.
+
+Remember:
+
+Embedding → converts data into vectors
+
+Vector database → stores/searches those vectors
+
+6. RAG + Embeddings + Vector DB
+
+Put everything together:
+
+             DOCUMENTS
+                 ↓
+          Embedding Model
+                 ↓
+           Vector Embeddings
+                 ↓
+          Vector Database
+                 ↓
+        ┌─────────────────┐
+User →  │ Similarity Search│
+        └─────────────────┘
+                 ↓
+        Relevant Documents
+                 ↓
+        Foundation Model
+                 ↓
+             Answer
+One-line memory trick
+
+Embedding creates vectors → Vector DB stores/searches vectors → RAG retrieves relevant information → FM generates the answer.
+
+7. Data Sources for Knowledge Bases
+
+Knowledge Bases need information to retrieve from.
+
+Typical sources include:
+
+Amazon S3
+Web/crawled content depending on supported configuration
+Other supported enterprise data sources/connectors
+
+For AIF-C01, remember S3 particularly well.
+
+Example:
+
+PDFs
+Word documents
+Text files
+Company documents
+        ↓
+       S3
+        ↓
+Knowledge Base
+        ↓
+Embeddings
+        ↓
+Vector Store
+8. Why Vector Embeddings?
+
+Suppose your database contains:
+
+"Employees can request 20 days of annual leave."
+
+User asks:
+
+"How many vacation days do I get?"
+
+There may be little or no exact keyword overlap.
+
+Traditional keyword search may struggle.
+
+Semantic/vector search recognizes that:
+
+annual leave ≈ vacation days
+
+and retrieves the relevant document.
+
+That's why embeddings are useful in RAG.
+
+9. AIF-C01 Exam Traps
+RAG vs Fine-tuning
+
+Need current/private information?
+
+👉 RAG
+
+Need model to learn a specialized behavior/style/task?
+
+👉 Fine-tuning
+
+Embedding vs Vector Database
+
+Convert text into numerical vectors?
+
+👉 Embedding
+
+Store/search those vectors?
+
+👉 Vector database
+
+Knowledge Base vs Vector Database
+
+A Knowledge Base is the overall knowledge retrieval mechanism/data layer used by the application.
+
+A vector database is the storage/search component for embeddings.
+
+Don't treat them as identical.
+
+RAG vs Training
+
+RAG retrieves information during inference.
+
+It does not require retraining the foundation model every time the source documents change.
+
+That's a very strong exam concept.
+
+🧠 Memorize these 7 lines
+RAG = Retrieval-Augmented Generation
+RAG retrieves external information before generation.
+Knowledge Base = collection of information available for retrieval.
+Embedding = numerical/vector representation of data.
+Similar meanings → similar vectors.
+Vector DB = stores and searches embeddings.
+RAG is useful for private, external, and frequently changing knowledge.
