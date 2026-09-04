@@ -1,0 +1,63 @@
+Amazon Nova Models
+
+There are 7 original Nova models, divided into 3 categories:
+
+1. Understanding Models
+
+These mainly understand inputs and generate text.
+
+Model	Main idea	Input
+Nova Micro	Fastest, lowest-cost, text-only	Text
+Nova Lite	Low-cost, fast multimodal	Text + Image + Video
+Nova Pro	High capability, balanced accuracy/speed/cost	Text + Image + Video
+Nova Premier	Most capable, complex tasks/reasoning	Text + Image + Video
+
+2. Creative Content Generation
+Model	Purpose	Input → Output
+Nova Canvas	Image generation	Text/Image → Image
+Nova Reel	Video generation	Text/Image → Video
+
+3. Speech
+Model	Purpose	Input → Output
+Nova Sonic	Real-time conversational speech	Speech → Speech + text
+
+Nova Sonic is designed for low-latency, multi-turn voice interactions such as conversational assistants and customer-service applications.
+
+🧠 The exam memory table
+UNDERSTANDING
+────────────────────────
+Micro    → Text only → cheapest/lowest latency
+Lite     → Multimodal → low cost + fast
+Pro      → Multimodal → balance of capability/cost/speed
+Premier  → Multimodal → most capable / complex tasks
+
+CREATIVE
+────────────────────────
+Canvas   → Image generation
+Reel     → Video generation
+
+SPEECH
+────────────────────────
+Sonic    → Speech conversation
+Most important distinctions
+
+"Lowest latency and low cost, text-only"
+→ Nova Micro
+
+"Low-cost multimodal model"
+→ Nova Lite
+
+"Best combination of accuracy, speed, and cost"
+→ Nova Pro
+
+"Most capable multimodal model / complex tasks"
+→ Nova Premier
+
+"Generate images"
+→ Nova Canvas
+
+"Generate videos"
+→ Nova Reel
+
+"Real-time conversational speech"
+→ Nova Sonic
