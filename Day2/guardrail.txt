@@ -1,0 +1,83 @@
+Why do we need embeddings?
+
+Computers and AI models cannot directly compare the meaning of text the way humans do.
+
+Embeddings convert text into numerical vectors that represent its semantic meaning.
+
+Example
+
+Suppose we have:
+
+"How can I reset my password?"
+
+and:
+
+"I forgot my password. How do I change it?"
+
+The words are different, but the meaning is very similar.
+
+An embedding model converts them into vectors:
+
+"How can I reset my password?"
+          ↓
+[0.21, -0.45, 0.78, 0.12, ...]
+
+"I forgot my password. How do I change it?"
+          ↓
+[0.19, -0.42, 0.75, 0.15, ...]
+
+Because their meanings are similar, their vectors will generally be close to each other in vector space.
+
+Why is this important for RAG?
+
+This is where embeddings become extremely useful.
+
+Imagine your Knowledge Base contains:
+
+"Customers who forget their credentials can reset their password from the account settings page."
+
+The user asks:
+
+"I can't remember my login password. What should I do?"
+
+There isn't an exact keyword match.
+
+But embeddings allow the system to recognize that:
+
+"can't remember login password"
+≈
+"forget credentials / reset password"
+
+So the system can retrieve the relevant document.
+
+RAG flow
+Documents
+    ↓
+Chunking
+    ↓
+Embedding Model
+    ↓
+Vector Embeddings
+    ↓
+Vector Database
+    ↓
+User Question
+    ↓
+Question Embedding
+    ↓
+Similarity Search
+    ↓
+Relevant Documents
+    ↓
+Foundation Model
+    ↓
+Answer
+Very important distinction
+
+Tokenization and embeddings solve different problems:
+
+Concept	Purpose
+Tokenization	Breaks text into tokens that the model can process
+Embedding	Converts text into numerical vectors representing meaning
+Vector DB	Stores and searches those vectors
+RAG	Retrieves relevant information a
