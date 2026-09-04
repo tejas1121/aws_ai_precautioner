@@ -1,0 +1,235 @@
+1. Amazon Bedrock Pricing
+
+Bedrock pricing depends on the model and how you use it.
+
+The main pricing approaches you should know are:
+
+On-Demand
+Batch inference
+Provisioned Throughput
+2. On-Demand
+
+With On-Demand, you pay based on the amount of inference you use.
+
+For text models, this is commonly based on:
+
+Input tokens
+Output tokens
+
+Example:
+
+User prompt
+   ↓
+Input tokens → charged
+   ↓
+Foundation Model
+   ↓
+Output tokens → charged
+When useful?
+
+When your workload is:
+
+Variable
+Unpredictable
+Low or moderate volume
+You don't want to commit to capacity
+Exam memory
+
+On-Demand = pay for what you use.
+
+3. Batch Inference
+
+Batch inference is used when you have a large number of inference requests that do not need immediate responses.
+
+Example:
+
+A company has 1 million customer reviews and wants to generate summaries overnight.
+
+Instead of processing each request interactively:
+
+1,000,000 requests
+       ↓
+   Batch job
+       ↓
+   Process later
+When useful?
+Large workloads
+Offline processing
+Non-real-time applications
+Cost optimization when immediate results aren't required
+Exam clue
+
+"Process a large number of prompts asynchronously/without real-time requirements."
+
+👉 Batch inference
+
+4. Provisioned Throughput
+
+Provisioned Throughput allows you to purchase dedicated model capacity for a specified period.
+
+Think:
+
+On-Demand → use capacity when needed
+
+Provisioned Throughput → reserve/purchase capacity
+
+Useful when you have:
+
+Predictable workload
+High-volume inference
+Consistent performance requirements
+Need for more predictable capacity
+Example
+
+A company runs a customer-support application 24/7 with predictable traffic.
+
+Instead of paying entirely based on individual on-demand requests, it may consider Provisioned Throughput.
+
+5. Batch vs Provisioned Throughput
+
+This is an important distinction.
+
+	Batch Inference	Provisioned Throughput
+Main idea	Process requests in batches	Reserve model capacity
+Real-time?	Generally no	Can support real-time workloads
+Best for	Large offline workloads	Predictable/high-volume workloads
+Cost concept	Lower-cost processing for eligible batch workloads	Capacity commitment
+Memory
+
+Batch = "I can wait."
+
+Provisioned = "I need predictable capacity."
+
+6. Model Improvement Techniques
+
+This relates to improving the quality of your GenAI application/model.
+
+You've already learned:
+
+Fine-tuning
+
+Use domain/task-specific data to adapt a foundation model.
+
+Foundation Model
+       ↓
+Specialized training data
+       ↓
+Fine-tuned model
+
+Useful when you need specialized behavior or task performance.
+
+RAG
+
+Use external knowledge without retraining the model.
+
+Question
+   ↓
+Retrieve information
+   ↓
+Foundation Model
+   ↓
+Answer
+
+Useful when knowledge is private or frequently changing.
+
+Prompt Engineering
+
+Improve the instructions given to the model.
+
+Often the simplest and cheapest first step.
+
+Model Distillation
+
+Use a larger model to train a smaller model.
+
+Useful for:
+
+Lower latency
+Lower inference cost
+Lower resource requirements
+7. Cost Optimization Techniques
+
+For AIF-C01, think about reducing unnecessary tokens, model size, and inference work.
+
+Technique 1 — Choose an appropriate model
+
+Don't automatically use the largest/most expensive model.
+
+Simple task → smaller model
+Complex task → more capable model
+
+If a smaller model performs the task adequately, it can reduce cost and latency.
+
+Technique 2 — Reduce unnecessary tokens
+
+Long prompts and unnecessarily long responses increase inference cost.
+
+For example:
+
+❌ Sending a 20-page document when only one paragraph is relevant.
+
+Better:
+
+Retrieve relevant section
+        ↓
+Send only useful context
+        ↓
+Model
+
+This is one reason RAG can help control token usage.
+
+Technique 3 — Prompt engineering
+
+A well-designed prompt can reduce unnecessary model calls and output.
+
+Technique 4 — Batch inference
+
+If responses don't need to be immediate, batch processing can be more cost-effective for appropriate workloads.
+
+Technique 5 — Model distillation
+
+A smaller student model can provide similar capabilities for certain tasks at lower inference cost.
+
+Technique 6 — Provisioned Throughput for predictable workloads
+
+If you have high, predictable usage, Provisioned Throughput can be considered instead of relying entirely on On-Demand pricing.
+
+8. Cost Optimization Order
+
+If Stephane is teaching a cost optimization order, the key idea is generally:
+
+Start with the simplest/cheapest optimization before making expensive model changes.
+
+A practical decision sequence:
+
+1. Improve prompt
+       ↓
+2. Reduce unnecessary input/output tokens
+       ↓
+3. Use RAG efficiently / retrieve only relevant context
+       ↓
+4. Try a smaller suitable model
+       ↓
+5. Consider fine-tuning/distillation where justified
+       ↓
+6. Choose the appropriate inference/pricing option
+
+Don't interpret this as a universal AWS pricing rule; it's a cost-optimization mindset.
+
+🧠 AIF-C01 Cheat Sheet
+Scenario	Think
+Pay according to actual inference usage	On-Demand
+Huge offline workload, no immediate response needed	Batch inference
+Predictable, sustained/high-volume workload	Provisioned Throughput
+Reduce prompt/output size	Token optimization
+Need current/private information	RAG
+Need specialized model behavior	Fine-tuning
+Need cheaper/faster smaller model	Distillation
+Improve instructions without retraining	Prompt engineering
+Avoid using an unnecessarily powerful model	Choose appropriate model
+
+Most important exam distinction:
+
+Batch = workload can wait.
+Provisioned Throughput = predictable capacity requirement.
+On-Demand = variable usage / pay as you go.
