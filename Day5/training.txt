@@ -1,0 +1,284 @@
+1. Labeled vs Unlabeled Data
+
+This refers to whether the data has a known target/answer (label).
+
+🟢 Labeled data
+
+Data contains the input and the desired answer.
+
+Example:
+
+Email	Label
+"You won $1 million!"	Spam
+"Meeting at 5 PM"	Not Spam
+"Claim your free prize"	Spam
+
+Here:
+
+Feature/input = email
+Label/target = Spam / Not Spam
+
+The model learns:
+
+Input → expected output
+
+This is the basis of supervised learning.
+
+Another example — house prices
+Area	Bedrooms	Price
+1000 sq ft	2	₹50 lakh
+1500 sq ft	3	₹75 lakh
+
+The price is the label.
+
+2. Unlabeled Data
+
+The data has no predefined target/answer.
+
+Example:
+
+Customer A → age 22, spends ₹5,000
+Customer B → age 45, spends ₹50,000
+Customer C → age 23, spends ₹6,000
+...
+
+There is no column saying:
+
+"Customer belongs to Group X."
+
+The model must discover patterns itself.
+
+This is commonly associated with unsupervised learning.
+
+For example, clustering might discover:
+
+Group 1 → young, low spending
+Group 2 → older, high spending
+Memory
+
+Labeled = answers provided
+Unlabeled = answers not provided
+
+3. Structured Data
+
+Now we're talking about a different property.
+
+Structured data is organized according to a predefined schema, often rows and columns.
+
+Example:
+
+Customer_ID	Age	Salary	City
+101	22	30000	Pune
+102	35	60000	Mumbai
+103	28	45000	Nashik
+
+This is easy for databases and traditional analytics systems to work with.
+
+Examples:
+
+SQL tables
+Spreadsheets
+CSV files
+Relational databases
+Characteristics
+predefined schema
+rows/columns
+consistent fields
+easy to query
+4. Unstructured Data
+
+Data that doesn't follow a fixed tabular schema.
+
+Examples:
+
+Text documents
+Emails
+PDFs
+Images
+Audio
+Video
+Social media posts
+
+For example:
+
+"Dear customer, your order has been shipped..."
+
+There's no predefined:
+
+Name | Age | Salary | City
+
+structure.
+
+Important
+
+Unstructured doesn't mean useless or disorganized.
+
+It simply means the data isn't naturally represented using a fixed structured schema.
+
+🔥 The important part: These are TWO different dimensions
+
+This is where exam questions can trick you.
+
+Imagine this:
+
+Example 1
+
+A CSV file:
+
+Review	Sentiment
+"Amazing product"	Positive
+"Terrible product"	Negative
+
+It's:
+
+Structured + Labeled
+
+Example 2
+
+A CSV containing customer information without a target:
+
+Age	Salary	Purchases
+22	30k	5
+45	80k	20
+
+It's:
+
+Structured + Unlabeled
+
+Example 3
+
+A collection of photographs where humans have identified what's in each image:
+
+cat.jpg → Cat
+dog.jpg → Dog
+car.jpg → Car
+
+The actual data (images) is unstructured, but it is labeled.
+
+So:
+
+Unstructured + Labeled
+
+Example 4
+
+Thousands of customer emails with no categorization:
+
+email1.txt
+email2.txt
+email3.txt
+...
+
+That's:
+
+Unstructured + Unlabeled
+
+🧠 Think of it as a 2 × 2 matrix
+	Labeled	Unlabeled
+Structured	CSV with spam labels	Customer database without target
+Unstructured	Images labeled "cat/dog"	Raw images/documents
+
+This is very important.
+
+Don't make this mistake:
+
+"Unstructured data = unsupervised learning."
+
+❌ Wrong.
+
+Unstructured data can absolutely be labeled.
+
+Likewise:
+
+"Structured data = supervised learning."
+
+❌ Wrong.
+
+Structured data can be unlabeled.
+
+How this connects to ML
+Supervised learning
+
+Usually needs:
+
+Labeled data
+
+Input + Label
+     ↓
+  Training
+     ↓
+   Model
+
+Examples:
+
+Classification
+Regression
+Unsupervised learning
+
+Usually works with:
+
+Unlabeled data
+
+Input only
+    ↓
+ Training
+    ↓
+Find patterns
+
+Examples:
+
+Clustering
+Dimensionality reduction
+Semi-supervised learning
+
+Uses:
+
+Small amount of labeled data + large amount of unlabeled data
+
+100 labeled examples
++
+10,000 unlabeled examples
+        ↓
+      Model
+
+This is useful when labeling data is expensive.
+
+AIF-C01 exam traps 🚨
+Trap 1
+
+Images are unstructured, therefore they cannot be labeled.
+
+❌ Wrong.
+
+Images can have labels:
+
+image → cat
+
+Trap 2
+
+Unlabeled means unstructured.
+
+❌ Wrong.
+
+A SQL database can be unlabeled.
+
+Trap 3
+
+Structured data always uses supervised learning.
+
+❌ Wrong.
+
+K-means can cluster structured customer data without labels.
+
+Trap 4
+
+Labels are always categories.
+
+❌ Wrong.
+
+Labels can be numeric.
+
+Example:
+
+House features → ₹75 lakh
+
+That's a regression label.
