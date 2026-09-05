@@ -1,0 +1,326 @@
+Reinforcement Learning (RL)
+
+Reinforcement Learning is the fourth major learning approach you should know alongside supervised, unsupervised, and self-supervised learning.
+
+The key idea is:
+
+An agent learns by interacting with an environment and receiving rewards or penalties.
+
+It does not learn from a dataset where every input has a correct label.
+
+1. Basic idea
+
+Imagine training an AI to play chess.
+
+You don't give it a table like:
+
+Board position	Correct move
+Position 1	Move A
+Position 2	Move C
+
+Instead, the AI:
+
+Looks at the current game state.
+Takes an action.
+Sees what happens.
+Receives a reward or penalty.
+Learns which actions tend to produce better outcomes.
+              Environment
+                  ↑
+              Reward
+                  │
+                  │
+Agent ── Action ──→
+                  │
+                  ↓
+              New State
+                  │
+                  ↓
+                Agent
+
+The agent continuously learns from this interaction.
+
+2. The five important terms
+
+You should know these.
+
+1. Agent
+
+The learner/decision maker.
+
+Examples:
+
+Game-playing AI
+Robot
+Autonomous system
+2. Environment
+
+The world in which the agent operates.
+
+Example:
+
+Chess board
+
+3. State
+
+The current situation/environment condition.
+
+Example:
+
+Current position of all chess pieces.
+
+4. Action
+
+What the agent can do.
+
+Example:
+
+Move a chess piece.
+
+5. Reward
+
+Feedback telling the agent how good or bad the action/outcome was.
+
+Example:
+
+Win → +100
+Draw → +10
+Lose → -100
+
+The agent tries to maximize cumulative reward over time.
+
+3. The learning loop
+
+This is the most important thing to understand:
+
+        ┌──────────────────────────┐
+        │                          ↓
+      Agent ── Action ──→ Environment
+        ↑                     │
+        │                     │
+        └── State + Reward ←──┘
+
+Step-by-step:
+
+1. Agent observes state
+        ↓
+2. Agent chooses action
+        ↓
+3. Environment changes
+        ↓
+4. Agent receives reward
+        ↓
+5. Agent observes new state
+        ↓
+6. Agent improves its policy
+        ↓
+7. Repeat
+4. What is a Policy?
+
+A policy is essentially the strategy the agent uses to decide:
+
+Given this state, what action should I take?
+
+For example:
+
+State: Opponent has weak defense
+       ↓
+Policy
+       ↓
+Action: Attack
+
+As the agent learns, its policy improves.
+
+You can think of:
+
+Policy = agent's strategy/decision rule
+
+5. Example: Robot learning to walk
+
+Suppose we're training a robot.
+
+State
+Robot position
+Speed
+Balance
+Leg positions
+Actions
+Move left leg
+Move right leg
+Adjust balance
+Reward
+Walk forward successfully → +10
+Fall down → -20
+Move toward target → +5
+
+Initially:
+
+Robot → random actions → falls
+
+Over many trials:
+
+Robot → learns which actions → better walking
+
+Eventually it develops a useful policy.
+
+6. Exploration vs Exploitation
+
+This is a very important RL concept.
+
+The agent has two competing goals.
+
+Exploration
+
+Try something new.
+
+"Maybe this action works better."
+
+Exploitation
+
+Use what it already knows works.
+
+"This action has given me good rewards before."
+
+Example:
+
+You are playing a game.
+
+You know:
+
+Strategy A usually gives +10 reward.
+
+That's exploitation.
+
+But you might try:
+
+Strategy B
+
+to discover whether it could give +50.
+
+That's exploration.
+
+The agent needs a balance between the two.
+
+7. RL vs Supervised Learning
+
+This distinction is extremely important.
+
+Supervised Learning
+
+You provide the correct answer.
+
+Input → Correct Label
+        ↓
+      Model
+
+Example:
+
+Image → Cat
+
+The model learns from the provided answer.
+
+Reinforcement Learning
+
+You don't provide the correct action for every situation.
+
+Instead:
+
+State → Action → Reward
+
+The agent learns through interaction.
+
+Memory:
+
+Supervised = "Here is the correct answer."
+
+RL = "Try something and I'll tell you how good it was."
+
+8. RL vs Unsupervised Learning
+
+Both can operate without traditional labels, but they are fundamentally different.
+
+Unsupervised
+
+The model tries to discover patterns in existing data.
+
+Data → Discover structure
+
+Example:
+
+Group customers into clusters.
+
+Reinforcement
+
+The agent takes actions and interacts with an environment.
+
+Agent → Action → Environment → Reward
+
+Example:
+
+Learn to play a game.
+
+Memory:
+
+Unsupervised → Discover
+
+Reinforcement → Interact + Reward
+
+9. Reinforcement Learning and Generative AI
+
+This is especially relevant to what you've already studied.
+
+You may encounter:
+
+RLHF
+
+Reinforcement Learning from Human Feedback
+
+The idea is to use human feedback to help align a model's behavior with desired responses.
+
+Simplified:
+
+Prompt
+  ↓
+Model generates responses
+  ↓
+Humans provide preferences/feedback
+  ↓
+Reward signal
+  ↓
+Optimization
+  ↓
+Better-aligned model
+
+This is one reason reinforcement learning is relevant to modern LLM development.
+
+Important distinction
+
+RLHF is not simply supervised learning.
+
+Human feedback provides a reward/preference signal, rather than manually specifying the perfect answer for every possible input.
+
+10. AIF-C01 exam perspective
+
+If the question says:
+
+"An AI agent learns by receiving positive and negative feedback based on its actions."
+
+→ Reinforcement Learning
+
+If it says:
+
+"The model interacts with an environment and attempts to maximize cumulative rewards."
+
+→ Reinforcement Learning
+
+If it says:
+
+"The model must choose between trying new actions and using actions known to work."
+
+→ Exploration vs exploitation
+
+If it says:
+
+"Human feedback is used to optimize the behavior of an LLM."
+
+→ Think RLHF
