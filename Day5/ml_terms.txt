@@ -1,0 +1,307 @@
+1. GPT — Generative Pre-trained Transformer
+
+GPT = Generative Pre-trained Transformer
+
+GPT is a family of Transformer-based language models designed primarily for generating text.
+
+How it works
+
+At a high level:
+
+Text
+ ↓
+Tokenization
+ ↓
+Transformer
+ ↓
+Predict next token
+ ↓
+Generated text
+
+GPT uses an autoregressive approach: it predicts the next token based on the previous tokens.
+
+Example:
+
+"The capital of France is ___"
+
+The model predicts:
+
+"Paris"
+
+Key characteristics
+Transformer architecture
+Primarily language
+Generative
+Pre-trained on large datasets
+Commonly used for text generation, conversation, summarization, coding, etc.
+Exam memory
+
+GPT → Generative + Transformer + language
+
+2. BERT — Bidirectional Encoder Representations from Transformers
+
+BERT is also Transformer-based, but its architecture and typical use are different from GPT.
+
+GPT vs BERT
+	GPT	BERT
+Architecture	Transformer decoder-style	Transformer encoder-style
+Main orientation	Generating text	Understanding text
+Typical use	Generation	Classification, search, NER, understanding
+Context	Primarily left-to-right during generation	Bidirectional during encoding
+
+The important idea behind BERT is that it can consider context from both directions.
+
+Example:
+
+"The bank is near the river."
+
+BERT can use surrounding words to understand what "bank" means.
+
+AIF-C01
+
+You generally don't need to memorize BERT's training mechanics deeply.
+
+Remember:
+
+BERT → Transformer → bidirectional language understanding
+
+3. RNN — Recurrent Neural Network
+
+RNNs were designed for sequential data.
+
+Examples:
+
+Text
+Speech
+Time series
+Sensor data
+
+The key idea is that the network maintains information from previous steps.
+
+Input 1 → RNN → Hidden State
+                    ↓
+Input 2 → RNN → Hidden State
+                    ↓
+Input 3 → RNN → Output
+
+So information can flow through the sequence.
+
+Problem with traditional RNNs
+
+They can struggle with long-term dependencies because of problems such as:
+
+Vanishing gradients
+Exploding gradients
+
+This led to architectures such as:
+
+LSTM
+GRU
+
+and eventually Transformers became dominant for many language tasks.
+
+Memory
+
+RNN → sequence + memory of previous steps
+
+4. ResNet — Residual Network
+
+ResNet is a deep convolutional neural network (CNN) architecture, primarily associated with computer vision.
+
+Its major contribution is the residual/skip connection.
+
+Instead of forcing a layer to learn an entire transformation:
+
+Input → Layer → Layer → Output
+
+ResNet provides a shortcut:
+
+        ┌───────────────┐
+        │               ↓
+Input → Layers → + → Output
+
+The shortcut allows information/gradients to flow more easily through very deep networks.
+
+Why was this important?
+
+As networks became deeper, simply adding more layers could make optimization difficult.
+
+Residual connections helped enable very deep networks.
+
+Uses
+Image classification
+Object recognition
+Computer vision
+Memory
+
+ResNet → CNN → images → residual/skip connections
+
+5. SVM — Support Vector Machine
+
+SVM is a supervised machine-learning algorithm commonly used for classification.
+
+Imagine two classes:
+
+● ● ●       │       ▲ ▲ ▲
+● ● ●       │       ▲ ▲ ▲
+            ↑
+        Decision boundary
+
+SVM tries to find a decision boundary that maximizes the margin between classes.
+
+The closest training examples to the boundary are called:
+
+Support vectors
+
+Why is the margin important?
+
+A larger margin generally provides better separation/generalization.
+
+SVMs can also use kernel functions to handle nonlinear classification problems.
+
+Typical uses
+Classification
+Text classification
+Image classification
+Smaller/medium-sized datasets
+Memory
+
+SVM → classification → maximum margin → support vectors
+
+6. WaveNet
+
+WaveNet is a deep generative neural network for raw audio/waveform generation, originally developed by DeepMind.
+
+It became well known for generating realistic speech/audio.
+
+Conceptually:
+
+Previous audio samples
+        ↓
+     WaveNet
+        ↓
+Next audio sample
+        ↓
+Next sample
+        ↓
+...
+
+It models the waveform sample by sample.
+
+Why is it important?
+
+It demonstrated that neural networks could generate highly realistic:
+
+Speech
+Audio
+Voices
+
+It is historically important in the development of neural speech generation.
+
+AIF-C01
+
+You mainly need recognition:
+
+WaveNet → audio/speech generation
+
+Don't spend time memorizing its internal architecture unless Stephane specifically emphasizes it.
+
+7. GAN — Generative Adversarial Network
+
+This one is very important conceptually.
+
+A GAN consists of two neural networks competing with each other:
+
+Generator
+
+Creates fake/generated data.
+
+Discriminator
+
+Tries to distinguish:
+
+real vs generated
+
+Architecture:
+
+              Random Noise
+                   ↓
+              GENERATOR
+                   ↓
+             Fake Data
+              ↙       ↘
+           Real      Fake
+             ↘       ↙
+            DISCRIMINATOR
+                   ↓
+          Real or Fake?
+
+The two networks improve through competition.
+
+Example
+
+Suppose we want to generate human faces.
+
+Generator:
+
+Creates a fake face.
+
+Discriminator:
+
+"Is this face real or generated?"
+
+Generator gets better at producing realistic faces.
+
+Discriminator gets better at detecting fakes.
+
+Eventually the generated output can become highly realistic.
+
+GAN applications
+Image generation
+Image synthesis
+Super-resolution
+Style transfer
+Data augmentation
+Memory
+
+GAN → Generator vs Discriminator
+
+8. XGBoost
+
+XGBoost = Extreme Gradient Boosting.
+
+It's a powerful gradient-boosted decision-tree algorithm.
+
+The idea is to build many relatively weak decision trees sequentially, where later trees focus on correcting errors made by earlier trees.
+
+Data
+ ↓
+Tree 1
+ ↓
+Errors
+ ↓
+Tree 2 focuses on errors
+ ↓
+Errors
+ ↓
+Tree 3 focuses on remaining errors
+ ↓
+...
+ ↓
+Final prediction
+
+It's an example of ensemble learning.
+
+Common applications
+Classification
+Regression
+Structured/tabular data
+Fraud detection
+Risk prediction
+Ranking
+
+XGBoost became extremely popular in traditional ML competitions and production systems.
+
+Memory
+
+XGBoost → boosted decision trees → tabular data
