@@ -1,0 +1,54 @@
+AWS Services with Amazon Q
+1. Amazon Q in QuickSight
+
+Amazon QuickSight is AWS's business intelligence (BI) service.
+
+Amazon Q can make interacting with business data more natural.
+
+For example:
+
+"What were our sales last quarter?"
+
+Instead of manually building a dashboard/query, users can ask questions in natural language.
+
+🧠 Remember
+
+Q + QuickSight → ask questions about business data / BI
+
+2. Amazon Q Developer + EC2
+
+Amazon Q Developer can help developers and cloud/IT teams with AWS resources such as EC2.
+
+For example, a developer can ask questions about:
+
+"Why is my EC2 instance having this issue?"
+
+Q Developer can provide guidance and help with AWS-related development/operations tasks.
+
+Memory
+
+Q Developer → developers + AWS infrastructure
+
+3. Amazon Q + AWS Glue
+
+AWS Glue is a managed data integration/ETL service.
+
+Amazon Q can assist with data integration and data engineering tasks in supported AWS Glue experiences.
+
+For example, developers/data engineers can use natural language assistance to work with data and Glue-related tasks.
+
+Memory
+
+Q + Glue → data integration / data engineering
+
+4. Amazon Q + AWS Chatbot
+
+Here be careful with the terminology because AWS has evolved this product.
+
+AWS Chatbot was the service that enabled interaction with AWS services through chat applications such as Slack and Amazon Chime. AWS renamed/repositioned this capability as Amazon Q Developer in chat applications.
+
+So for exam questions or older course material:
+
+AWS Chatbot → Amazon Q Developer in chat applications
+
+It allows teams to interact with AWS information/operations through supported chat channels.
