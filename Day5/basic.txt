@@ -1,0 +1,414 @@
+1. Artificial Intelligence (AI)
+Basic
+
+Artificial Intelligence is the broad field of making machines perform tasks that normally require human intelligence.
+
+Examples:
+
+Understanding language
+Recognizing images
+Making decisions
+Planning
+Solving problems
+Generating content
+
+Think:
+
+AI = the big umbrella
+
+2. Machine Learning (ML)
+
+ML is a subset of AI.
+
+Instead of explicitly programming every rule, we give the system data and allow it to learn patterns.
+
+Traditional programming
+Rules + Data → Output
+Machine learning
+Data + Correct outputs → Model
+Model + New data → Prediction
+
+Example:
+
+You want to detect spam emails.
+
+Instead of manually writing:
+
+IF email contains "lottery" → spam
+IF email contains "free money" → spam
+...
+
+you provide thousands of examples:
+
+Email → Spam
+Email → Not Spam
+Email → Spam
+...
+
+The ML algorithm learns patterns.
+
+Key idea
+
+ML = AI that learns patterns from data.
+
+3. Deep Learning
+
+Deep Learning is a subset of Machine Learning that uses neural networks with multiple layers.
+
+So the relationship is:
+
+Artificial Intelligence
+        ↓
+Machine Learning
+        ↓
+Deep Learning
+
+Deep learning is particularly powerful for:
+
+Images
+Speech
+Natural language
+Video
+Complex patterns
+
+Examples:
+
+Image recognition
+Speech recognition
+Autonomous driving
+LLMs
+Image generation
+Why "deep"?
+
+Because the neural network contains multiple layers through which information is transformed.
+
+4. Neural Networks
+
+A neural network is a machine-learning model inspired loosely by biological neurons.
+
+Basic structure:
+
+Input Layer
+     ↓
+Hidden Layer
+     ↓
+Hidden Layer
+     ↓
+Output Layer
+
+For example, for image classification:
+
+Pixels
+  ↓
+Input layer
+  ↓
+Hidden layers
+  ↓
+Learned visual features
+  ↓
+Output
+  ↓
+"Cat"
+What does it actually learn?
+
+Primarily weights and biases (parameters).
+
+During training:
+
+Input
+ ↓
+Neural Network
+ ↓
+Prediction
+ ↓
+Compare with expected result
+ ↓
+Calculate error
+ ↓
+Adjust weights
+ ↓
+Repeat
+
+This happens many times.
+
+Important distinction
+
+Neural network ≠ Deep Learning
+
+A neural network with relatively few layers can be considered a neural network.
+
+Deep learning generally refers to neural networks with many layers/complex architectures.
+
+5. Generative AI
+
+This is where things become interesting.
+
+Traditional ML often answers:
+
+"Which category does this belong to?"
+
+or:
+
+"What value should I predict?"
+
+Generative AI focuses on:
+
+"What new content can I generate?"
+
+Examples:
+
+Input	Generative AI output
+Text prompt	Text
+Text prompt	Image
+Text prompt	Video
+Voice	Speech
+Prompt	Code
+
+Examples:
+
+"Write a Python function to sort a list."
+
+→ generates code.
+
+"Create an image of a futuristic Pune."
+
+→ generates an image.
+
+Important
+
+Generative AI is not simply another level after Deep Learning.
+
+A better conceptual relationship is:
+
+AI
+│
+└── ML
+    │
+    └── Deep Learning
+         │
+         ├── Some discriminative models
+         │
+         └── Generative models
+              │
+              ├── LLMs
+              ├── Diffusion models
+              └── Other generative architectures
+
+It's not a perfectly strict hierarchy because these categories describe different aspects of AI.
+
+6. LLM — Large Language Model
+
+An LLM is a type of foundation model focused primarily on language.
+
+Examples of tasks:
+
+Question answering
+Summarization
+Translation
+Text generation
+Classification
+Code generation
+Conversation
+
+At a simplified level:
+
+Prompt
+  ↓
+Tokenization
+  ↓
+Tokens
+  ↓
+LLM
+  ↓
+Next-token prediction
+  ↓
+Generated response
+Important connection
+
+Most modern LLMs use deep neural networks, particularly Transformer architectures.
+
+So:
+
+Deep Learning
+      ↓
+Neural Networks
+      ↓
+Transformer architectures
+      ↓
+Many modern LLMs
+
+Don't memorize this as:
+
+"LLM = neural network."
+
+More accurately:
+
+LLM is a large language-focused model, commonly based on Transformer neural-network architectures.
+
+7. Diffusion Models
+
+Diffusion models are another major type of generative model, especially important for image generation.
+
+The basic idea is fascinating.
+
+Training
+
+Start with a real image:
+
+Original image
+     ↓
+Add noise
+     ↓
+More noise
+     ↓
+More noise
+     ↓
+Almost pure noise
+
+The model learns how to reverse this process.
+
+Generation
+
+Start with random noise:
+
+Random noise
+     ↓
+Remove some noise
+     ↓
+Remove more noise
+     ↓
+Remove more noise
+     ↓
+Generated image
+Loading
+
+That's the fundamental intuition behind diffusion-based generation.
+
+Example
+
+Prompt:
+
+"A golden retriever sitting on Mars."
+
+The model starts from noise and iteratively transforms it into an image consistent with the prompt.
+
+AIF-C01 level
+
+You mainly need to know:
+
+Diffusion models are generative models that generate content by learning a denoising/reverse-diffusion process.
+
+They're strongly associated with image generation, although diffusion techniques can be applied beyond images.
+
+8. Multimodal AI
+
+"Multi" + "modal" means working with multiple types of information (modalities).
+
+Examples of modalities:
+
+Text
+Image
+Audio
+Video
+
+A multimodal model can understand combinations such as:
+
+Image + Text → Answer
+
+or
+
+Text → Image
+
+or
+
+Audio + Text → Response
+Example
+
+You upload an image of a graph and ask:
+
+"What is the highest value shown?"
+
+A multimodal model can process the image + your text question and answer.
+
+The BIG picture
+
+This is what I want you to have in your head:
+
+                         ARTIFICIAL INTELLIGENCE
+                                  │
+                                  ▼
+                         MACHINE LEARNING
+                                  │
+                                  ▼
+                          DEEP LEARNING
+                                  │
+                         ┌────────┴─────────┐
+                         │                  │
+                  Neural Networks      Generative AI
+                                            │
+                         ┌──────────────────┼──────────────┐
+                         │                  │              │
+                        LLMs          Diffusion Models   Other
+                         │
+                   Language-focused
+                   generative models
+                         
+              Multimodal AI can work across
+              text + image + audio + video
+
+Important: Don't interpret this diagram as every concept being a strict mathematical subset of the next. For AIF-C01, the key is understanding their relationships and roles.
+
+🔥 Exam distinctions you MUST know
+AI vs ML
+
+AI = broad field
+ML = learns from data
+
+ML vs Deep Learning
+
+ML = broad collection of learning techniques
+Deep Learning = ML using deep neural networks
+
+Neural Network vs Deep Learning
+
+Neural network = model architecture
+Deep learning = use of deeper/more complex neural networks
+
+Generative AI vs Traditional ML
+
+Traditional ML:
+
+Input → Prediction/classification
+
+GenAI:
+
+Prompt/input → New content
+LLM vs Foundation Model
+
+Foundation Model = broad category of large pretrained models
+
+LLM = language-focused model; many LLMs are foundation models.
+
+Therefore:
+
+Every LLM isn't necessarily being discussed as a foundation model in every context, but modern large pretrained LLMs commonly are FMs.
+
+LLM vs Diffusion
+
+LLM → primarily language generation
+
+Diffusion → especially image/content generation through iterative denoising
+
+Unimodal vs Multimodal
+
+Unimodal:
+
+Text → Text
+
+Multimodal:
+
+Image + Text → Text
+
+or
+
+Text → Image
