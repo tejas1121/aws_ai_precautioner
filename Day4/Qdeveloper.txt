@@ -1,0 +1,113 @@
+Amazon Q Developer
+
+Amazon Q Developer is a generative-AI assistant designed for software developers and IT professionals.
+
+It can help with:
+
+Writing code
+Explaining code
+Debugging
+Generating code
+Refactoring
+Suggesting improvements
+Answering AWS-related questions
+Working with AWS resources
+🧠 Memory
+
+Q Business → business users
+Q Developer → developers
+
+1. AI Coding Companion
+
+Amazon Q Developer can act as an AI coding companion.
+
+Instead of searching the internet every time you have a coding problem, you can ask Q Developer directly.
+
+Example:
+
+"Explain what this Python function does."
+
+or:
+
+"Find the bug in this code."
+
+or:
+
+"Write a Python function to read objects from S3."
+
+Q Developer can generate/explain/modify code based on the context.
+
+2. IDE Extension
+
+Amazon Q Developer can be integrated into supported IDEs (Integrated Development Environments).
+
+Examples include development environments such as:
+
+Visual Studio Code
+JetBrains IDEs
+Visual Studio
+AWS development environments
+
+Once installed, developers can interact with Q directly inside their development environment.
+
+Example
+        IDE
+         │
+    ┌────▼─────┐
+    │ Q        │
+    │ Developer│
+    └────┬─────┘
+         ↓
+ Generate / Explain / Debug
+         ↓
+       Code
+
+This means you don't have to constantly switch between your IDE and another application.
+
+Exam clue
+
+"Developer wants AI assistance directly inside the IDE."
+
+👉 Amazon Q Developer IDE integration/extension
+
+3. Kiro
+
+Kiro is AWS's AI-powered IDE focused on agentic software development.
+
+The important idea is that it goes beyond simple code completion and can help developers work through a software-development task more systematically.
+
+For example, instead of simply asking:
+
+"Write this function."
+
+an agentic coding environment can help with a larger task such as:
+
+Requirement
+    ↓
+Understand project
+    ↓
+Plan changes
+    ↓
+Modify multiple files
+    ↓
+Test
+    ↓
+Iterate
+Don't mix these up
+
+Amazon Q Developer
+
+→ AI assistant for developers
+
+Kiro
+
+→ AI-powered IDE / agentic development environment
+
+For your AIF-C01 exam, if the question is about AWS's generative-AI assistant helping developers with coding and AWS development tasks, the answer is generally Amazon Q Developer.
+
+🔥 Q Business vs Q Developer vs Q Apps
+Service	Main purpose
+Amazon Q Business	Help employees with business/enterprise information
+Amazon Q Apps	Create custom AI applications for business tasks
+Amazon Q Developer	Help developers with coding and AWS development
+Kiro	AI-powered IDE for agentic software development

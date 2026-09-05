@@ -1,0 +1,34 @@
+Amazon Q Apps
+
+Amazon Q Apps is a capability of Amazon Q Business that lets users create generative AI-powered applications from natural-language descriptions, without needing to be professional developers.
+
+Simple example
+
+An employee wants an app to summarize customer feedback.
+
+They can describe:
+
+"Create an app that takes customer feedback and summarizes the main complaints and suggestions."
+
+Amazon Q Apps can help create that application.
+
+Basic idea
+User describes desired application
+              ↓
+        Amazon Q Apps
+              ↓
+   AI-powered application
+              ↓
+        User uses it
+Why is it useful?
+
+It helps business users create task-specific AI applications quickly.
+
+Examples:
+
+Summarize reports
+Analyze customer feedback
+Generate meeting summaries
+Create content
+Extract information
+Transform business data into useful outputs
