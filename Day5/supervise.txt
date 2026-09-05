@@ -1,0 +1,327 @@
+1. Supervised Learning
+
+Supervised learning means training a model using labeled data.
+
+You give the model:
+
+Input/features + correct output/label
+
+and it learns the relationship between them.
+
+Example — house price prediction
+
+Training data:
+
+Area	Bedrooms	Location	Price
+1000	2	Pune	₹50L
+1500	3	Pune	₹75L
+2000	4	Mumbai	₹1.2Cr
+
+Here:
+
+Features:
+
+Area
+Bedrooms
+Location
+
+Label:
+
+Price
+
+The model learns:
+
+Features → Model → Predicted Price
+Two major supervised-learning tasks
+
+Classification
+
+Output is a category.
+
+Email → Spam / Not Spam
+
+Regression
+
+Output is a continuous numeric value.
+
+House features → ₹75 lakh
+2. Training, Validation & Test Sets
+
+This is one of the most important ML concepts.
+
+Suppose you have 100,000 labeled examples.
+
+You don't train and evaluate the model on the exact same data.
+
+You split the dataset.
+
+                 Complete Dataset
+                       │
+          ┌────────────┼────────────┐
+          ↓            ↓            ↓
+       Training     Validation      Test
+         Set           Set           Set
+
+Typical split could be:
+
+70% Training
+15% Validation
+15% Test
+
+The exact percentages can vary.
+
+Training Set
+
+The training set is used to actually train the model.
+
+The model sees:
+
+Input → Prediction → Error → Update parameters
+
+Repeated many times.
+
+Example:
+
+Training data
+      ↓
+Model
+      ↓
+Learn weights/parameters
+Think:
+
+Training = learn
+
+3. Validation Set
+
+The validation set is used during model development to evaluate and tune the model.
+
+The model doesn't use the validation examples to directly learn its parameters in the normal training process.
+
+You use validation performance to make decisions such as:
+
+Which model architecture?
+Which hyperparameters?
+How much regularization?
+How many layers?
+What learning rate?
+When should training stop?
+
+For example:
+
+Model A → Validation accuracy = 91%
+Model B → Validation accuracy = 95%
+Model C → Validation accuracy = 89%
+
+You might select Model B.
+
+Think:
+
+Validation = tune/select
+
+4. Test Set
+
+The test set is used after you've finished developing the model to estimate how well it performs on unseen data.
+
+Ideally, you don't repeatedly use the test set to make development decisions.
+
+Why?
+
+Because eventually you start indirectly optimizing for the test set.
+
+That's called test-set leakage / overfitting to the test set.
+
+Think:
+
+Test = final evaluation
+
+🔥 The easiest way to remember
+
+Think of preparing for your AWS exam.
+
+Training set
+
+Your study material.
+
+You learn from it.
+
+Validation set
+
+Your practice tests.
+
+You use the results to decide what to improve.
+
+Test set
+
+Your actual exam.
+
+You use it to measure final performance.
+
+TRAINING
+"Learn"
+
+      ↓
+
+VALIDATION
+"Tune"
+
+      ↓
+
+TEST
+"Evaluate"
+
+That's an extremely useful mental model.
+
+5. What happens if we don't separate them?
+
+Imagine you train a model on 100 images and then test it on those exact same 100 images.
+
+It gets:
+
+99% accuracy
+
+Sounds amazing.
+
+But perhaps it has simply memorized those images.
+
+You don't know whether it can generalize to new images.
+
+That's why we need unseen data.
+
+6. Hyperparameters vs Parameters
+
+This is closely related to training/validation.
+
+Parameters
+
+Learned by the model during training.
+
+Examples:
+
+Neural-network weights
+Biases
+Hyperparameters
+
+Set by the practitioner/algorithm configuration.
+
+Examples:
+
+Learning rate
+Number of trees
+Tree depth
+Batch size
+Number of epochs
+Regularization strength
+
+Validation data can help you choose good hyperparameter values.
+
+7. Feature Engineering
+
+Now your last topic:
+
+Feature Engineering
+
+Feature engineering means creating, transforming, selecting, or extracting useful features from raw data so that an ML model can learn more effectively.
+
+Suppose you have:
+
+Date of Birth = 19/06/2005
+
+Instead of directly giving the raw date to the model, you might create:
+
+Age = 21
+
+Age can be a more useful feature for predicting something like insurance risk.
+
+Another example
+
+Raw data:
+
+Purchase history
+
+You might create:
+
+Total purchases
+Average purchase value
+Purchases in last 30 days
+Days since last purchase
+
+These are engineered features.
+
+8. Why feature engineering matters
+
+Raw data isn't always in the most useful form for an ML algorithm.
+
+Feature engineering can:
+
+expose useful patterns
+improve model performance
+reduce irrelevant information
+make data suitable for a model
+sometimes reduce model complexity
+
+Think:
+
+Raw data → useful representation → ML model
+
+9. Feature Selection vs Feature Engineering
+
+Don't confuse these.
+
+Feature selection
+
+Choose the best existing features.
+
+Suppose you have:
+
+Age
+Salary
+City
+Hair color
+Favorite movie
+
+You determine that:
+
+Age + Salary + City
+
+are useful and remove irrelevant features.
+
+Feature engineering
+
+Create or transform features.
+
+Date of birth → Age
+
+or:
+
+Price + Quantity → Total purchase amount
+10. Modern ML vs Feature Engineering
+
+An important nuance for AIF-C01:
+
+Traditional ML often relies heavily on manual feature engineering.
+
+For example:
+
+Raw customer data
+       ↓
+Human creates useful features
+       ↓
+XGBoost / SVM / etc.
+
+Deep learning can often learn useful representations/features automatically from raw or relatively lightly processed data.
+
+For example, with image recognition:
+
+Raw pixels
+   ↓
+CNN
+   ↓
+Low-level features
+   ↓
+Higher-level features
+   ↓
+Classification
+
+The network can learn things such as edges, shapes, textures, and increasingly complex representations.
+
+This doesn't mean preprocessing and feature engineering disappear entirely.
