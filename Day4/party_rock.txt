@@ -1,0 +1,189 @@
+PartyRock is a hands-on, no-code generative AI app-building playground from AWS. It lets you experiment with foundation models and build GenAI applications without needing to write backend code or set up AWS infrastructure.
+
+Think of it as:
+
+PartyRock = learn + experiment + prototype GenAI apps
+
+It is particularly useful for understanding how prompts, foundation models, and GenAI applications work before moving to production AWS services.
+
+1. Basic idea
+
+Suppose you want to create a Resume Improvement App.
+
+In PartyRock, you can describe the application and configure components such as:
+
+User Input
+   ↓
+Prompt / Instructions
+   ↓
+Foundation Model
+   ↓
+Generated Output
+
+You can build the application through a visual interface rather than writing a complete application yourself.
+
+2. Why PartyRock exists
+
+PartyRock is primarily designed for experimentation and learning.
+
+It allows you to experiment with:
+
+Different foundation models
+Prompts
+Prompt parameters
+User inputs
+Generated outputs
+Application layouts/components
+
+So you can quickly see:
+
+"What happens if I change the prompt?"
+
+or:
+
+"What happens if I use another model?"
+
+or:
+
+"What happens if I change the model parameters?"
+
+This makes it useful for learning prompt engineering and foundation-model behavior.
+
+3. PartyRock vs Amazon Bedrock
+
+This distinction is important.
+
+Amazon Bedrock
+
+Bedrock is the AWS managed service/platform that developers use to build and deploy production GenAI applications using foundation models.
+
+You can build applications involving:
+
+Foundation models
+RAG / Knowledge Bases
+Agents
+Guardrails
+Model customization
+APIs
+AWS infrastructure integration
+PartyRock
+
+PartyRock is primarily a playground for experimenting and building prototypes without coding.
+
+Think:
+
+                GENERATIVE AI
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+      PartyRock              Bedrock
+          │                     │
+   Experiment / Learn     Build applications
+   No-code prototypes     Production-oriented
+🧠 Exam memory
+
+PartyRock → experiment/prototype without coding
+
+Bedrock → managed AWS service for building GenAI applications
+
+4. PartyRock and Foundation Models
+
+PartyRock allows you to experiment with different foundation models.
+
+The important architecture is:
+
+                 PartyRock
+                    ↓
+          Select/configure FM
+                    ↓
+              Prompt
+                    ↓
+          Foundation Model
+                    ↓
+              Output
+
+You're not training a foundation model from scratch.
+
+You're using existing models to experiment with GenAI applications.
+
+5. PartyRock and Prompt Engineering
+
+This is where PartyRock connects directly to the topic you just studied.
+
+Suppose you create:
+
+Customer Review Summarizer
+
+You might start with:
+
+Summarize this review.
+
+Then improve it:
+
+You are a customer-support analyst.
+
+Summarize the following customer review in:
+1. Main complaint
+2. Sentiment
+3. Suggested action
+
+Keep the response under 100 words.
+
+You can experiment with the prompt and observe how the output changes.
+
+So PartyRock provides a convenient environment to practice prompt engineering.
+
+6. PartyRock is NOT primarily...
+
+This is where exam questions can trick you.
+
+❌ PartyRock is not:
+A foundation model
+A vector database
+A Knowledge Base
+An LLM
+A model-training service
+A replacement for Amazon Bedrock
+✅ PartyRock is:
+
+A no-code generative-AI application playground for experimentation and learning.
+
+7. Practical example
+
+Imagine you're learning GenAI and want to create:
+
+"AI Travel Planner"
+
+You could have:
+
+User Inputs
+├── Destination
+├── Budget
+├── Number of days
+└── Interests
+        ↓
+     Prompt
+        ↓
+ Foundation Model
+        ↓
+ ┌───────────────────┐
+ │ Travel itinerary  │
+ │ Hotels             │
+ │ Activities         │
+ │ Recommendations    │
+ └───────────────────┘
+
+You can experiment with the application without first building a complete frontend/backend system.
+
+Once you've validated the idea, a production application could be developed using Amazon Bedrock APIs and other AWS services.
+
+🔥 PartyRock vs Q Apps
+
+Since you're currently studying Amazon Q, this distinction is worth knowing.
+
+	PartyRock	Amazon Q Apps
+Main purpose	GenAI experimentation/prototyping	Create custom AI apps for business
+Target	Learners/developers/experimenters	Business users/organizations
+Coding	No-code	No-code/low-code experience
+Ecosystem	AWS GenAI playground	Amazon Q Business
+Main idea	Experiment	Build a business app
