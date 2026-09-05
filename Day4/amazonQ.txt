@@ -1,0 +1,132 @@
+Amazon Q
+
+Amazon Q is a generative AI-powered assistant from AWS that helps users with tasks such as:
+
+Answering questions
+Finding information in an organization's data
+Helping developers write and understand code
+Helping employees with business-related tasks
+
+For the exam, the important idea is:
+
+Amazon Q = AWS generative AI assistant for users and organizations.
+
+There are different Amazon Q experiences for different use cases, such as Amazon Q Business and Amazon Q Developer.
+
+1. Amazon Q Business
+
+Amazon Q Business is designed primarily for business users.
+
+It can use an organization's information to answer questions and help employees find information.
+
+Example:
+
+Employee: "What is our company's leave policy?"
+
+Amazon Q Business can retrieve the relevant information from connected enterprise data sources.
+
+Memory
+
+Q Business → business employees + enterprise data
+
+2. Data Connectors
+
+Organizations have information stored in many different systems:
+
+SharePoint
+Confluence
+S3
+Salesforce
+Jira
+...
+
+Amazon Q needs a way to connect to and retrieve information from these data sources.
+
+That's where data connectors come in.
+
+Simple flow
+Enterprise Data Sources
+        ↓
+   Data Connectors
+        ↓
+    Amazon Q
+        ↓
+   User Question
+        ↓
+      Answer
+
+The connector allows Amazon Q to ingest/index information from supported data sources so that Q can use that information when answering questions.
+
+Exam clue
+
+"Connect Amazon Q to an organization's existing data repositories."
+
+👉 Data connectors
+
+3. Plugins
+
+A plugin allows Amazon Q Business to interact with external applications/services and perform actions.
+
+This is different from simply retrieving information.
+
+Example
+
+Suppose Amazon Q is connected to a ticketing system.
+
+User:
+
+"Create a support ticket for my laptop issue."
+
+A plugin can allow Q to interact with the external application and perform the action.
+
+Think:
+
+Connector → get/use information
+
+Plugin → take action in an external application
+
+4. IAM Identity Center
+
+This is particularly important for Amazon Q Business security.
+
+AWS IAM Identity Center provides centralized identity and access management.
+
+It allows organizations to manage:
+
+Users
+Groups
+Authentication
+Access permissions
+
+Amazon Q Business can use identity information to ensure that users only receive information they are authorized to access.
+
+Example
+
+Suppose the company has:
+
+Employee A → HR documents
+Employee B → Engineering documents
+
+Employee B shouldn't automatically receive confidential HR information simply because Q has access to the company's data.
+
+Identity and access controls help ensure that Q respects the user's permissions.
+
+🧠 Exam memory
+
+IAM Identity Center → identity + access control
+
+5. Admin Controls
+
+Amazon Q Business administrators can control how the application is configured and used by the organization.
+
+This can include things such as:
+
+Managing users and access
+Configuring data sources
+Configuring plugins
+Controlling application behavior
+Managing the Q Business environment
+
+The important exam concept is:
+
+Administrators control the enterprise Amazon Q environment; individual users don't get unrestricted access to everything.
