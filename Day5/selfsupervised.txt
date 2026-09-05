@@ -1,0 +1,220 @@
+Self-Supervised Learning
+
+This is an important concept because it sounds similar to unsupervised and semi-supervised learning, but the mechanism is different.
+
+1. Basic idea
+
+Self-supervised learning trains a model using unlabeled data, but the model creates its own labels/learning targets from the data itself.
+
+So instead of humans saying:
+
+"This is a cat."
+
+the data itself is used to create a prediction task.
+
+Simple example
+
+Take the sentence:
+
+"The cat is sitting on the mat."
+
+Hide a word:
+
+"The cat is sitting on the ___."
+
+The model has to predict:
+
+"mat"
+
+The original sentence provides the answer.
+
+No human had to manually label it.
+
+Raw unlabeled data
+        ↓
+Create artificial learning task
+        ↓
+Predict missing/next part
+        ↓
+Compare with original data
+        ↓
+Learn
+2. Why is it called "self-supervised"?
+
+Because the data provides the supervision.
+
+Traditional supervised learning:
+
+Human-labeled data
+       ↓
+Input + Label
+       ↓
+Model
+
+Self-supervised:
+
+Raw data
+   ↓
+Automatically generate target
+   ↓
+Input + Target
+   ↓
+Model
+
+So the model essentially creates its own training signal.
+
+3. LLMs are a major example
+
+This is very important for your GenAI understanding.
+
+Modern LLMs can be pretrained using self-supervised learning.
+
+For example:
+
+"Amazon Web Services provides..."
+
+The model might learn to predict the next token:
+
+"cloud"
+
+It sees enormous amounts of text and repeatedly learns relationships between tokens.
+
+Another common approach is masked-token prediction:
+
+"Amazon Web Services provides [MASK] computing services."
+
+The model learns to predict the missing token(s).
+
+This allows models to learn from huge quantities of unlabeled text without humans manually labeling every sentence.
+
+4. Self-supervised vs Supervised
+	Supervised	Self-supervised
+Human labels	Required	Not required
+Target	Human-provided	Generated from data
+Example	Image → "Cat"	Sentence → predict missing word
+Typical use	Classification/regression	Pretraining representations/models
+Example
+
+Supervised:
+
+Image → CAT
+
+A human has labeled the image.
+
+Self-supervised:
+
+"The cat is sitting on the ___"
+                         ↓
+                       MAT
+
+The original text provides the target.
+
+5. Self-supervised vs Unsupervised
+
+This is where exam questions can become tricky.
+
+Both can use unlabeled data, but:
+
+Unsupervised
+
+The algorithm directly tries to discover structure/patterns.
+
+Example:
+
+Group customers based on similarity.
+
+→ Clustering
+
+Self-supervised
+
+The system creates a prediction task from the data and learns representations by solving it.
+
+Example:
+
+Predict the missing word.
+
+→ Self-supervised
+
+So:
+
+Unsupervised = discover patterns
+
+Self-supervised = create a learning task from the data itself
+
+6. Self-supervised vs Semi-supervised
+
+Don't confuse these either.
+
+Self-supervised
+
+Uses unlabeled data to generate its own training targets.
+
+Unlabeled data
+      ↓
+Generate targets automatically
+      ↓
+Train
+Semi-supervised
+
+Uses both labeled and unlabeled data.
+
+Labeled data
+     +
+Unlabeled data
+     ↓
+   Training
+7. Why is self-supervised learning so useful?
+
+The biggest advantage is scale.
+
+Human labeling:
+
+expensive + slow
+
+Internet-scale raw data:
+
+enormous + readily available
+
+For example, manually labeling billions of sentences would be impractical.
+
+Self-supervised learning allows models to learn from massive datasets automatically.
+
+This is one of the foundations behind modern foundation models and LLM pretraining.
+
+🔥 AIF-C01 exam perspective
+
+If you see:
+
+"The model learns from unlabeled data by generating training targets from the data itself."
+
+→ Self-supervised learning
+
+If you see:
+
+"A small amount of labeled data is combined with a large amount of unlabeled data."
+
+→ Semi-supervised learning
+
+If you see:
+
+"The model discovers groups/patterns without labels."
+
+→ Unsupervised learning
+
+If you see:
+
+"The model learns from labeled examples provided by humans."
+
+→ Supervised learning
+
+🧠 Four-way memory
+
+Supervised → Human gives the answer
+
+Self-supervised → Data creates the answer
+
+Unsupervised → Model finds the pattern
+
+Semi-supervised → Some human answers + lots of unlabeled data
+
+That distinction is the key thing to remember for the exam.
