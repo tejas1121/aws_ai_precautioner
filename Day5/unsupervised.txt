@@ -1,0 +1,296 @@
+1. Unsupervised Learning
+
+In unsupervised learning, the training data does not have labeled answers.
+
+The model tries to discover patterns, relationships, or unusual observations by itself.
+
+Unlabeled Data
+      ↓
+ML Algorithm
+      ↓
+Discover patterns
+
+Example:
+
+You have customer data:
+
+Customer	Age	Spending
+A	21	₹5K
+B	23	₹6K
+C	55	₹80K
+D	52	₹75K
+
+There is no column saying "young customer" or "premium customer."
+
+The algorithm can discover groups itself.
+
+2. Main Types You Need to Know
+
+For AIF-C01, the important unsupervised applications are:
+
+Clustering
+Association
+Anomaly detection
+3. Clustering
+
+Clustering groups similar data points together.
+
+You don't tell the algorithm what the groups are beforehand.
+
+Example:
+
+● ● ●                 ▲ ▲ ▲
+● ● ●                 ▲ ▲ ▲
+
+     Cluster 1             Cluster 2
+
+The algorithm might discover:
+
+These customers behave similarly.
+
+Example — customer segmentation
+
+Input:
+
+Age
+Income
+Purchase frequency
+Spending
+
+K-means might discover:
+
+Cluster 1 → Young + low spending
+Cluster 2 → Young + high spending
+Cluster 3 → Older + high spending
+
+You didn't provide those labels.
+
+The algorithm discovered them.
+
+Common algorithm
+
+K-means
+
+Very important association:
+
+K-means → clustering → unsupervised learning
+
+4. Association
+
+Association learning discovers relationships between items/events.
+
+The classic example is:
+
+Market Basket Analysis
+
+A supermarket analyzes purchase history.
+
+It discovers:
+
+Customers who buy bread frequently also buy butter.
+
+The model isn't predicting a predefined label like "spam."
+
+It's discovering:
+
+Item X is associated with Item Y.
+
+Example:
+
+Bread → Butter
+Beer → Snacks
+Laptop → Mouse
+Business use
+
+This can be used for:
+
+Product recommendations
+Cross-selling
+Store layout
+Marketing
+Shopping-cart analysis
+Memory
+
+Association → "What things occur together?"
+
+5. Anomaly Detection
+
+Anomaly detection identifies unusual or abnormal observations.
+
+Example:
+
+Normal transactions:
+
+₹500
+₹800
+₹1,200
+₹650
+₹900
+
+Suddenly:
+
+₹5,00,000
+
+That transaction may be an anomaly.
+
+The system can flag it for investigation.
+
+Applications
+Fraud detection
+Network intrusion detection
+Equipment failure
+Unusual financial transactions
+Monitoring systems
+Important
+
+Anomaly detection can often work with unlabeled data, because you may not have examples of every possible fraudulent behavior.
+
+Memory
+
+Anomaly detection → find what doesn't fit the normal pattern
+
+6. Clustering vs Association vs Anomaly
+
+This distinction is extremely useful in exam questions.
+
+Technique	Question it answers
+Clustering	"Which things are similar?"
+Association	"Which things occur together?"
+Anomaly detection	"Which things are unusual?"
+Example
+
+Suppose Amazon analyzes customer purchases.
+
+"Group customers with similar buying behavior."
+
+→ Clustering
+
+"Find products frequently purchased together."
+
+→ Association
+
+"Find unusual transactions."
+
+→ Anomaly detection
+
+7. Semi-Supervised Learning
+
+Now we combine labeled and unlabeled data.
+
+Suppose you have:
+
+1,000 labeled examples
++
+100,000 unlabeled examples
+
+Instead of throwing away the 100,000 unlabeled examples, a semi-supervised approach can use both.
+
+       Labeled Data
+            +
+      Unlabeled Data
+            ↓
+   Semi-Supervised Learning
+            ↓
+          Model
+Why would we use it?
+
+Because labeling data can be expensive.
+
+Imagine medical images.
+
+You might have:
+
+100,000 X-ray images
+
+but getting medical experts to label all 100,000 could be expensive and time-consuming.
+
+Perhaps:
+
+5,000 → labeled by experts
+95,000 → unlabeled
+
+Semi-supervised learning can leverage both.
+
+Memory
+
+Semi-supervised = a little labeled + a lot of unlabeled
+
+8. Supervised vs Unsupervised vs Semi-Supervised
+	Supervised	Unsupervised	Semi-supervised
+Labeled data	Yes	No	Some
+Unlabeled data	Usually no	Yes	Yes
+Main goal	Learn known target	Discover patterns	Learn using both
+Example	Spam classification	Customer clustering	Image classification with few labels
+9. A Very Important Distinction
+
+Don't confuse unsupervised learning with reinforcement learning.
+
+Unsupervised
+
+No labels; discover patterns.
+
+Data → Find patterns
+Reinforcement learning
+
+An agent interacts with an environment and receives rewards/penalties.
+
+Agent
+ ↓ action
+Environment
+ ↓
+Reward/Penalty
+ ↓
+Learn better actions
+
+So:
+
+Unsupervised → patterns
+
+Reinforcement → rewards
+
+10. AIF-C01 Scenario Recognition
+
+If the question says:
+
+"A retailer wants to divide customers into groups based on purchasing behavior without predefined categories."
+
+→ Clustering
+
+"A retailer wants to discover which products customers frequently purchase together."
+
+→ Association
+
+"A bank wants to identify unusual transactions that may indicate fraud."
+
+→ Anomaly detection
+
+"An organization has a small amount of labeled data and a very large amount of unlabeled data."
+
+→ Semi-supervised learning
+
+🧠 Final memory map
+UNSUPERVISED
+│
+├── Clustering
+│     └── Find similar groups
+│
+├── Association
+│     └── Find things that occur together
+│
+└── Anomaly Detection
+      └── Find unusual patterns
+
+
+SEMI-SUPERVISED
+│
+└── Small labeled data
+       +
+    Large unlabeled data
+One-line exam shortcut:
+
+Cluster = Group
+Association = Together
+Anomaly = Unusual
+Semi-supervised = Some labels + many unlabeled
+
+For AIF-C01, these scenario associations are more important than memorizing the mathematical details of the algorithms.
