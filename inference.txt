@@ -1,0 +1,322 @@
+1. First: What is inference?
+
+Inference is when a trained ML model is used to make predictions on new/unseen data.
+
+Example:
+
+You trained an image classification model:
+
+Training:
+Images + labels
+       ↓
+    ML model
+
+Now someone gives the model a new image:
+
+New image
+    ↓
+Trained model
+    ↓
+"Dog"
+
+That prediction process is inference.
+
+So:
+
+Training = model learns
+
+Inference = trained model makes predictions
+
+2. What is an Edge Device?
+
+An edge device is a device that performs computing close to where data is generated, rather than sending all data to a centralized cloud/server.
+
+Examples:
+
+Smartphones
+Security cameras
+IoT sensors
+Drones
+Robots
+Smart vehicles
+Industrial machines
+Wearable devices
+
+For example, a security camera continuously generates video.
+
+Instead of:
+
+Camera
+   ↓
+Internet
+   ↓
+Cloud
+   ↓
+ML model
+   ↓
+Result
+   ↓
+Camera
+
+you can put the ML model directly on/near the camera:
+
+Camera
+   ↓
+ML model on edge
+   ↓
+"Person detected"
+
+That is edge inference.
+
+3. Why perform inference at the edge?
+
+There are several important reasons.
+
+① Low latency
+
+The device doesn't have to send data to the cloud and wait for a response.
+
+Example:
+
+Autonomous vehicle detects an obstacle.
+
+You don't want:
+
+Car → Internet → Cloud → Prediction → Car
+
+because network latency could be dangerous.
+
+Instead:
+
+Camera/Sensor → Edge ML → Brake
+
+Much faster.
+
+② Reduced bandwidth
+
+Imagine a security camera producing huge amounts of video.
+
+Sending everything to the cloud consumes significant bandwidth.
+
+Instead:
+
+Video
+ ↓
+Edge ML
+ ↓
+"Person detected"
+
+Only important information might be sent to the cloud.
+
+③ Connectivity independence
+
+Edge inference can continue even when:
+
+Internet connectivity is poor
+Network is unavailable
+Device is temporarily offline
+
+This is useful for:
+
+Remote IoT
+Vehicles
+Industrial environments
+Drones
+④ Privacy
+
+Sensitive data can sometimes be processed locally instead of being sent to a remote cloud service.
+
+Example:
+
+Phone microphone
+      ↓
+Local speech model
+      ↓
+Result
+
+The raw audio may not need to leave the device.
+
+Important: Edge processing can improve privacy, but it doesn't automatically guarantee privacy. Security controls are still required.
+
+4. The major disadvantage
+
+Edge devices usually have limited resources compared with cloud infrastructure.
+
+They may have:
+
+Limited CPU
+Limited GPU/NPU
+Limited memory
+Limited storage
+Battery constraints
+
+So you generally can't take a gigantic model and casually deploy it onto a small IoT sensor.
+
+This creates a trade-off:
+
+Cloud
+↑
+More compute
+More memory
+Larger models
+Potentially higher latency/network dependency
+
+Edge
+↑
+Less compute
+Less memory
+Smaller/optimized models
+Lower latency
+5. Model Optimization for Edge
+
+This is where techniques such as model compression become relevant.
+
+You may use:
+
+Quantization
+
+Reduce numerical precision used by model parameters.
+
+For example:
+
+FP32 → INT8
+
+This can reduce:
+
+Model size
+Memory usage
+Computation requirements
+
+while attempting to preserve acceptable accuracy.
+
+Knowledge Distillation
+
+You already learned this.
+
+Large teacher model
+        ↓
+   Knowledge
+        ↓
+Small student model
+
+The smaller student can be easier to deploy on resource-constrained devices.
+
+Pruning
+
+Remove less important parameters/connections from the model.
+
+Conceptually:
+
+Large model
+   ↓
+Remove unnecessary components
+   ↓
+Smaller model
+
+These techniques can make edge deployment more practical.
+
+6. Edge vs Cloud Inference
+	Edge Inference	Cloud Inference
+Where model runs	Device/near data source	Cloud
+Latency	Usually lower	Network latency possible
+Connectivity	Can work offline	Usually needs network access
+Compute	Limited	Large-scale
+Model size	Often constrained	Can support larger models
+Bandwidth	Lower data transfer	Potentially higher
+Privacy	Data can stay local	Data may be transmitted
+Management	More distributed devices	Centralized
+7. Practical Example — Smart Camera
+
+Suppose a factory has 1,000 cameras.
+
+Cloud approach
+1,000 Cameras
+      ↓
+Continuous video
+      ↓
+Network
+      ↓
+Cloud
+      ↓
+ML model
+
+Potential problems:
+
+huge bandwidth
+latency
+connectivity dependency
+potentially more data exposure
+Edge approach
+Camera
+  ↓
+Edge ML model
+  ↓
+Detect object/defect
+  ↓
+Send only event/result
+  ↓
+Cloud dashboard
+
+This is much more efficient for many real-time applications.
+
+8. Edge inference vs Edge training
+
+This distinction is important.
+
+Edge inference
+
+The model is already trained.
+
+Cloud/device training
+       ↓
+Trained model
+       ↓
+Deploy to edge
+       ↓
+Inference
+Edge training
+
+The device actually trains or updates a model locally.
+
+This is much more demanding because training requires significantly more compute and resources.
+
+For AIF-C01, when you see:
+
+"Run a trained model locally on a device."
+
+Think:
+
+Edge inference.
+
+9. AIF-C01 Scenario Recognition
+Scenario:
+
+A company needs real-time object detection on autonomous drones and cannot depend on a stable internet connection.
+
+→ Edge inference
+
+Why?
+
+Low latency + offline capability
+
+Scenario:
+
+A company wants to process sensitive sensor data locally and avoid transmitting raw data to the cloud.
+
+→ Edge inference
+
+Potential privacy benefit.
+
+Scenario:
+
+An IoT sensor has very limited memory and compute.
+
+You may need:
+
+→ Model optimization/compression, potentially quantization or distillation.
+
+Scenario:
+
+A company has unlimited cloud compute and needs to run a huge model centrally.
+
+→ Cloud inference
