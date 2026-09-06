@@ -1,0 +1,184 @@
+Amazon Translate is a fully managed neural machine translation (NMT) service from AWS.
+
+Simple definition
+
+Amazon Translate = AWS service that automatically translates text from one language to another.
+
+Example:
+
+English
+   ↓
+Amazon Translate
+   ↓
+Hindi
+
+Input:
+
+"Welcome to our website."
+
+Output:
+
+"हमारी वेबसाइट पर आपका स्वागत है।"
+
+How Amazon Translate works
+
+At a high level:
+
+Source Text
+     ↓
+Amazon Translate
+     ↓
+Neural Machine Translation
+     ↓
+Translated Text
+
+You provide the source language, target language, and text.
+
+For example:
+
+Source: English
+Target: French
+
+"Good morning"
+       ↓
+"Bonjour"
+
+It uses neural machine translation, meaning ML models are used to learn language relationships and produce translations.
+
+Important capabilities
+1. Real-time translation
+
+You can translate text immediately.
+
+Useful for:
+
+Chat applications
+Customer support
+Websites
+Applications requiring multilingual responses
+
+Example:
+
+Customer: "Where is my order?"
+                 ↓
+            Translate
+                 ↓
+Support system receives translated text
+2. Batch translation
+
+For large amounts of text, Amazon Translate can perform batch translation.
+
+Example:
+
+A company has:
+
+10,000 English product descriptions
+
+and wants them translated into:
+
+French
+German
+Japanese
+
+Batch processing is appropriate for this type of workload.
+
+3. Custom terminology
+
+This is an important feature.
+
+Sometimes a company has specific terms that should not be translated normally.
+
+For example, suppose a company has a product called:
+
+NovaCloud
+
+You want Amazon Translate to preserve the product name rather than translate it.
+
+Custom terminology lets you specify preferred translations for particular terms.
+
+Think:
+
+Custom terminology = control how specific words/phrases are translated.
+
+4. Automatic language detection
+
+Amazon Translate can determine the source language in supported scenarios.
+
+For example:
+
+Input:
+"Bonjour, comment allez-vous?"
+
+        ↓
+
+Detected language:
+French
+
+Then the text can be translated into the desired target language.
+
+Amazon Translate vs Amazon Comprehend ⭐
+
+This is a very important exam distinction.
+
+	Amazon Translate	Amazon Comprehend
+Main purpose	Translate text	Analyze/understand text
+Input	Text	Text
+Output	Translated text	Insights/information
+Sentiment	❌	✅
+Entity detection	❌	✅
+Key phrases	❌	✅
+Language translation	✅	❌
+Example
+
+Question:
+
+"Determine whether customer reviews are positive or negative."
+
+→ Amazon Comprehend
+
+Question:
+
+"Convert customer reviews from English into German."
+
+→ Amazon Translate
+
+Translate vs Transcribe vs Polly
+
+These three are easy to confuse:
+
+                    Amazon AI Services
+
+Speech ──→ Text
+            ↓
+      Amazon Transcribe
+
+
+Text ──→ Another Language
+            ↓
+      Amazon Translate
+
+
+Text ──→ Speech
+            ↓
+        Amazon Polly
+Memory trick
+
+Transcribe = Speech → Text
+Translate = Language → Language
+Polly = Text → Speech
+
+Example:
+
+"I love AWS"
+     ↓
+Translate
+     ↓
+"J'aime AWS"
+
+Whereas:
+
+Person speaking
+     ↓
+Transcribe
+     ↓
+Text
