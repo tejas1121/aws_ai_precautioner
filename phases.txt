@@ -1,0 +1,160 @@
+An ML project lifecycle is the sequence of steps followed to build, deploy, and maintain a machine learning solution.
+
+1. Problem Definition
+
+First, clearly define what problem ML needs to solve.
+
+Identify the business problem.
+Decide whether it is classification, regression, clustering, etc.
+Define the success criteria.
+
+Example: Predict whether a customer will cancel their subscription.
+
+2. Data Collection
+
+Collect the data required to solve the problem.
+
+Sources can include:
+
+Databases
+APIs
+CSV files
+Sensors/IoT devices
+Logs
+User-generated data
+
+Example: Collect customer age, usage, subscription history, complaints, and cancellation records.
+
+3. Data Preparation / Preprocessing
+
+Raw data is usually unsuitable for direct model training.
+
+Activities include:
+
+Handling missing values
+Removing duplicates
+Handling outliers
+Encoding categorical variables
+Scaling/normalization
+Cleaning noisy data
+Splitting data into training, validation, and test sets
+4. Feature Engineering
+
+Create useful input features from the available data.
+
+Example:
+
+Instead of directly using:
+
+Date_of_Last_Purchase
+
+create:
+
+Days_Since_Last_Purchase
+
+Feature engineering can significantly improve model performance.
+
+Feature engineering = converting raw data into useful model inputs.
+
+5. Model Selection
+
+Choose an appropriate ML algorithm/model.
+
+For example:
+
+Problem	Possible Model
+House price prediction	Linear Regression
+Spam detection	Logistic Regression / Decision Tree
+Customer segmentation	K-Means
+Image classification	CNN
+Text generation	Transformer
+
+The choice depends on the problem, data, performance requirements, and resources.
+
+6. Model Training
+
+Train the selected model using the training dataset.
+
+The model learns its parameters from the data.
+
+For example, in a neural network, the model learns weights and biases.
+
+7. Model Evaluation
+
+Evaluate the trained model on unseen data.
+
+Depending on the problem, use metrics such as:
+
+Classification: Accuracy, Precision, Recall, F1, AUC
+Regression: MAE, MSE, RMSE
+
+The goal is to determine whether the model generalizes well rather than simply memorizing the training data.
+
+8. Model Deployment
+
+Make the trained model available for real-world use.
+
+Examples:
+
+Cloud API
+Web application
+Mobile application
+Edge device
+Embedded system
+
+Example: Deploy a customer-churn model as an API that receives customer information and returns a churn prediction.
+
+9. Inference
+
+The deployed model receives new/unseen data and generates predictions.
+
+Example:
+
+New customer data
+       ↓
+Deployed ML model
+       ↓
+Churn probability = 87%
+
+Remember:
+
+Training → model learns
+Inference → model predicts
+
+10. Monitoring & Maintenance
+
+After deployment, continuously monitor the model.
+
+Monitor:
+
+Prediction accuracy
+Data drift
+Model drift
+Performance
+Latency
+Resource usage
+
+If real-world data changes significantly, the model may need to be retrained or updated.
+
+🔄 Complete ML Project Lifecycle
+Problem Definition
+        ↓
+Data Collection
+        ↓
+Data Preparation
+        ↓
+Feature Engineering
+        ↓
+Model Selection
+        ↓
+Model Training
+        ↓
+Model Evaluation
+        ↓
+Model Deployment
+        ↓
+Inference
+        ↓
+Monitoring & Maintenance
+        ↺
+   Retrain / Impro
