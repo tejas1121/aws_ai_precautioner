@@ -1,0 +1,241 @@
+Amazon Comprehend
+
+Amazon Comprehend is a fully managed Natural Language Processing (NLP) service from AWS.
+
+It uses machine learning to analyze and understand text without requiring you to build and train your own NLP model.
+
+Simple definition
+
+Amazon Comprehend = AWS service for extracting insights and information from text.
+
+For example, give it:
+
+"I absolutely love this product. The delivery was fast!"
+
+Comprehend can determine:
+
+Sentiment: Positive
+Language: English
+Entities: Product
+Key phrases: "love this product", "delivery"
+Syntax: grammatical information
+What can Amazon Comprehend do?
+1. Sentiment Analysis ⭐
+
+Determines the emotional sentiment of text.
+
+Possible results:
+
+Positive
+Negative
+Neutral
+Mixed
+
+Example:
+
+"The phone is excellent, but the battery is terrible."
+
+→ Mixed
+
+Exam clue:
+"Determine whether customer reviews are positive or negative" → Comprehend
+
+2. Entity Recognition
+
+Identifies important entities mentioned in text.
+
+Examples:
+
+People
+Organizations
+Locations
+Dates
+Products
+Events
+
+Example:
+
+"Amazon opened a new office in Mumbai."
+
+Comprehend might identify:
+
+Amazon → Organization
+Mumbai → Location
+3. Key Phrase Extraction
+
+Extracts the most important phrases from a piece of text.
+
+Example:
+
+"The customer purchased a new laptop with excellent battery life."
+
+Possible key phrases:
+
+new laptop
+excellent battery life
+4. Language Detection
+
+Determines which language a piece of text is written in.
+
+Example:
+
+"Bonjour, comment allez-vous?"
+             ↓
+          French
+5. Syntax Analysis
+
+Analyzes the grammatical structure of text.
+
+It can identify things such as:
+
+Nouns
+Verbs
+Adjectives
+Pronouns
+Adverbs
+
+Example:
+
+"The customer bought a laptop."
+
+customer → noun
+bought   → verb
+laptop   → noun
+6. Personally Identifiable Information (PII) Detection
+
+Comprehend can identify PII in text.
+
+Examples:
+
+Names
+Email addresses
+Phone numbers
+Addresses
+Identification information
+
+Example:
+
+"Contact Rahul at rahul@example.com."
+
+Comprehend can identify:
+
+Rahul → NAME
+rahul@example.com → EMAIL
+
+This is particularly useful for detecting or redacting sensitive information in documents.
+
+Custom Classification
+
+Comprehend can also be used to classify documents/text according to your own categories.
+
+For example, a company receives thousands of support tickets:
+
+Customer complaint
+       ↓
+Amazon Comprehend
+       ↓
+Billing
+Technical Issue
+Account Problem
+Shipping
+
+Instead of using only predefined categories, you can train a custom classifier for your organization's specific requirements.
+
+Custom Entity Recognition
+
+You can also create a custom entity recognition model.
+
+For example, a hospital may want to identify:
+
+Drug names
+Medical procedure names
+Disease codes
+Patient IDs
+
+These may not be adequately represented by generic entity categories, so a custom entity recognizer can be trained for the organization's domain.
+
+Comprehend vs Generative AI
+
+This distinction is important.
+
+Amazon Comprehend	Generative AI / LLM
+Primarily analyzes text	Can generate new content
+NLP understanding	Content generation
+Sentiment	Write an email
+Entity extraction	Summarize/generate text
+Key phrases	Chat
+Language detection	Generate code
+Classification	Generate answers
+Example
+
+If you ask:
+
+"Is this customer review positive or negative?"
+
+→ Amazon Comprehend
+
+If you ask:
+
+"Write a polite response to this customer."
+
+→ Generative AI/LLM
+
+Where does Comprehend fit in AWS?
+
+Think of the Amazon AI service family like this:
+
+                    Amazon AI Services
+                           │
+        ┌──────────────────┼──────────────────┐
+        ↓                  ↓                  ↓
+     Comprehend          Rekognition         Transcribe
+        │                  │                  │
+       Text               Images             Speech
+        │                  │                  │
+   NLP analysis       Image/video        Speech → Text
+
+Some important services you'll encounter:
+
+Service	Main purpose
+Amazon Comprehend	Analyze text/NLP
+Amazon Rekognition	Analyze images/videos
+Amazon Transcribe	Speech → text
+Amazon Polly	Text → speech
+Amazon Translate	Language translation
+Amazon Textract	Extract text/data from documents
+Amazon Lex	Build conversational chatbots
+🔥 AIF-C01 Exam Perspective
+
+Remember the input → task relationship:
+
+Text
+ ↓
+Amazon Comprehend
+ ↓
+Sentiment / Entities / Key phrases /
+Language / PII / Classification
+Typical exam questions
+
+"A company wants to analyze thousands of customer reviews to determine customer sentiment."
+
+→ Amazon Comprehend
+
+"A company wants to identify names, organizations, and locations in documents."
+
+→ Amazon Comprehend
+
+"A company wants to detect PII in text."
+
+→ Amazon Comprehend
+
+"A company wants to translate customer reviews from Japanese to English."
+
+→ Amazon Translate, not Comprehend.
+
+"A company wants to extract printed text and form data from scanned invoices."
+
+→ Amazon Textract, not Comprehend.
+
+🧠 Memory shortcut
+
+Comprehend = Understand TEXT
