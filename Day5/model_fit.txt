@@ -1,0 +1,296 @@
+1. Model Fit
+
+Model fit describes how well a machine-learning model represents the relationship between the input data and the target.
+
+There are three situations you need to recognize:
+
+Underfitting       Good Fit        Overfitting
+     ↓                 ↓                ↓
+Too simple       Appropriate       Too complex
+2. Underfitting
+
+A model is underfitting when it is too simple to capture the important patterns in the data.
+
+Example:
+
+Suppose the real relationship is complex:
+
+      •       •
+   •     •       •
+      •       •
+
+But you use an overly simple model that can't capture the relationship.
+
+Symptoms
+
+Training performance → poor
+
+Test performance → poor
+
+The model hasn't learned enough.
+
+Typical cause
+Model too simple
+Insufficient training
+Too few useful features
+Excessive regularization
+Connection to bias
+
+Underfitting → High Bias
+
+The model makes strong simplifying assumptions and misses important patterns.
+
+3. Overfitting
+
+Overfitting is almost the opposite.
+
+The model becomes too closely fitted to the training data, including noise and accidental patterns.
+
+Example:
+
+Training data:
+● ● ● ● ● ●
+
+Model:
+"I'll create a complicated rule that perfectly handles every one of these."
+
+It performs extremely well on training data but poorly on new data.
+
+Symptoms
+
+Training performance → very good
+
+Test/validation performance → significantly worse
+
+Typical causes
+Model too complex
+Too little training data
+Noisy data
+Too many irrelevant features
+Insufficient regularization
+Connection to variance
+
+Overfitting → High Variance
+
+The model is too sensitive to the particular training dataset.
+
+4. Good Fit
+
+A good model learns the underlying pattern rather than simply memorizing the training data.
+
+Training performance → Good
+Validation/test → Good
+
+The goal is:
+
+Generalization
+
+The model should perform well on unseen data.
+
+5. Bias
+
+Here, bias means the error introduced because the model makes overly simplistic assumptions about the underlying relationship.
+
+High bias means:
+
+"My model is too simple."
+
+Example:
+
+Trying to model a complex nonlinear relationship using an overly simple linear model.
+
+High Bias → Underfitting
+High Bias
+   ↓
+Model too simple
+   ↓
+Misses patterns
+   ↓
+Underfitting
+6. Variance
+
+Variance describes how sensitive the model is to changes in the training data.
+
+A high-variance model can change significantly if the training dataset changes slightly.
+
+Think:
+
+"The model is paying too much attention to the specific training examples."
+
+\(Var(X) = E(X^2) - [E(X)]^2\)
+Var(X)=(1.4)
+2
+=1.96
+σ
+σ
+μ
+-σ
++σ
+Var(X) ≈ 1.96
+Give feedback
+High variance
+Small change in training data
+          ↓
+Large change in model
+
+This is associated with:
+
+Overfitting
+
+7. Bias vs Variance
+
+This is one of the most important comparisons.
+
+	High Bias	High Variance
+Model	Too simple	Too complex
+Main problem	Misses patterns	Learns noise
+Training error	High	Low
+Test error	High	High
+Problem	Underfitting	Overfitting
+Generalization	Poor	Poor
+Memory:
+
+Bias → too simple
+
+Variance → too sensitive
+
+8. The Bias-Variance Tradeoff
+
+You generally want to balance the two.
+
+Imagine model complexity increasing:
+
+Low complexity                         High complexity
+     │                                      │
+     ▼                                      ▼
+High Bias ──────────────────────────→ High Variance
+Underfit                                  Overfit
+
+At very low complexity:
+
+Model can't learn enough → high bias
+
+At very high complexity:
+
+Model memorizes training data → high variance
+
+The goal is a model with a suitable level of complexity that generalizes well.
+
+9. Practical Example
+
+Suppose you're predicting house prices.
+
+Model A
+
+Uses only:
+
+Price = Area × constant
+
+It's too simplistic.
+
+Training:
+
+Poor
+
+Test:
+
+Poor
+
+→ Underfitting / high bias
+
+Model B
+
+Uses appropriate features:
+
+Area
+Location
+Bedrooms
+Age
+Amenities
+
+It learns meaningful relationships.
+
+Training:
+
+Good
+
+Test:
+
+Good
+
+→ Good fit
+
+Model C
+
+Uses hundreds of irrelevant features and essentially memorizes the training examples.
+
+Training:
+
+99.9%
+
+Test:
+
+65%
+
+→ Overfitting / high variance
+
+10. How do we fix them?
+Underfitting → reduce bias
+
+Possible approaches:
+
+Use a more complex model
+Add useful features
+Reduce excessive regularization
+Train for longer where appropriate
+
+Example:
+
+Simple model
+      ↓
+More expressive model
+      ↓
+Better pattern capture
+Overfitting → reduce variance
+
+Possible approaches:
+
+More representative training data
+Regularization
+Data augmentation where appropriate
+Simpler model
+Feature selection
+Early stopping
+Cross-validation during development
+
+The general idea is:
+
+Prevent the model from memorizing noise.
+
+11. Training vs Validation Performance — Exam Shortcut
+
+This is extremely useful for questions.
+
+Situation A
+Training accuracy = 60%
+Validation accuracy = 58%
+
+Both poor.
+
+→ Underfitting / high bias
+
+Situation B
+Training accuracy = 99%
+Validation accuracy = 65%
+
+Huge gap.
+
+→ Overfitting / high variance
+
+Situation C
+Training accuracy = 94%
+Validation accuracy = 92%
+
+Both good and close.
+
+→ Good generalization
