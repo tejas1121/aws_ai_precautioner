@@ -1,0 +1,313 @@
+RLHF — Reinforcement Learning from Human Feedback
+
+RLHF is a technique used to align a model's behavior with human preferences.
+
+You can think of it as:
+
+Humans tell the system which responses are better → that feedback becomes a reward signal → reinforcement learning improves the model.
+
+This is particularly important in the development/alignment of LLMs and generative AI models.
+
+1. Why do we need RLHF?
+
+Suppose an LLM receives:
+
+"Explain AWS to a beginner."
+
+It might generate several possible responses:
+
+Response A: Clear, accurate, simple
+Response B: Accurate but unnecessarily complicated
+Response C: Incorrect information
+
+The model needs to learn that:
+
+A > B > C
+
+Simply predicting the next token from internet text doesn't necessarily teach the model what humans consider helpful, safe, relevant, and well-written.
+
+RLHF provides that additional signal.
+
+2. How RLHF works
+
+A simplified RLHF pipeline is:
+
+              Large Pretrained Model
+                       ↓
+              Supervised Fine-Tuning
+                       ↓
+                Candidate Responses
+                       ↓
+                Human Preferences
+                       ↓
+                Reward Model
+                       ↓
+          Reinforcement Learning
+                       ↓
+             Aligned Model
+
+Let's break this down.
+
+Step 1 — Pretrained model
+
+First, you have a large pretrained model.
+
+It has learned language patterns from massive amounts of data.
+
+But it doesn't necessarily behave exactly how humans want.
+
+Internet / large dataset
+        ↓
+   Pretraining
+        ↓
+   Base LLM
+3. Step 2 — Supervised Fine-Tuning (SFT)
+
+The model is trained using examples of desirable behavior.
+
+For example:
+
+Prompt:
+"Explain cloud computing."
+
+Desired response:
+"Cloud computing means using computing resources
+over the internet..."
+
+The model learns to produce responses like these.
+
+This gives us an initial instruction-following model.
+
+4. Step 3 — Humans provide preferences
+
+Now give humans multiple responses to the same prompt.
+
+Example:
+
+Prompt
+
+"Explain machine learning."
+
+Response A
+
+Clear explanation with examples.
+
+Response B
+
+Extremely long and confusing explanation.
+
+Response C
+
+Contains factual errors.
+
+Human evaluators rank them:
+
+A > B > C
+
+This is preference feedback.
+
+Notice:
+
+The human doesn't necessarily have to write the perfect answer.
+
+They can simply say:
+
+"A is better than B."
+
+That's an important distinction.
+
+5. Step 4 — Reward Model
+
+Now we train a reward model to learn human preferences.
+
+It learns something like:
+
+Good response → High reward
+Bad response  → Low reward
+
+So eventually:
+
+Prompt
+  ↓
+Candidate response
+  ↓
+Reward Model
+  ↓
+Reward score
+
+The reward model acts as a proxy for human preferences.
+
+6. Step 5 — Reinforcement Learning
+
+Now the LLM is optimized using the reward signal.
+
+Conceptually:
+
+LLM
+ ↓
+Generate response
+ ↓
+Reward Model
+ ↓
+Reward
+ ↓
+Update model
+ ↓
+Generate better responses
+
+The objective is to encourage behavior that receives higher rewards.
+
+This is where the RL in RLHF comes from.
+
+🔥 The key distinction
+
+Don't think:
+
+"RLHF = humans manually train the model."
+
+That's too simplistic.
+
+The process is approximately:
+
+Humans
+  ↓
+Provide preference data
+  ↓
+Reward Model
+  ↓
+Reward signal
+  ↓
+Reinforcement Learning
+  ↓
+LLM behavior improves
+
+Humans provide the feedback.
+
+The reinforcement-learning process uses that feedback to optimize the model.
+
+7. RLHF vs Fine-Tuning
+
+This can easily appear as an exam trap.
+
+Normal/Supervised Fine-Tuning
+
+You provide:
+
+Input → Desired Output
+
+Example:
+
+Question → Ideal answer
+
+The model learns to reproduce desired examples.
+
+RLHF
+
+You provide human preferences:
+
+Response A > Response B
+
+Then use a reward signal to optimize behavior.
+
+Think:
+
+SFT → "Here is the answer I want."
+
+RLHF → "I prefer this answer over that one."
+
+8. RLHF vs RAG
+
+Completely different purposes.
+
+RAG
+
+Changes what information the model can access at inference time.
+
+Question
+ ↓
+Retrieve documents
+ ↓
+LLM
+ ↓
+Answer
+
+Useful for:
+
+Current information
+Private company information
+External knowledge
+RLHF
+
+Changes/alters model behavior based on human preferences.
+
+Useful for:
+
+Helpfulness
+Instruction following
+Alignment
+Response preferences
+
+So:
+
+RAG → knowledge/context
+
+RLHF → behavior/alignment
+
+9. RLHF and Responsible AI
+
+RLHF can help improve:
+
+Helpfulness
+Safety
+Instruction following
+Alignment with human preferences
+Reduction of certain undesirable behaviors
+
+But RLHF is not a guarantee of safety.
+
+You still need appropriate:
+
+Guardrails
+Evaluation
+Monitoring
+Security controls
+Human oversight
+
+This distinction matters.
+
+10. AIF-C01 exam perspective
+
+You should recognize wording like:
+
+"Human evaluators rank model responses according to their preferences."
+
+→ RLHF
+
+"Human feedback is converted into a reward signal used to optimize an LLM."
+
+→ RLHF
+
+"The organization wants the model to better align with human preferences."
+
+→ Think RLHF
+
+"The organization wants the model to answer using frequently changing private documents."
+
+→ RAG, not RLHF.
+
+🧠 Final mental model
+
+Remember this:
+
+PRETRAINING
+"Learn language"
+       ↓
+SFT
+"Follow instructions"
+       ↓
+RLHF
+"Behave according to human preferences"
+
+And the simplest definition:
+
+RLHF = using human preferences as feedback to optimize a model's behavior through reinforcement learning.
