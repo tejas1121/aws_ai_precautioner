@@ -1,0 +1,525 @@
+1. Confusion Matrix
+
+A confusion matrix is used for classification problems.
+
+Suppose a model predicts whether a transaction is fraudulent.
+
+There are two possibilities:
+
+Actual = Fraud
+Actual = Not Fraud
+
+And the model predicts:
+
+Fraud
+Not Fraud
+
+This creates four outcomes.
+
+Threshold 0.50
+Predicted negative
+Predicted positive
+Actual Positive
+Actual Negative
+0
+Model score
+1
+TP
+True positive
+	3
+
+FP
+False positive
+	3
+
+TN
+True negative
+	2
+
+FN
+False negative
+	2
+At threshold 0.50:
+Precision=
+TP+FP
+TP
+	​
+
+=
+3+3
+3
+	​
+
+=50%
+Recall=
+TP+FN
+TP
+	​
+
+=
+3+2
+3
+	​
+
+=60%
+Threshold
+Threshold
+Give feedback
+	Actually Positive	Actually Negative
+Predicted Positive	TP	FP
+Predicted Negative	FN	TN
+2. TP — True Positive
+
+Model predicts Positive, and reality is Positive.
+
+Example:
+
+Model says transaction is fraudulent → it actually is fraudulent.
+
+✅ Correct prediction.
+
+3. TN — True Negative
+
+Model predicts Negative, and reality is Negative.
+
+Example:
+
+Model says transaction is legitimate → it actually is legitimate.
+
+✅ Correct prediction.
+
+4. FP — False Positive
+
+Model predicts Positive, but reality is Negative.
+
+Example:
+
+Model says transaction is fraudulent → actually legitimate.
+
+❌ False alarm.
+
+Think:
+
+False Positive = false alarm
+
+5. FN — False Negative
+
+Model predicts Negative, but reality is Positive.
+
+Example:
+
+Model says transaction is legitimate → actually fraudulent.
+
+❌ The fraud was missed.
+
+Think:
+
+False Negative = missed positive
+
+🧠 Easy memory
+
+True/False = Was the prediction correct?
+
+Positive/Negative = What did the model predict?
+
+So:
+
+TP = correctly found positive
+
+TN = correctly found negative
+
+FP = incorrectly found positive
+
+FN = incorrectly found negative
+
+6. Accuracy
+
+Accuracy measures:
+
+How many total predictions were correct?
+
+Formula:
+
+Accuracy = (TP + TN) / (TP + TN + FP + FN)
+
+Example:
+
+100 transactions:
+
+90 correctly classified
+10 incorrectly classified
+
+Accuracy:
+
+90%
+
+Problem with accuracy
+
+Accuracy can be misleading for imbalanced datasets.
+
+Suppose:
+
+10,000 transactions
+9,900 legitimate
+100 fraudulent
+
+A terrible model predicts:
+
+"Everything is legitimate."
+
+It gets:
+
+99% accuracy
+
+But it detects:
+
+0 fraud cases.
+
+So accuracy alone is terrible here.
+
+7. Precision
+
+Precision asks:
+
+Of everything the model predicted as positive, how much was actually positive?
+
+Formula:
+
+Precision = TP / (TP + FP)
+
+Example:
+
+Model flags 100 transactions as fraud.
+
+Actually:
+
+80 are fraud
+20 are legitimate
+
+Precision:
+
+80 / 100 = 80%
+
+Precision cares about FP
+
+Low precision means:
+
+Model produces too many false alarms.
+
+Memory
+
+Precision = "When I say positive, how often am I right?"
+
+8. Recall
+
+Recall asks:
+
+Of all the actual positive cases, how many did the model successfully find?
+
+Formula:
+
+Recall = TP / (TP + FN)
+
+Example:
+
+There are actually 100 fraudulent transactions.
+
+Model detects 90.
+
+Recall:
+
+90%
+
+Recall cares about FN.
+
+Low recall means:
+
+Model is missing positive cases.
+
+Memory
+
+Recall = "Of all the real positives, how many did I catch?"
+
+9. Precision vs Recall
+
+This is one of the most important exam distinctions.
+
+Scenario: Spam filter
+
+You don't want legitimate emails to be incorrectly classified as spam.
+
+You care about avoiding:
+
+False Positives
+
+→ Precision
+
+Scenario: Cancer detection
+
+Missing an actual cancer case can be extremely serious.
+
+You want to minimize:
+
+False Negatives
+
+→ Recall
+
+Scenario: Fraud detection
+
+Often, you want to catch as much fraud as possible.
+
+→ Recall can be especially important
+
+But in real systems, fraud detection often requires balancing recall against false alarms, so don't blindly assume "fraud = recall" in every question. Look at the stated business cost.
+
+10. F1 Score
+
+F1 combines precision and recall into a single metric.
+
+It uses their harmonic mean:
+
+F1 = 2 × (Precision × Recall) / (Precision + Recall)
+
+Why harmonic mean?
+
+Because F1 becomes low if either precision or recall is low.
+
+Example:
+
+Precision = 90%
+Recall = 20%
+
+F1 will be much closer to the weaker performance than a simple average would be.
+
+When useful?
+
+Especially when:
+
+classes are imbalanced
+both precision and recall matter
+Memory
+
+F1 = balance between precision and recall
+
+11. ROC Curve and AUC
+
+Now we move to another important classification concept.
+
+ROC
+
+ROC = Receiver Operating Characteristic
+
+A ROC curve shows the relationship between:
+
+True Positive Rate (TPR) → Recall
+False Positive Rate (FPR)
+
+at different classification thresholds.
+
+Imagine your model gives a fraud probability:
+
+Transaction A → 0.95
+Transaction B → 0.80
+Transaction C → 0.40
+Transaction D → 0.10
+
+You need a threshold.
+
+For example:
+
+probability ≥ 0.5 → fraud
+
+Changing the threshold changes TP, FP, TN, and FN.
+
+ROC examines model behavior across these thresholds.
+
+12. AUC
+
+AUC = Area Under the ROC Curve
+
+It summarizes how well a classifier can distinguish between positive and negative classes across thresholds.
+
+Generally:
+
+Higher AUC → better ability to discriminate between classes.
+
+Very roughly:
+
+AUC = 1.0 → Excellent discrimination
+AUC ≈ 0.5 → Random guessing
+Important distinction
+
+AUC is not simply:
+
+"percentage of predictions that are correct."
+
+That's accuracy.
+
+AUC is about:
+
+How well the model separates/ranks positive vs negative examples across thresholds.
+
+13. Regression Metrics
+
+Now classification is different from regression.
+
+Regression predicts a continuous numeric value.
+
+Examples:
+
+House price
+Temperature
+Sales
+Demand
+Revenue
+
+Suppose:
+
+Actual:
+
+100
+
+Predicted:
+
+90
+
+Error:
+
+10
+
+Several metrics can measure these errors.
+
+14. MAE — Mean Absolute Error
+
+MAE = Mean Absolute Error
+
+Take the absolute difference between actual and predicted values and average them.
+
+Example:
+
+Actual:
+
+100, 200, 300
+
+Predicted:
+
+90, 220, 280
+
+Absolute errors:
+
+10, 20, 20
+
+MAE:
+
+(10 + 20 + 20) / 3
+= 16.67
+Interpretation
+
+On average, predictions are off by about 16.67 units.
+
+Key property
+
+MAE treats errors linearly.
+
+15. MSE — Mean Squared Error
+
+MSE squares each error before averaging.
+
+Formula:
+
+MSE = average[(Actual − Predicted)²]
+
+Using the same errors:
+
+10² = 100
+20² = 400
+20² = 400
+
+MSE:
+
+(100 + 400 + 400) / 3
+= 300
+Why square errors?
+
+Large errors get penalized much more heavily.
+
+For example:
+
+Error = 2 → 4
+Error = 10 → 100
+
+So:
+
+MSE strongly penalizes large errors.
+
+16. RMSE — Root Mean Squared Error
+
+RMSE is simply the square root of MSE.
+
+RMSE = √MSE
+
+If:
+
+MSE = 300
+
+then:
+
+RMSE ≈ 17.32
+Why is RMSE useful?
+
+The result is expressed in the same units as the target variable.
+
+If you're predicting house prices in ₹lakhs:
+
+RMSE is also in ₹lakhs.
+
+Memory
+
+MAE → average absolute error
+
+MSE → squared error
+
+RMSE → square root of MSE, same units as target
+
+17. MAE vs MSE/RMSE
+
+Suppose you have:
+
+Actual = 100
+Predicted A = 98
+Predicted B = 50
+
+Errors:
+
+A = 2
+B = 50
+
+MSE/RMSE will punish B much more strongly because of squaring.
+
+So:
+
+If large errors are especially costly:
+
+→ MSE/RMSE
+
+If you want a straightforward average magnitude of error:
+
+→ MAE
+
+18. Regression vs Classification
+
+Don't mix these.
+
+Problem	Typical metrics
+Classification	Accuracy, Precision, Recall, F1, AUC
+Regression	MAE, MSE, RMSE
+
+Example:
+
+Predict whether a transaction is fraudulent.
+
+→ Classification
+
+Predict the amount of fraud loss.
+
+→ Regression
