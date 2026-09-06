@@ -1,0 +1,179 @@
+Hyperparameter Tuning
+
+Hyperparameter tuning is the process of finding the best values for hyperparameters so that an ML model performs well on unseen data.
+
+First: Parameter vs Hyperparameter
+
+This is very important for AIF-C01:
+
+	Parameter	Hyperparameter
+Who determines it?	Learned by the model	Set by the developer/data scientist
+When?	During training	Before/during training configuration
+Example	Neural-network weights	Learning rate, number of layers
+Need tuning?	Usually no	Yes
+
+Simple analogy:
+
+Parameters = what the model learns
+Hyperparameters = what you configure
+
+Important Hyperparameters
+
+The exact hyperparameters depend on the algorithm.
+
+1. Learning Rate
+
+Controls how much the model changes its parameters during each training step.
+
+Too high → training may become unstable or overshoot the optimum.
+Too low → training can be very slow.
+High learning rate → fast but unstable
+Low learning rate  → slow but potentially stable
+
+Exam keyword: controls the step size of learning.
+
+2. Number of Epochs
+
+An epoch = one complete pass through the training dataset.
+
+Example:
+
+If you have 10,000 training samples:
+
+1 epoch = model sees all 10,000 samples once
+10 epochs = sees them 10 times
+
+Too few → underfitting
+Too many → can contribute to overfitting
+
+3. Batch Size
+
+Number of training samples processed before the model updates its parameters.
+
+Example:
+
+Dataset = 10,000 samples
+Batch size = 100
+
+10,000 / 100 = 100 batches per epoch
+
+Common values: 16, 32, 64, 128, etc.
+
+4. Number of Layers
+
+Important for neural networks.
+
+More layers can allow the model to learn more complex patterns.
+
+But an excessively complex network can:
+
+Increase computational cost
+Increase training time
+Increase risk of overfitting
+5. Number of Neurons / Units
+
+Controls the number of neurons in a neural-network layer.
+
+Input → [64 neurons] → [128 neurons] → Output
+
+Increasing neurons can increase model capacity, but also computational cost and potentially overfitting.
+
+6. Regularization Strength
+
+Regularization helps prevent overfitting.
+
+Examples:
+
+L1 regularization
+L2 regularization
+Dropout
+
+The regularization strength determines how strongly the model is penalized for complexity.
+
+Too much → may cause underfitting.
+
+7. Dropout Rate
+
+Used mainly in neural networks.
+
+It randomly "drops" a percentage of neurons during training.
+
+Example:
+
+Dropout = 0.2
+       ↓
+Approximately 20% of selected neurons
+are temporarily ignored during a training step
+
+Purpose → reduce overfitting.
+
+8. Tree Depth
+
+Important for Decision Trees / Random Forests / Gradient Boosting.
+
+max_depth controls how deep a decision tree can grow.
+
+Small depth → simpler model → may underfit
+Large depth → complex model → may overfit
+9. Number of Trees
+
+Important for ensemble algorithms such as:
+
+Random Forest
+Gradient Boosting
+XGBoost
+
+More trees can improve performance up to a point, but increase computational cost.
+
+10. Number of Clusters (K)
+
+Important for K-Means.
+
+K determines how many clusters the algorithm should create.
+
+Example:
+
+K = 3
+
+Customers
+   ↓
+Cluster 1
+Cluster 2
+Cluster 3
+Hyperparameter Tuning Process
+
+You don't simply guess the best values.
+
+A typical process is:
+
+Choose hyperparameters
+        ↓
+Train model
+        ↓
+Evaluate on validation set
+        ↓
+Change hyperparameters
+        ↓
+Train again
+        ↓
+Compare performance
+        ↓
+Select best configuration
+
+Common tuning approaches include:
+
+Grid Search
+
+Try every combination from a predefined set.
+
+Example:
+
+Learning rate: 0.01, 0.1
+Tree depth:    5, 10
+
+Combinations = 2 × 2 = 4
+Random Search
+
+Randomly select combinations from the specified ranges.
+
+Often more efficient when there are many hyperparameters.
