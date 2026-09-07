@@ -1,0 +1,279 @@
+1. SageMaker Console
+
+The SageMaker console is the AWS web interface used to access and manage SageMaker resources and ML workflows.
+
+Think:
+
+Console = Control panel for SageMaker
+
+From the console, you can work with things such as:
+
+Training jobs
+Models
+Endpoints
+Notebooks/development environments
+Model Registry
+Pipelines
+Monitoring
+JumpStart
+Other SageMaker resources
+                    SageMaker Console
+                          │
+        ┌─────────────────┼─────────────────┐
+        ↓                 ↓                 ↓
+    Training            Models          Endpoints
+        ↓                 ↓                 ↓
+      Train            Manage           Inference
+Exam clue
+
+"An administrator wants to access and manage SageMaker resources through the AWS web interface."
+
+→ SageMaker Console
+
+2. SageMaker JumpStart ⭐⭐⭐
+
+SageMaker JumpStart provides pretrained models, foundation models, built-in algorithms, and solution templates that can help you get started with ML quickly.
+
+Simple definition
+
+JumpStart = Ready-to-use models and ML solutions to accelerate development.
+
+Instead of starting from zero:
+
+Build model from scratch
+        ❌
+
+you can:
+
+SageMaker JumpStart
+        ↓
+Choose pretrained model
+        ↓
+Customize / fine-tune if needed
+        ↓
+Deploy
+Example
+
+Suppose you want to build a sentiment-analysis application.
+
+Instead of training a model from scratch:
+
+Raw data
+ ↓
+Train model
+ ↓
+Evaluate
+ ↓
+Deploy
+
+you can find an appropriate pretrained model through JumpStart and adapt/deploy it.
+
+JumpStart is NOT:
+
+❌ A single ML model
+❌ A training algorithm
+❌ An inference endpoint
+
+It is a catalog/hub of models and ML solutions that helps you get started faster.
+
+Exam clue
+
+"A developer wants to quickly find and deploy a pretrained model."
+
+→ SageMaker JumpStart
+
+3. SageMaker Canvas ⭐⭐⭐
+
+Amazon SageMaker Canvas is a visual, low-code/no-code interface for building ML models and generating predictions.
+
+The key idea:
+
+Canvas → ML without requiring extensive coding
+
+Business/Data user
+       ↓
+SageMaker Canvas
+       ↓
+Import data
+       ↓
+Build/train model
+       ↓
+Evaluate
+       ↓
+Predictions
+Example
+
+A business analyst has a dataset containing:
+
+Customer Age
+Purchase History
+Subscription Type
+Churn
+
+They want to predict customer churn but aren't comfortable writing Python ML code.
+
+They can use SageMaker Canvas to build an ML solution through a visual interface.
+
+Canvas vs SageMaker Studio
+SageMaker Canvas	SageMaker Studio
+Low-code/no-code	Full ML development environment
+Business analysts / less technical users	Data scientists / ML developers
+Visual interface	More developer-oriented
+Minimal coding	Can involve substantial coding
+Build/use ML models easily	Complete ML development workflow
+Memory:
+
+Canvas = ML with little/no code 🎨
+
+4. MLflow ⭐⭐⭐
+
+MLflow is an open-source platform used to track and manage ML experiments and model lifecycle activities.
+
+In SageMaker, you can use MLflow capabilities to track experiments.
+
+Think:
+
+MLflow = Track what happened during ML experiments.
+
+Suppose you train multiple versions:
+
+Experiment 1
+Learning rate = 0.01
+Accuracy = 89%
+
+Experiment 2
+Learning rate = 0.001
+Accuracy = 92%
+
+Experiment 3
+Learning rate = 0.005
+Accuracy = 94%
+
+MLflow can help track:
+
+Parameters
+Metrics
+Model artifacts
+Experiments
+Model versions/lifecycle information
+Why is this useful?
+
+Without experiment tracking, you might forget:
+
+"Which configuration produced that 94% model?"
+
+MLflow helps maintain a record.
+
+Experiment
+   ↓
+Parameters
+   ↓
+Metrics
+   ↓
+Artifacts
+   ↓
+Compare experiments
+5. SageMaker Training Servers / Training Infrastructure
+
+When you train an ML model, you need compute resources.
+
+SageMaker provides managed training infrastructure so you don't have to manually configure and manage the underlying servers.
+
+Training data
+     ↓
+SageMaker Training Job
+     ↓
+Managed compute
+     ↓
+Model training
+     ↓
+Trained model
+
+You can select appropriate compute resources depending on the workload, including CPU- or GPU-based instances.
+
+Example
+
+You need to train a deep-learning model.
+
+Instead of:
+
+Buy GPU server
+ ↓
+Install drivers
+ ↓
+Configure environment
+ ↓
+Manage server
+
+SageMaker can provide managed compute for the training job.
+
+SageMaker manages the underlying training infrastructure for you.
+
+⭐ Training Server vs Endpoint
+
+Don't confuse these.
+
+Training
+
+Used to learn the model.
+
+Training data
+     ↓
+Training compute
+     ↓
+Trained model
+Endpoint
+
+Used to serve predictions.
+
+New input
+    ↓
+SageMaker Endpoint
+    ↓
+Trained model
+    ↓
+Prediction
+
+So:
+
+Training server → TRAIN the model
+
+Endpoint → SERVE the model
+
+🔥 Compare All Five
+SageMaker component	Main purpose
+Console	Manage SageMaker resources through AWS UI
+JumpStart	Pretrained models + ML solutions
+Canvas	Low-code/no-code ML
+MLflow	Experiment/model tracking
+Training servers	Compute infrastructure for training
+🎯 AIF-C01 Exam Scenarios
+Q1
+
+A data scientist wants to quickly find a pretrained foundation model and deploy it.
+
+✅ SageMaker JumpStart
+
+Q2
+
+A business analyst wants to build an ML model without writing significant code.
+
+✅ SageMaker Canvas
+
+Q3
+
+An ML team wants to track hyperparameters, metrics, and model artifacts across experiments.
+
+✅ MLflow
+
+Q4
+
+A company wants managed compute resources to train its ML model without managing the underlying servers.
+
+✅ SageMaker training infrastructure
+
+Q5
+
+An administrator wants to manage SageMaker training jobs, models, endpoints, and other resources from a web interface.
+
+✅ SageMaker Console

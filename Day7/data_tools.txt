@@ -1,0 +1,245 @@
+1. SageMaker Data Wrangler
+
+SageMaker Data Wrangler is a capability in SageMaker that helps you collect, explore, transform, and prepare data for machine learning.
+
+Simple definition
+
+Data Wrangler = ML data preparation / data wrangling tool.
+
+Raw data is usually messy:
+
+Raw Data
+   ↓
+Data Wrangler
+   ↓
+Clean + Transform + Prepare
+   ↓
+ML-ready data
+   ↓
+Training
+What is Data Wrangling?
+
+Data wrangling means taking raw data and transforming it into a form suitable for analysis and ML.
+
+Typical tasks:
+
+Handle missing values
+Remove duplicates
+Detect/handle outliers
+Transform data
+Encode categorical variables
+Normalize/scale values
+Combine data sources
+Explore/analyze datasets
+Example
+
+Suppose you have:
+
+Name     Age    City      Income
+Rahul    25     Pune      50000
+Amit     ?      Mumbai    60000
+Sneha    30     Pune      55000
+
+Data Wrangler can help with:
+
+Missing Age
+    ↓
+Handle missing value
+
+City
+    ↓
+Encode categorical variable
+
+Income
+    ↓
+Scale/transform if required
+
+       ↓
+Clean ML-ready dataset
+2. Data Wrangler vs Feature Engineering
+
+They are related, but don't treat them as identical.
+
+Data Wrangler
+
+A tool/workflow for preparing data.
+
+Feature Engineering
+
+The process of creating useful features from raw data.
+
+Example:
+
+Date of birth
+     ↓
+Feature Engineering
+     ↓
+Age
+
+Data Wrangler can help you perform feature engineering and other data transformations.
+
+3. SageMaker Feature Store ⭐⭐⭐
+
+SageMaker Feature Store is a managed repository for storing, organizing, and retrieving ML features.
+
+Simple definition
+
+Feature Store = Central place to store and reuse ML features.
+
+First, what is a feature?
+
+A feature is an input variable used by an ML model.
+
+Example:
+
+Customer
+ ├── Age
+ ├── Income
+ ├── Number of purchases
+ └── Days since last purchase
+
+These are features.
+
+Why do we need a Feature Store?
+
+Imagine a large company has multiple ML teams.
+
+One team creates:
+
+customer_purchase_frequency
+
+Another team needs exactly the same feature.
+
+Instead of calculating it again from scratch, they can retrieve the feature from the Feature Store.
+
+Raw Data
+   ↓
+Feature Engineering
+   ↓
+Features
+   ↓
+SageMaker Feature Store
+   ↓
+ ┌──────────────┬──────────────┐
+ ↓              ↓              ↓
+Model A       Model B        Model C
+
+This promotes feature reuse and consistency.
+
+4. Feature Store and Training
+
+Features can be stored and then retrieved for model training.
+
+Historical data
+      ↓
+Feature engineering
+      ↓
+Feature Store
+      ↓
+Training dataset
+      ↓
+ML model
+5. Feature Store and Inference ⭐
+
+Feature Store can also provide features needed when making real-time predictions.
+
+Example:
+
+A fraud detection system receives a transaction.
+
+The model needs:
+
+Customer's recent transaction count
+Average transaction amount
+Recent location information
+
+These features can be retrieved from the Feature Store.
+
+New Transaction
+      ↓
+Retrieve required features
+      ↓
+Feature Store
+      ↓
+ML Model
+      ↓
+Fraud prediction
+6. Offline Store vs Online Store
+
+This is a useful deeper concept.
+
+SageMaker Feature Store supports different access patterns, including offline and online feature storage.
+
+Offline Store
+
+Used primarily for:
+
+Historical feature data
+Training
+Batch processing
+Analysis
+
+Think:
+
+Offline → historical data
+
+Online Store
+
+Used primarily for:
+
+Low-latency feature retrieval
+Real-time inference
+
+Think:
+
+Online → real-time prediction
+
+                 Feature Store
+                     │
+          ┌──────────┴──────────┐
+          ↓                     ↓
+    Offline Store          Online Store
+          ↓                     ↓
+ Training / History       Real-time inference
+Data Wrangler vs Feature Store ⭐⭐⭐
+
+This is the most important comparison.
+
+Data Wrangler	Feature Store
+Prepare data	Store features
+Clean data	Organize/reuse features
+Transform data	Retrieve features
+Explore datasets	Feature consistency
+Feature engineering	Feature serving
+Before/during data preparation	Used across training & inference
+Simple analogy
+
+Think of cooking:
+
+Data Wrangler
+    ↓
+Wash + cut + prepare ingredients
+
+Feature Store
+    ↓
+Store prepared ingredients
+so they can be reused
+Complete ML Workflow
+
+These concepts fit together:
+
+Raw Data
+   ↓
+SageMaker Data Wrangler
+   ↓
+Clean / Transform / Feature Engineering
+   ↓
+Features
+   ↓
+SageMaker Feature Store
+   ↓
+ ┌───────────────┐
+ ↓               ↓
+Training       Inference
+ ↓               ↓
+ML Model      Real-time prediction

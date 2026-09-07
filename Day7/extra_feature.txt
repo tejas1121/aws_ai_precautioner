@@ -1,0 +1,180 @@
+1. Network Isolation in SageMaker
+
+Network isolation is a security feature that prevents a SageMaker training container from making network calls.
+
+Basic idea
+
+Normally:
+
+SageMaker Training Job
+        │
+        ├── Training data
+        ├── Model artifacts
+        │
+        └── Network access
+
+With network isolation:
+
+SageMaker Training Job
+        │
+        ├── Training data
+        ├── Model artifacts
+        │
+        ✖ No network access
+
+The training container cannot access the internet or AWS services through the network during training.
+
+Why use it?
+
+Suppose your company has sensitive customer data:
+
+Private Training Data
+       ↓
+SageMaker Training
+       ↓
+Model
+
+You don't want the training container to communicate externally.
+
+Network isolation helps reduce the risk of:
+
+Data exfiltration
+Unauthorized external communication
+Malicious code contacting external systems
+⚠️ Exam point
+
+Network isolation ≠ VPC
+
+These are related but different concepts.
+
+VPC configuration → controls networking around SageMaker resources.
+Network isolation → prevents the training container from making network calls.
+
+Memory:
+
+Network Isolation = Training container is cut off from the network.
+
+2. DeepAR Algorithm
+
+DeepAR is a SageMaker built-in algorithm designed for time-series forecasting.
+
+Instead of predicting a category like:
+
+Fraud / Not Fraud
+
+or a value from independent rows, DeepAR predicts future values based on historical time-series data.
+
+Example
+
+Suppose Amazon wants to predict product demand:
+
+Date       Sales
+Mon         100
+Tue         120
+Wed         115
+Thu         140
+Fri         150
+...
+
+DeepAR learns patterns from historical sequences and predicts:
+
+Sat → 160
+Sun → 170
+Mon → 155
+What makes DeepAR useful?
+
+A traditional forecasting model might build a separate model for every time series.
+
+DeepAR can learn from multiple related time series.
+
+For example:
+
+Product A sales ─┐
+Product B sales ─┤
+Product C sales ─┼──→ DeepAR ──→ Future forecasts
+Product D sales ─┘
+
+This is especially useful when you have many related time series.
+
+Examples
+Product demand forecasting
+Electricity consumption
+Website traffic
+Inventory forecasting
+Sales forecasting
+Capacity planning
+Key exam phrase
+
+If you see:
+
+Forecast future values using historical time-series data
+
+Think:
+
+Amazon SageMaker DeepAR
+
+3. DeepAR vs Normal ML
+
+Consider:
+
+Problem A
+
+Predict whether a customer will churn.
+
+This is classification.
+
+Problem B
+
+Predict tomorrow's electricity demand using historical hourly demand.
+
+This is time-series forecasting → DeepAR.
+
+Problem C
+
+Predict house price from area, bedrooms, and location.
+
+This is regression.
+
+So:
+
+Problem	Type
+Spam / Not Spam	Classification
+Customer churn	Classification
+House price	Regression
+Customer groups	Clustering
+Future sales	Time-series forecasting → DeepAR
+4. Important DeepAR exam distinction
+
+DeepAR is not simply "deep learning for any prediction."
+
+Its important association is:
+
+DeepAR → probabilistic time-series forecasting
+
+It can produce forecasts that represent uncertainty rather than only giving one deterministic number.
+
+For example:
+
+Tomorrow's demand:
+P10 = 80
+P50 = 100
+P90 = 125
+
+Meaning the model can provide different forecast quantiles.
+
+🧠 AIF-C01 memory shortcut
+
+Remember these three:
+
+Network Isolation
+→ 🚫 Training container cannot access network
+
+DeepAR
+→ 📈 Time-series forecasting
+
+SageMaker built-in algorithms
+→ Prebuilt algorithms you can use for ML without building the algorithm from scratch.
+
+One-line exam answer
+
+Amazon SageMaker DeepAR is a built-in deep-learning algorithm for probabilistic forecasting of time-series data, particularly useful when working with multiple related time series.

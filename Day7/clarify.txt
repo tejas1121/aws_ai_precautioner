@@ -1,0 +1,293 @@
+1. Amazon SageMaker Clarify ⭐⭐⭐
+
+SageMaker Clarify helps organizations detect bias in datasets and models and understand model predictions.
+
+Think of Clarify as:
+
+Data / Model
+     ↓
+SageMaker Clarify
+     ↓
+Bias detection + Explainability
+
+It addresses two major questions:
+
+Question 1:
+
+"Is my data/model biased?"
+
+→ Bias detection
+
+Question 2:
+
+"Why did my model make this prediction?"
+
+→ Model explainability
+
+2. Bias Detection
+
+Bias can occur in the data or in the model's predictions.
+
+Example
+
+Suppose a company builds a model to predict whether a person should receive a loan.
+
+Training data:
+
+Male applicants   → 80% approved
+Female applicants → 45% approved
+
+The company wants to investigate whether the dataset or model has an undesirable bias related to gender.
+
+SageMaker Clarify can help identify potential bias.
+
+Dataset / Model
+       ↓
+SageMaker Clarify
+       ↓
+Bias metrics
+       ↓
+Potential bias identified
+Important:
+
+Clarify helps detect and analyze bias.
+
+It does not automatically guarantee that the model is fair.
+
+3. Bias in Training Data vs Bias in Model
+
+This distinction is important.
+
+Before training
+
+Clarify can analyze the dataset for potential bias.
+
+Training Data
+     ↓
+Clarify
+     ↓
+Potential data bias
+
+Example:
+
+One demographic group is severely underrepresented.
+
+After training
+
+Clarify can analyze model predictions for potential bias.
+
+Trained Model
+     ↓
+Clarify
+     ↓
+Prediction bias analysis
+
+So Clarify can be useful at different stages of the ML workflow.
+
+4. Model Explainability ⭐⭐⭐
+
+Another major capability of SageMaker Clarify is model explainability.
+
+Suppose your model rejects a loan application:
+
+Loan application
+       ↓
+ML Model
+       ↓
+❌ Rejected
+
+The business may ask:
+
+"Why was this application rejected?"
+
+Clarify can help identify which input features contributed to the prediction.
+
+For example:
+
+Prediction: Loan rejected
+
+Important features:
+Income          → strong influence
+Credit history  → strong influence
+Debt ratio      → moderate influence
+Age             → low influence
+
+This improves interpretability/transparency.
+
+5. Feature Importance
+
+Model explainability often involves determining how much different input features contributed to a prediction.
+
+Example:
+
+Prediction = Fraud
+
+Transaction amount  → +++
+Location            → ++
+Transaction time    → +
+Customer history    → +++
+
+This helps developers/business users understand model behavior.
+
+Exam clue
+
+"Determine which features contributed to a model's prediction."
+
+→ SageMaker Clarify
+
+6. Clarify vs Model Evaluation
+
+Don't confuse explainability with performance evaluation.
+
+Model Evaluation
+
+Question:
+
+"How well does my model perform?"
+
+Metrics:
+
+Accuracy
+Precision
+Recall
+F1
+AUC
+RMSE
+Explainability
+
+Question:
+
+"Why did the model make this prediction?"
+
+→ Feature contribution / explanations
+
+Clarify
+
+Can help with:
+
+"Is the model/data biased?"
+"Why did the model make this prediction?"
+
+7. SageMaker Ground Truth ⭐⭐⭐
+
+Now let's separate Ground Truth.
+
+SageMaker Ground Truth is a service/capability for building and managing data-labeling workflows.
+
+Remember from the previous module:
+
+ML models often need labeled training data.
+
+For example, you have 100,000 images:
+
+Unlabeled images
+       ↓
+SageMaker Ground Truth
+       ↓
+Human labeling
+       ↓
+Labeled dataset
+       ↓
+ML training
+8. Why Ground Truth?
+
+Suppose you want to train an image classifier:
+
+Image 1 → 🐱 Cat
+Image 2 → 🐶 Dog
+Image 3 → 🐱 Cat
+Image 4 → 🚗 Car
+
+Humans can label the data.
+
+Ground Truth helps create and manage these data-labeling workflows.
+
+9. Ground Truth + Mechanical Turk
+
+You previously learned Amazon Mechanical Turk.
+
+They can work together conceptually:
+
+SageMaker Ground Truth
+        ↓
+Data-labeling workflow
+        ↓
+Human workers
+        ↓
+Mechanical Turk / other workforce
+        ↓
+Labels
+Difference:
+
+Ground Truth
+
+→ AWS service for data-labeling workflows
+
+Mechanical Turk
+
+→ Crowdsourcing platform / human workforce
+
+10. Ground Truth vs A2I ⭐⭐⭐
+
+This is another important exam distinction.
+
+Ground Truth
+
+Used to label training data.
+
+Raw data
+   ↓
+Ground Truth
+   ↓
+Labels
+   ↓
+Training
+A2I
+
+Used to review AI/ML predictions.
+
+ML Model
+   ↓
+Prediction
+   ↓
+A2I
+   ↓
+Human review
+Memory:
+
+Ground Truth → Teach the model
+A2I → Check the model
+
+11. Clarify vs Ground Truth vs A2I
+
+🔥 Memorize this table.
+
+Service	Main purpose
+SageMaker Clarify	Bias detection + model explainability
+SageMaker Ground Truth	Data labeling
+Amazon A2I	Human review of AI/ML predictions
+Mechanical Turk	Crowdsourcing / human workforce
+
+Think of the ML lifecycle:
+
+Raw Data
+   ↓
+Ground Truth
+   ↓
+Labeled Data
+   ↓
+Training
+   ↓
+Trained Model
+   ↓
+Clarify
+   ↓
+Check bias / explainability
+   ↓
+Deployment
+   ↓
+Prediction
+   ↓
+A2I
+   ↓
+Human review when required

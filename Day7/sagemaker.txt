@@ -1,0 +1,387 @@
+1. What is Amazon SageMaker?
+
+Amazon SageMaker AI is a fully managed AWS service for building, training, and deploying machine learning models.
+
+Think of the overall workflow:
+
+Data
+ ↓
+SageMaker
+ ↓
+Train Model
+ ↓
+Evaluate Model
+ ↓
+Deploy Model
+ ↓
+Endpoint
+ ↓
+Inference / Predictions
+
+So SageMaker covers much more of the ML lifecycle than services like Comprehend or Rekognition.
+
+Compare:
+
+Amazon Comprehend
+
+"Analyze this text."
+
+Amazon Rekognition
+
+"Analyze this image."
+
+SageMaker
+
+"I want to build/train/deploy my own ML model."
+
+2. SageMaker Built-in Algorithms ⭐⭐⭐
+
+SageMaker provides built-in machine learning algorithms so you don't necessarily have to implement an algorithm from scratch.
+
+Examples include algorithms for:
+
+Classification
+Regression
+Clustering
+Recommendation
+Anomaly detection
+Forecasting
+
+Some well-known SageMaker built-in algorithms include:
+
+XGBoost
+
+Used for:
+
+Classification
+Regression
+
+Example:
+
+Customer data
+     ↓
+SageMaker XGBoost
+     ↓
+Will customer churn?
+Yes / No
+Linear Learner
+
+Can be used for:
+
+Regression
+Classification
+
+Example:
+
+House features
+      ↓
+Linear Learner
+      ↓
+Predicted price
+K-Means
+
+Used for:
+
+Unsupervised clustering
+
+Example:
+
+Customer data
+      ↓
+K-Means
+      ↓
+Group 1
+Group 2
+Group 3
+Important idea
+
+You don't need to write the complete ML algorithm yourself.
+
+Instead:
+
+Your data
+   ↓
+Choose SageMaker built-in algorithm
+   ↓
+Configure hyperparameters
+   ↓
+Train
+
+This makes model development easier.
+
+3. SageMaker Training ⭐
+
+Once you select an algorithm, SageMaker can launch a training job.
+
+Example:
+
+Training Dataset
+      ↓
+SageMaker Training Job
+      ↓
+Built-in Algorithm
+      ↓
+Trained Model
+
+During training, the model learns its parameters from the training data.
+
+You can specify:
+
+Training data location
+Algorithm/container
+Compute instance
+Hyperparameters
+Output location
+4. Deployment ⭐⭐⭐
+
+After training, you need to make the model available for predictions.
+
+This is called model deployment.
+
+A common SageMaker architecture is:
+
+Trained Model
+      ↓
+SageMaker Model
+      ↓
+SageMaker Endpoint
+
+The endpoint provides an interface through which applications can send data to the model.
+
+5. Inference
+
+Inference = using a trained model to make predictions on new data.
+
+Example:
+
+New customer data
+       ↓
+SageMaker Endpoint
+       ↓
+Trained ML Model
+       ↓
+Prediction
+       ↓
+"High probability of churn"
+Very important:
+
+Training = model learns
+Inference = model predicts
+
+6. Real-Time Inference
+
+Suppose an application needs a prediction immediately.
+
+Application
+     ↓
+SageMaker real-time endpoint
+     ↓
+Model
+     ↓
+Prediction
+
+Example:
+
+An e-commerce website needs to predict whether a transaction is fraudulent while the customer is making the payment.
+
+You want low-latency inference.
+
+→ Real-time endpoint.
+
+7. Batch Inference
+
+Sometimes you don't need an immediate response.
+
+Suppose a company wants to predict churn for 5 million customers every night.
+
+5 million customers
+        ↓
+Batch inference
+        ↓
+Predictions
+        ↓
+Output file
+
+This is appropriate for large offline workloads.
+
+Remember:
+
+Real-time inference → immediate prediction
+
+Batch inference → large/offline prediction workload
+
+8. SageMaker Endpoints ⭐
+
+A SageMaker endpoint provides a way for applications to invoke a deployed model for inference.
+
+Example:
+
+Web Application
+      ↓
+SageMaker Endpoint
+      ↓
+ML Model
+      ↓
+Prediction
+
+You don't need to expose the model's internal implementation to the application.
+
+The application simply sends input and receives output.
+
+9. SageMaker Studio ⭐⭐⭐
+
+Amazon SageMaker Studio is a web-based integrated development environment (IDE) for ML.
+
+Think of it as the workspace where data scientists and ML developers work with SageMaker.
+
+                 SageMaker Studio
+                       │
+       ┌───────────────┼──────────────┐
+       ↓               ↓              ↓
+   Prepare data      Train models   Evaluate
+                                       ↓
+                                   Deploy
+
+It provides tools for activities such as:
+
+Data preparation
+Model development
+Training
+Experimentation
+Model evaluation
+Deployment
+Monitoring
+Simple analogy
+
+Think of:
+
+SageMaker = ML platform
+
+and
+
+SageMaker Studio = ML development workspace/IDE
+
+SageMaker Studio vs SageMaker Endpoint
+
+Don't confuse them.
+
+Studio
+
+Used by the developer/data scientist.
+
+Developer
+   ↓
+SageMaker Studio
+   ↓
+Build/train/evaluate/deploy
+Endpoint
+
+Used by the application to obtain predictions.
+
+Application
+   ↓
+SageMaker Endpoint
+   ↓
+Prediction
+Complete SageMaker Flow 🔥
+
+This is the flow I'd remember for the exam:
+
+                    SageMaker Studio
+                          │
+                          ↓
+                     Prepare Data
+                          │
+                          ↓
+                 Choose Algorithm
+                          │
+                          ↓
+                  Training Job
+                          │
+                          ↓
+                    Trained Model
+                          │
+                          ↓
+                      Deploy
+                          │
+                          ↓
+                 SageMaker Endpoint
+                          │
+                          ↓
+                     Inference
+                          │
+                          ↓
+                     Prediction
+Built-in Algorithm vs Custom Algorithm
+Built-in algorithm
+
+SageMaker already provides the algorithm/container.
+
+Example:
+
+Use SageMaker XGBoost to classify customers.
+
+You mainly provide:
+
+Data
+Hyperparameters
+Compute
+Custom algorithm
+
+You provide your own model/training code or container.
+
+Example:
+
+Company has developed a proprietary ML algorithm that isn't available as a SageMaker built-in algorithm.
+
+Then you can use a custom approach.
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+A company wants a managed environment to train and deploy machine learning models.
+
+✅ Amazon SageMaker AI
+
+Scenario 2
+
+A developer wants to use a prebuilt XGBoost algorithm without implementing the algorithm from scratch.
+
+✅ SageMaker built-in algorithm
+
+Scenario 3
+
+A trained model needs to provide predictions to a web application with low latency.
+
+✅ SageMaker real-time endpoint
+
+Scenario 4
+
+A company wants to generate predictions for millions of records overnight.
+
+✅ SageMaker batch inference
+
+Scenario 5
+
+A data scientist wants a web-based environment to develop, train, and deploy ML models.
+
+✅ SageMaker Studio
+
+⭐ Important exam distinctions
+Concept	Purpose
+SageMaker Studio	ML development environment / IDE
+Built-in algorithm	Prebuilt ML algorithm
+Training job	Train the model
+Model	Trained ML artifact
+Endpoint	Serve model for inference
+Real-time inference	Immediate predictions
+Batch inference	Large offline predictions
+🧠 Ultimate memory shortcut
+
+Studio → Build
+Training Job → Learn
+Model → Learned artifact
+Endpoint → Serve
+Inference → Predict
+
+One correction to keep current for your exam: AWS now generally refers to the service as Amazon SageMaker AI (rather than simply "Amazon SageMaker") in current documentation. For AIF-C01, you should recognize both naming styles.

@@ -1,0 +1,323 @@
+SageMaker Governance & MLOps Tools
+
+These concepts are mainly about controlling, documenting, monitoring, managing, and automating ML models throughout their lifecycle.
+
+The easiest way to organize them:
+
+Model Development
+       ↓
+ Model Registry
+       ↓
+ Governance / Approval
+       ↓
+ Deployment
+       ↓
+ Model Monitor
+       ↓
+ Pipelines → automate the lifecycle
+
+Let's break them down.
+
+1. Model Cards ⭐
+
+A model card is documentation that describes an ML model and provides information about its intended use, limitations, performance, risks, and other relevant characteristics.
+
+Think:
+
+Model Card = Identity card / documentation for an ML model
+
+Example:
+
+Model: Customer Churn Predictor
+
+Purpose:
+Predict likelihood of customer churn
+
+Training data:
+2024–2025 customer data
+
+Performance:
+Accuracy = 91%
+
+Intended use:
+Customer retention analysis
+
+Limitations:
+May perform poorly on new customer segments
+
+Bias considerations:
+...
+Why useful?
+
+Model cards improve:
+
+Transparency
+Documentation
+Responsible AI
+Governance
+Understanding of model limitations
+Exam clue
+
+"Document the intended use, limitations, performance, and risks of an ML model."
+
+→ Model Card
+
+2. SageMaker Dashboard
+
+The SageMaker dashboard provides a centralized view of ML resources and activities.
+
+Think of it as:
+
+Dashboard = See/manage your ML environment
+
+Depending on the SageMaker experience, dashboards can help you access and manage things such as:
+
+Models
+Training jobs
+Endpoints
+Experiments
+Pipelines
+Monitoring information
+
+It's mainly about visibility and management, rather than being a specific ML algorithm.
+
+3. SageMaker Role Manager ⭐
+
+SageMaker Role Manager helps administrators create and configure IAM roles and permissions for SageMaker users.
+
+Think:
+
+Role Manager = Who can do what in SageMaker?
+
+Example:
+
+Data Scientist
+    ↓
+Can train models
+Can access datasets
+
+ML Engineer
+    ↓
+Can deploy models
+
+Administrator
+    ↓
+Can manage SageMaker resources
+
+The underlying concept is least-privilege access through IAM permissions.
+
+Exam clue
+
+"An administrator wants to simplify creation of IAM roles and permissions for SageMaker personas."
+
+→ SageMaker Role Manager
+
+4. SageMaker Model Monitor ⭐⭐⭐
+
+SageMaker Model Monitor monitors deployed ML models and helps detect problems with model inputs and predictions.
+
+Think:
+
+Model Monitor = Is my deployed model still behaving properly?
+
+After deployment:
+
+New Data
+   ↓
+Model Endpoint
+   ↓
+Predictions
+   ↓
+Model Monitor
+   ↓
+Detect problems
+What can go wrong after deployment?
+
+The real-world data can change.
+
+For example, you trained a fraud model using data from 2025:
+
+Training data:
+Average transaction = ₹5,000
+
+But in 2026:
+
+Real-world data:
+Average transaction = ₹15,000
+
+The distribution has changed.
+
+This can indicate data drift.
+
+Model Monitor can help detect such issues.
+
+Model Monitor and Data Quality
+
+It can monitor the quality/distribution of data being sent to the model.
+
+Examples:
+
+Missing values
+Distribution changes
+Unexpected values
+Feature changes
+Model Monitor and Model Quality
+
+Model Monitor can also help monitor model quality when ground-truth labels become available.
+
+Example:
+
+Prediction:
+Fraud
+
+Later:
+Actual result = Not Fraud
+
+        ↓
+Model quality monitoring
+
+This helps identify degradation in model performance.
+
+5. Model Registry ⭐⭐⭐
+
+SageMaker Model Registry is used to catalog, manage, version, and govern ML models.
+
+Think:
+
+Model Registry = Central repository/catalog for ML models
+
+Example:
+
+Customer-Churn Model
+
+Version 1 → Accuracy 86%
+Version 2 → Accuracy 91%
+Version 3 → Accuracy 94%
+
+You can track model versions and their lifecycle status.
+
+For example:
+
+Development
+     ↓
+Testing
+     ↓
+Approved
+     ↓
+Production
+     ↓
+Archived
+Why Model Registry?
+
+Imagine a company has hundreds of ML models.
+
+Without a registry:
+
+models/
+├── final_model.pkl
+├── final_model2.pkl
+├── final_model_new.pkl
+├── final_model_really_final.pkl
+
+😵
+
+A model registry provides structured management:
+
+Model
+ ├── Version 1
+ ├── Version 2
+ └── Version 3
+
+with associated metadata and lifecycle information.
+
+6. SageMaker Pipelines ⭐⭐⭐
+
+SageMaker Pipelines is used to automate and orchestrate ML workflows.
+
+Instead of manually performing:
+
+Prepare data
+     ↓
+Train
+     ↓
+Evaluate
+     ↓
+Deploy
+
+you can define an automated pipeline.
+
+Data Preparation
+       ↓
+Training
+       ↓
+Evaluation
+       ↓
+Condition Check
+       ↓
+Register Model
+       ↓
+Deploy
+Example
+
+Suppose your organization wants to retrain a model every time new data is available.
+
+A pipeline can automate:
+
+New data
+   ↓
+Preprocess
+   ↓
+Train
+   ↓
+Evaluate
+   ↓
+Is accuracy > 90%?
+   ↓
+  YES
+   ↓
+Register
+   ↓
+Deploy
+
+If:
+
+Accuracy < 90%
+
+the pipeline can stop rather than deploying the model.
+
+⭐ Model Registry vs Model Monitor vs Pipelines
+
+This is very important for your exam.
+
+Tool	Main question
+Model Cards	What is this model? What are its limitations?
+Role Manager	Who can access/do what?
+Model Registry	Which models/versions do we have and what is their status?
+Model Monitor	Is my deployed model/data behaving properly?
+Pipelines	How do I automate the ML workflow?
+Dashboard	Where can I view/manage ML resources?
+Complete SageMaker Governance Picture
+                         SageMaker
+                            │
+        ┌───────────────────┼───────────────────┐
+        ↓                   ↓                   ↓
+   Model Cards          Role Manager       Dashboard
+        ↓                   ↓                   ↓
+ Documentation          Permissions       Visibility
+                            │
+                            ↓
+                      Model Registry
+                            ↓
+                    Version / Approval
+                            ↓
+                       Deployment
+                            ↓
+                    Model Monitor
+                            ↓
+                  Drift / Quality issues
+                            ↑
+                            │
+                    SageMaker Pipelines
+                            │
+                    Automate workflow
+🎯 AIF-C01 Exam Scenario
