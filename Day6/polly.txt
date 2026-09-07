@@ -1,0 +1,202 @@
+
+
+Amazon Polly
+
+Amazon Polly is a fully managed AWS AI service that converts text into natural-sounding speech using speech synthesis.
+
+Simple definition
+
+Amazon Polly = Text → Speech (voice/audio) 🔊
+
+Example:
+
+📝 "Welcome to Amazon Web Services."
+             ↓
+        Amazon Polly
+             ↓
+🔊 Spoken audio
+How Amazon Polly works
+
+At a high level:
+
+Text
+ ↓
+Amazon Polly
+ ↓
+Speech Synthesis
+ ↓
+Audio Stream/File
+ ↓
+Speaker / Application
+
+You provide text, select a supported language and voice, and Polly generates spoken audio.
+
+1. Text-to-Speech ⭐
+
+This is Polly's primary purpose.
+
+Example:
+
+A navigation application has:
+
+"Turn left after 200 meters."
+
+Instead of displaying only text:
+
+Text → Polly → 🔊 "Turn left after 200 meters."
+2. Natural-Sounding Voices
+
+Polly provides multiple voices and languages.
+
+This allows applications to produce speech appropriate for different:
+
+Languages
+Accents
+Voice characteristics
+
+The key exam idea:
+
+Polly synthesizes human-like speech from text.
+
+3. Real-Time Speech Synthesis
+
+Polly can generate speech for applications where audio needs to be produced dynamically.
+
+Example:
+
+User asks:
+"What is my account balance?"
+
+        ↓
+
+Application generates text:
+"Your balance is ₹5,000."
+
+        ↓
+
+Amazon Polly
+
+        ↓
+
+🔊 Spoken response
+
+This makes Polly useful in voice-enabled applications.
+
+4. SSML ⭐
+
+SSML = Speech Synthesis Markup Language
+
+It allows you to control how the generated speech sounds.
+
+For example, you can influence:
+
+Pronunciation
+Pauses
+Emphasis
+Speaking style
+Speech rate
+Volume
+Pitch
+
+Instead of simply sending:
+
+"Welcome to our store."
+
+you can use SSML to tell Polly how that sentence should be spoken.
+
+Exam clue
+
+"Control pronunciation, pauses, emphasis, or speaking rate."
+
+→ Amazon Polly with SSML
+
+Polly vs Transcribe ⭐⭐⭐
+
+This is one of the easiest exam traps.
+
+They perform opposite conversions.
+
+🎤 Speech
+   ↓
+Amazon Transcribe
+   ↓
+📝 Text
+
+Whereas:
+
+📝 Text
+   ↓
+Amazon Polly
+   ↓
+🔊 Speech
+Memory trick
+
+Transcribe = Hear → Write
+Polly = Write → Speak
+
+Polly vs Translate vs Comprehend
+Service	Function
+Amazon Polly	Text → Speech
+Amazon Transcribe	Speech → Text
+Amazon Translate	Language → Language
+Amazon Comprehend	Analyze text
+Amazon Rekognition	Analyze images/videos
+Amazon Textract	Extract data from documents
+Example workflow
+
+Suppose you build a multilingual voice assistant:
+
+🎤 User speaks Hindi
+       ↓
+Amazon Transcribe
+       ↓
+Hindi text
+       ↓
+Amazon Translate
+       ↓
+English text
+       ↓
+LLM / application
+       ↓
+English response
+       ↓
+Amazon Translate
+       ↓
+Hindi text
+       ↓
+Amazon Polly
+       ↓
+🔊 Hindi speech
+
+This kind of service-combination scenario is useful to recognize in AIF-C01 questions.
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+An application needs to read news articles aloud to users.
+
+✅ Amazon Polly
+
+Scenario 2
+
+A company wants to convert recorded customer calls into text.
+
+✅ Amazon Transcribe
+
+Scenario 3
+
+An application needs to convert generated text into spoken audio.
+
+✅ Amazon Polly
+
+Scenario 4
+
+A developer needs to control how a word is pronounced and add pauses to speech.
+
+✅ Amazon Polly + SSML
+
+Scenario 5
+
+A company wants to analyze customer reviews for sentiment.
+
+✅ Amazon Comprehend

@@ -1,0 +1,251 @@
+Amazon Lex is a fully managed AWS service for building conversational interfaces using voice and text.
+
+Simple definition
+
+Amazon Lex = AWS service for building chatbots and conversational applications. 🤖
+
+It uses technologies such as Automatic Speech Recognition (ASR) and Natural Language Understanding (NLU) to understand user input.
+
+How Amazon Lex works
+
+A simplified flow:
+
+User
+ ↓
+"I want to book a flight"
+ ↓
+Amazon Lex
+ ↓
+Understand user's intent
+ ↓
+Extract required information
+ ↓
+Take appropriate action
+ ↓
+Respond to user
+
+Lex can accept:
+
+Text
+Speech
+
+So:
+
+🎤 Voice ──┐
+           ├──→ Amazon Lex → Conversational response
+📝 Text ───┘
+1. Intent ⭐
+
+An intent represents what the user wants to accomplish.
+
+Example chatbot for a bank:
+
+User: "I want to check my account balance."
+
+             ↓
+
+Intent: CheckBalance
+
+Other intents might be:
+
+CheckBalance
+TransferMoney
+BlockCard
+OpenAccount
+Exam clue
+
+"Determine what the customer wants to do."
+
+→ Intent
+
+2. Utterances
+
+An utterance is what the user actually says/types to express an intent.
+
+For example, for CheckBalance:
+
+"What's my balance?"
+"How much money do I have?"
+"Show my account balance"
+"Can I check my balance?"
+
+All of these can correspond to the same intent.
+
+Multiple utterances
+       ↓
+CheckBalance intent
+3. Slots ⭐
+
+A slot is information that Lex needs to collect from the user to fulfill an intent.
+
+Example: Flight-booking chatbot.
+
+User:
+"I want to fly from Pune to Delhi tomorrow."
+
+Intent:
+BookFlight
+
+Slots:
+Origin      = Pune
+Destination = Delhi
+Date        = Tomorrow
+
+If something is missing, Lex can ask the user.
+
+Lex: "Where are you flying from?"
+
+User: "Pune"
+
+Lex: "Where are you flying to?"
+
+User: "Delhi"
+Memory trick
+
+Intent = WHAT the user wants
+Slot = INFORMATION needed to do it
+
+4. Confirmation
+
+Lex can ask the user to confirm an action before completing it.
+
+Example:
+
+Lex:
+"You want to transfer ₹10,000 to Rahul. Should I proceed?"
+
+User:
+"Yes."
+
+This is useful for actions where accidental execution should be avoided.
+
+5. Fulfillment
+
+Once Lex understands the intent and collects the required slots, the application can fulfill the request.
+
+For example:
+
+User:
+"Book a flight from Pune to Delhi tomorrow."
+
+        ↓
+
+Lex
+        ↓
+Intent: BookFlight
+        ↓
+Slots collected
+        ↓
+Fulfillment
+        ↓
+Flight-booking system/API
+        ↓
+Booking completed
+
+The actual business operation can involve AWS Lambda or another backend service.
+
+Lex vs Amazon Q ⭐⭐⭐
+
+This is important because you've already studied Amazon Q.
+
+Amazon Lex
+
+Primarily used to build conversational bots.
+
+Developer
+   ↓
+Build chatbot with Lex
+   ↓
+Customer interacts
+
+Example:
+
+"Welcome to ABC Bank. How can I help you?"
+
+Amazon Q
+
+Primarily provides generative-AI-powered assistants for business users, developers, and enterprise scenarios.
+
+Employee
+   ↓
+Amazon Q
+   ↓
+Ask questions / get assistance
+Key distinction
+
+Lex → Build conversational bots
+Q → Generative AI assistant
+
+Don't confuse Lex with an LLM itself.
+
+Lex vs Comprehend
+
+Another common confusion:
+
+Amazon Lex	Amazon Comprehend
+Builds conversational applications	Analyzes text
+Understands user intent in a conversation	Sentiment analysis
+Collects slots	Entity extraction
+Manages conversational flow	Key phrase extraction
+Text + speech input	Text analysis
+
+Example:
+
+"I want to cancel my order."
+
+Lex:
+
+Determines the CancelOrder intent and collects order information.
+
+Comprehend:
+
+Could analyze the text's sentiment/entities/key phrases.
+
+Lex vs Transcribe
+
+They can work together, but they are different.
+
+Transcribe:
+
+🎤 Speech → 📝 Text
+
+Lex:
+
+🎤/📝 User input
+       ↓
+Understand intent + slots
+       ↓
+Conversation
+
+Lex can incorporate speech recognition capabilities for voice conversations, while Transcribe's core purpose is speech-to-text transcription.
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+A company wants to build a customer-service chatbot that can understand user requests and ask follow-up questions.
+
+✅ Amazon Lex
+
+Scenario 2
+
+A chatbot needs to determine whether a customer wants to cancel an order, check an order, or return an item.
+
+✅ Amazon Lex — intents
+
+Scenario 3
+
+A flight-booking bot needs to collect the departure city, destination, and travel date.
+
+✅ Amazon Lex — slots
+
+Scenario 4
+
+A company wants to determine whether thousands of reviews are positive or negative.
+
+✅ Amazon Comprehend
+
+Scenario 5
+
+A company wants to convert recorded speech into text.
+
+✅ Amazon Transcribe

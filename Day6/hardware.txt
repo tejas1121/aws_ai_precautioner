@@ -1,0 +1,226 @@
+For AIF-C01, you mainly need to understand what types of hardware are used for AI workloads and why, rather than learning hardware architecture in depth.
+
+The main hardware you'll encounter is:
+
+CPU → GPU → TPU/AI Accelerators
+1. CPU — Central Processing Unit
+
+A CPU is a general-purpose processor designed to handle many different types of tasks.
+
+CPU
+ ↓
+General-purpose computing
+Characteristics
+Good for sequential/general-purpose workloads
+Flexible
+Usually fewer powerful parallel processing units compared with GPUs
+Suitable for many traditional applications and lighter ML workloads
+AI example
+
+A small ML model performing inference on a server may run perfectly well on a CPU.
+
+2. GPU — Graphics Processing Unit ⭐⭐⭐
+
+GPUs are extremely important for modern AI.
+
+A GPU contains many processing units that can perform operations in parallel.
+
+        GPU
+ ┌───────────────────┐
+ │ ● ● ● ● ● ● ● ● │
+ │ ● ● ● ● ● ● ● ● │
+ │ ● ● ● ● ● ● ● ● │
+ └───────────────────┘
+       Parallel
+     computation
+
+AI models perform huge numbers of mathematical operations, especially matrix/tensor operations.
+
+GPUs can perform many of these operations simultaneously.
+
+Why GPUs are good for AI
+
+Massive parallel processing
+
+This makes GPUs particularly useful for:
+
+Deep learning training
+Neural networks
+Large language models
+Generative AI
+Image/video processing
+Large-scale inference
+CPU vs GPU
+CPU	GPU
+General-purpose	Highly parallel
+Smaller number of powerful cores	Many processing cores
+Good for varied workloads	Excellent for parallel workloads
+Often used for application logic	Commonly used for AI/ML computation
+Usually less suitable for large-scale deep-learning training	Very suitable for deep-learning training
+Easy analogy
+
+Imagine calculating:
+
+2 × 3, 4 × 5, 6 × 7, ... 1 million calculations
+
+A GPU can distribute many calculations across its parallel processing units.
+
+AI = lots of parallel mathematical operations → GPU is very useful.
+
+3. AI Accelerators
+
+Modern AI systems also use specialized hardware called AI accelerators.
+
+These are designed specifically to accelerate AI/ML operations.
+
+Examples include:
+
+AWS Trainium
+AWS Inferentia
+NVIDIA AI accelerators
+Google's TPU
+
+For AIF-C01, the most important AWS examples are Trainium and Inferentia.
+
+4. AWS Trainium ⭐
+
+AWS Trainium is an AWS-designed accelerator optimized primarily for machine learning model training.
+
+Think:
+
+Training
+   ↓
+AWS Trainium
+   ↓
+Faster / more cost-efficient AI training
+
+It's designed for workloads such as:
+
+Deep learning
+Generative AI model training
+Large-scale ML training
+Memory shortcut
+
+Trainium → TRAINING
+
+5. AWS Inferentia ⭐
+
+AWS Inferentia is an AWS-designed accelerator optimized for ML inference.
+
+Trained Model
+     ↓
+AWS Inferentia
+     ↓
+Predictions
+
+Useful when you already have a trained model and want to serve predictions efficiently.
+
+Memory shortcut
+
+Inferentia → INFERENCE
+
+Trainium vs Inferentia ⭐⭐⭐
+
+This is worth memorizing.
+
+	AWS Trainium	AWS Inferentia
+Primary purpose	Training	Inference
+Used when	Building/training models	Running trained models
+Main goal	Accelerate training	Accelerate inference
+Memory trick	TRAINium → TRAIN	Inferentia → INFER
+
+Example:
+
+A company wants to train a large generative AI model.
+
+→ Trainium
+
+A company has a trained model and wants to serve millions of predictions efficiently.
+
+→ Inferentia
+
+6. Edge AI Hardware
+
+AI doesn't always run in AWS/cloud.
+
+Some AI workloads run directly on edge devices.
+
+Examples:
+
+Smartphones
+Security cameras
+IoT devices
+Drones
+Robots
+Autonomous vehicles
+
+These devices may contain specialized processors such as:
+
+GPUs
+NPUs (Neural Processing Units)
+AI accelerators
+Camera
+  ↓
+Edge AI hardware
+  ↓
+Model inference
+  ↓
+Immediate result
+Why?
+
+Because edge inference can provide:
+
+Lower latency
+Reduced network bandwidth
+Operation with limited connectivity
+Potential privacy benefits because data can remain local
+CPU vs GPU vs AI Accelerator
+
+Think about the progression:
+
+CPU
+ ↓
+General-purpose computing
+
+GPU
+ ↓
+Highly parallel computation
+
+AI Accelerator
+ ↓
+Specialized AI computation
+🎯 AIF-C01 Exam Perspective
+
+AWS can give you scenarios like:
+
+Scenario 1
+
+A company needs to train a large deep-learning model efficiently.
+
+Think:
+
+GPU / AWS Trainium
+
+Scenario 2
+
+A company has a trained ML model and needs high-performance inference.
+
+Think:
+
+GPU / AWS Inferentia
+
+Scenario 3
+
+A model needs to run locally on a camera with very low latency.
+
+Think:
+
+Edge AI hardware / accelerator
+
+Scenario 4
+
+A workload requires general-purpose application processing rather than massive parallel tensor computation.
+
+Think:
+
+CPU

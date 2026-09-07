@@ -1,0 +1,185 @@
+Amazon Rekognition
+
+Amazon Rekognition is a fully managed AWS AI service for analyzing images and videos using computer vision.
+
+Simple definition
+
+Amazon Rekognition = AWS service that understands/analyzes images and videos.
+
+Think:
+
+📷 Image / 🎥 Video
+        ↓
+ Amazon Rekognition
+        ↓
+Computer Vision Analysis
+        ↓
+Labels / Faces / Text / Objects / Activities
+1. Object & Label Detection ⭐
+
+Rekognition can identify objects, scenes, and concepts in images.
+
+Example:
+
+Image
+  ↓
+Rekognition
+  ↓
+Car       98%
+Person    97%
+Road      95%
+Building  91%
+
+This is called label detection.
+
+Exam clue
+
+"Identify cars, people, buildings, animals, etc. in an image."
+
+→ Amazon Rekognition
+
+2. Face Detection
+
+Rekognition can detect faces in images and videos.
+
+It can provide information such as:
+
+Face location/bounding box
+Facial landmarks
+Approximate attributes
+Face quality
+
+Example:
+
+📷 Group photo
+       ↓
+Rekognition
+       ↓
+Face 1 → detected
+Face 2 → detected
+Face 3 → detected
+Important distinction
+
+Face detection ≠ face recognition
+
+Detection: "There is a face here."
+Recognition: "This face matches a known person in my collection."
+3. Face Recognition ⭐
+
+Rekognition can compare faces against a collection of previously indexed faces.
+
+Example:
+
+Camera image
+     ↓
+Detected face
+     ↓
+Compare with face collection
+     ↓
+Possible match
+
+This can be used in applications such as identity verification or finding known faces in a collection, subject to appropriate privacy and legal requirements.
+
+4. Facial Analysis
+
+Rekognition can analyze detected faces for various attributes.
+
+For example, it can provide information about:
+
+Facial landmarks
+Face quality
+Pose
+Certain facial attributes
+
+The important exam idea is:
+
+Rekognition can extract information about faces from images/videos.
+
+5. Text Detection ⭐
+
+Rekognition can detect text in images and videos.
+
+Example:
+
+Image:
+┌──────────────────┐
+│  AMAZON          │
+│  AWS CLOUD       │
+└──────────────────┘
+
+        ↓
+
+Rekognition
+        ↓
+
+"AMAZON"
+"AWS CLOUD"
+
+This is useful for:
+
+Signs
+Posters
+Labels
+Street scenes
+Video frames
+Exam trap: Rekognition vs Textract
+
+Rekognition
+→ Detects text as part of image/video analysis
+
+Textract
+→ Extracts text and structured data from documents, such as forms and tables.
+
+6. Content Moderation
+
+Rekognition can detect potentially inappropriate or unwanted visual content.
+
+Example:
+
+Uploaded image
+      ↓
+Rekognition
+      ↓
+Content moderation labels
+      ↓
+Application decides whether
+to allow, review, or reject
+
+Useful for websites where users upload images/videos.
+
+7. Image & Video Analysis
+
+Rekognition supports analysis of both:
+
+Images
+Image → objects
+      → faces
+      → text
+      → content
+Videos
+Video → people
+       → objects
+       → activities/events
+       → faces
+       → content
+
+This makes it useful for security monitoring, media analysis, and content management.
+
+Rekognition vs Other AWS AI Services 🔥
+
+This is where AIF-C01 questions can become tricky.
+
+AWS Service	Main purpose
+Amazon Rekognition	🖼️ Images & 🎥 videos
+Amazon Comprehend	📝 Analyze text
+Amazon Transcribe	🎤 Speech → text
+Amazon Translate	🌐 Translate text
+Amazon Polly	📝 Text → speech
+Amazon Textract	📄 Extract text/data from documents
+Easy memory
+📷 Images / 🎥 Videos → Rekognition
+📝 Text analysis      → Comprehend
+🎤 Speech → Text      → Transcribe
+🌐 Language → Language→ Translate
+📝 Text → Speech      → Polly
+📄 Documents → Data   → Textract

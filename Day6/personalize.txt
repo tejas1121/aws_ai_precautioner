@@ -1,0 +1,207 @@
+Amazon Personalize
+
+Amazon Personalize is a fully managed AWS machine learning service for building personalized recommendations.
+
+Simple definition
+
+Amazon Personalize = AWS service that learns user preferences and recommends relevant items. 🎯
+
+Think of platforms like:
+
+"Recommended for you"
+"Because you watched X"
+"Customers who bought X also liked Y"
+Personalized product recommendations
+How Amazon Personalize works
+
+At a high level:
+
+User activity/data
+       ↓
+Amazon Personalize
+       ↓
+ML learns user preferences
+       ↓
+Personalized recommendations
+       ↓
+User sees relevant items
+
+For example, an e-commerce application has:
+
+User A:
+  → Viewed laptops
+  → Bought headphones
+  → Viewed keyboards
+
+Personalize learns these interactions and may recommend:
+
+Recommended:
+  → Gaming mouse
+  → Mechanical keyboard
+  → Laptop accessories
+
+The key idea is:
+
+Recommendations are personalized for the individual user.
+
+1. User-Item Interactions ⭐
+
+One of the most important concepts is interaction data.
+
+This represents how users interact with items.
+
+Examples:
+
+User viewed a product
+User purchased a product
+User clicked a movie
+User rated a movie
+User added an item to cart
+
+Example:
+
+User       Item          Interaction
+─────────────────────────────────────
+U1         Laptop        Viewed
+U1         Mouse         Purchased
+U2         Phone         Viewed
+U2         Headphones    Purchased
+
+Amazon Personalize can use these interactions to learn preferences.
+
+2. Items
+
+The Items dataset contains information about the things you want to recommend.
+
+For an e-commerce application:
+
+Item ID    Category     Price
+--------------------------------
+P101       Laptop       ₹60,000
+P102       Mouse        ₹2,000
+P103       Keyboard     ₹4,000
+
+For a movie application:
+
+Movie ID   Genre
+------------------
+M101       Action
+M102       Comedy
+M103       Drama
+3. Users
+
+You can also provide information about users.
+
+Example:
+
+User ID    Age    Location
+--------------------------
+U1         21     Pune
+U2         30     Mumbai
+
+This additional information can help Personalize generate better recommendations.
+
+4. Real-Time Recommendations
+
+Personalize can provide recommendations based on a user's current interactions.
+
+For example:
+
+User is browsing:
+        ↓
+Gaming laptops
+        ↓
+Personalize
+        ↓
+Updates understanding of user
+        ↓
+Recommends gaming accessories
+
+This is useful for applications where recommendations need to adapt to user activity.
+
+Amazon Personalize vs Amazon Bedrock ⭐⭐⭐
+
+Don't confuse these.
+
+Amazon Personalize
+
+Specialized for:
+
+Recommendation systems
+
+User behavior
+      ↓
+Personalize
+      ↓
+Recommended items
+Amazon Bedrock
+
+Provides access to foundation models for generative AI applications.
+
+Prompt
+  ↓
+Bedrock
+  ↓
+Foundation Model
+  ↓
+Generated response
+
+So:
+
+Personalize → What should this user see/buy/watch?
+Bedrock → What should the AI generate?
+
+Amazon Personalize vs K-Means
+
+Another useful distinction.
+
+K-Means:
+
+Groups similar users/data points into clusters.
+
+Example:
+
+Customers
+   ↓
+K-Means
+   ↓
+Budget shoppers
+Premium shoppers
+Frequent shoppers
+
+Personalize:
+
+Generates recommendations for individual users.
+
+User A
+ ↓
+Personalize
+ ↓
+Product X, Y, Z
+
+Personalize is specifically designed for personalized recommendations, rather than simply grouping customers.
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+An online retailer wants to recommend products based on each customer's previous purchases and browsing behavior.
+
+✅ Amazon Personalize
+
+Scenario 2
+
+A streaming platform wants to provide each viewer with a personalized list of movies.
+
+✅ Amazon Personalize
+
+Scenario 3
+
+A company wants to group customers based on similarities in their behavior.
+
+→ Clustering / K-Means may be appropriate.
+
+Scenario 4
+
+A company wants an LLM to generate personalized marketing messages.
+
+→ Amazon Bedrock / generative AI, rather than Personalize as the primary service.

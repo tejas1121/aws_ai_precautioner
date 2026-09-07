@@ -1,0 +1,207 @@
+Amazon A2I — Augmented AI
+
+Amazon Augmented AI (Amazon A2I) is an AWS service that allows you to add human review to ML predictions.
+
+Simple definition
+
+Amazon A2I = Human-in-the-loop for AI/ML predictions.
+
+The key idea is that an ML model makes a prediction automatically, but humans review selected predictions when human judgment is needed.
+
+Why do we need A2I?
+
+ML models aren't always 100% confident.
+
+Suppose an OCR system reads an invoice:
+
+Invoice
+   ↓
+AI/ML model
+   ↓
+"Total = ₹82,000"
+   ↓
+Confidence = 99%
+
+No human review may be necessary.
+
+But:
+
+Invoice
+   ↓
+AI/ML model
+   ↓
+"Total = ₹82,000"
+   ↓
+Confidence = 52%
+   ↓
+🚨 Human review
+
+A human checks the result and confirms or corrects it.
+
+Human-in-the-loop ⭐⭐⭐
+
+This is the most important concept.
+
+                 ┌── High confidence ──→ Accept prediction
+                 │
+ML Model ────────┤
+                 │
+                 └── Low confidence ───→ 👤 Human review
+
+A2I allows you to define conditions that determine when human review should occur.
+
+For example:
+
+If confidence is below 80%, send the result to a human reviewer.
+
+Example with Amazon Textract
+
+Suppose a bank processes loan documents.
+
+📄 Loan document
+       ↓
+Amazon Textract
+       ↓
+Extract information
+       ↓
+Confidence check
+       ↓
+ ┌─────┴──────┐
+ ↓            ↓
+High         Low
+confidence   confidence
+ ↓            ↓
+Accept       👤 Human
+             review
+
+A2I can create the human-review workflow for the low-confidence results.
+
+This is a very good AIF-C01 scenario.
+
+A2I with Other AWS AI Services
+
+A2I can be used with supported AI/ML workflows where human review is useful.
+
+For example:
+
+Textract
+   ↓
+Document extraction
+   ↓
+A2I
+   ↓
+Human review when required
+
+Or:
+
+Rekognition
+   ↓
+Image analysis
+   ↓
+A2I
+   ↓
+Human review
+
+The exact integration capabilities depend on the service/workflow.
+
+A2I vs Mechanical Turk ⭐⭐⭐
+
+These two are easy to confuse.
+
+Amazon Mechanical Turk
+
+Provides human workers who perform tasks.
+
+Company
+   ↓
+Mechanical Turk
+   ↓
+Human workers
+   ↓
+Complete task
+Amazon A2I
+
+Provides the human-review workflow/orchestration for ML predictions.
+
+ML prediction
+      ↓
+A2I
+      ↓
+Does this need human review?
+      ↓
+     Yes
+      ↓
+👤 Human reviewer
+Memory trick
+
+Mechanical Turk = Where humans can perform tasks
+A2I = When/how humans review AI results
+
+A2I vs SageMaker Ground Truth
+
+Another distinction:
+
+SageMaker Ground Truth
+
+Mainly about:
+
+Creating labeled datasets for ML training.
+
+Raw data
+ ↓
+Ground Truth
+ ↓
+Human labeling
+ ↓
+Training dataset
+A2I
+
+Mainly about:
+
+Reviewing model predictions during an AI/ML workflow.
+
+Trained model
+ ↓
+Prediction
+ ↓
+A2I
+ ↓
+Human review if necessary
+Very important:
+
+Ground Truth → Label data for training
+
+A2I → Review AI predictions
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+An organization wants humans to review ML predictions when the model's confidence falls below a specified threshold.
+
+✅ Amazon A2I
+
+Scenario 2
+
+A bank wants humans to verify information extracted from documents when automated extraction has low confidence.
+
+✅ Amazon A2I
+
+Scenario 3
+
+A company wants humans to label thousands of images to create a training dataset.
+
+✅ Amazon Mechanical Turk / SageMaker Ground Truth, depending on the wording.
+
+Scenario 4
+
+A company wants to automatically extract text and tables from scanned documents.
+
+✅ Amazon Textract
+
+🧠 Final comparison
+Service	Main purpose
+Amazon Mechanical Turk	Crowdsourcing / human tasks
+SageMaker Ground Truth	Data labeling for ML training
+Amazon A2I	Human review of AI/ML predictions
+Amazon Textract	Extract data from documents
+Amazon Rekognition

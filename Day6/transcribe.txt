@@ -1,0 +1,206 @@
+Amazon Transcribe
+
+Amazon Transcribe is a fully managed AWS AI service that converts speech/audio into text using automatic speech recognition (ASR).
+
+Simple definition
+
+Amazon Transcribe = Speech → Text
+
+Example:
+
+🎤 Audio:
+"Hello, I want to check my order."
+
+             ↓
+      Amazon Transcribe
+
+             ↓
+
+"Hello, I want to check my order."
+How it works
+
+At a high level:
+
+Audio / Speech
+      ↓
+Amazon Transcribe
+      ↓
+Speech Recognition
+      ↓
+Text Transcript
+
+The important point is that Transcribe analyzes spoken language, not written text.
+
+Important capabilities
+1. Speech-to-text
+
+Its primary purpose is converting recorded or spoken audio into text.
+
+Common use cases:
+
+Call-center conversations
+Meeting transcription
+Interviews
+Voice recordings
+Video subtitles/captions
+Voice-enabled applications
+2. Batch transcription
+
+Used when you already have a recorded audio/video file and want to generate a transcript.
+
+Example:
+
+Recorded interview
+       ↓
+Amazon Transcribe
+       ↓
+Text transcript
+3. Streaming transcription
+
+Used for real-time speech.
+
+Example:
+
+Person speaking
+      ↓
+Amazon Transcribe
+      ↓
+Real-time text
+
+This can be useful for:
+
+Live captions
+Contact centers
+Real-time voice applications
+Remember:
+
+Batch = recorded audio
+Streaming = real-time audio
+
+4. Speaker identification
+
+Transcribe can distinguish between different speakers in supported transcription scenarios.
+
+Example:
+
+Speaker 1: Hello, how can I help you?
+
+Speaker 2: I have an issue with my order.
+
+Speaker 1: Sure, let me check.
+
+This is particularly useful for customer service calls and meetings.
+
+5. Custom vocabulary
+
+Organizations may use specialized terms, product names, or industry-specific words that normal speech recognition might misinterpret.
+
+Custom vocabulary allows you to provide terms that Transcribe should recognize correctly.
+
+Example:
+
+Company/product term:
+"NovaSRE"
+
+Speech:
+"Let's deploy NovaSRE."
+
+        ↓
+
+Transcribe
+
+        ↓
+
+"Let's deploy NovaSRE."
+6. PII identification/redaction
+
+Transcribe can identify certain Personally Identifiable Information (PII) in transcripts and can support redaction in appropriate configurations.
+
+Example:
+
+Audio:
+"My phone number is 9876543210."
+
+          ↓
+     Transcribe
+
+          ↓
+
+"My phone number is [PII]."
+
+This is useful when handling sensitive customer conversations.
+
+7. Call analytics
+
+Amazon Transcribe capabilities can be used in contact-center and call-analysis workflows, such as analyzing conversations and extracting useful information from customer calls.
+
+For example:
+
+Customer call
+      ↓
+Transcribe
+      ↓
+Text transcript
+      ↓
+Analyze conversation
+      ↓
+Customer-service insights
+Transcribe vs Translate vs Comprehend ⭐
+
+This is very important for AIF-C01.
+
+Service	Main function	Example
+Amazon Transcribe	Speech → Text	Audio → Transcript
+Amazon Translate	Language → Language	English → Hindi
+Amazon Comprehend	Analyze Text	Find sentiment/entities
+Amazon Polly	Text → Speech	Text → Voice
+Easy flow to remember
+🎤 Speech
+   ↓
+Transcribe
+   ↓
+📝 Text
+   ↓
+Translate
+   ↓
+🌐 Another language
+
+And if you want to analyze that text:
+
+Text
+ ↓
+Comprehend
+ ↓
+Sentiment / Entities / Key phrases / PII
+
+And if you want to speak the translated text:
+
+Text
+ ↓
+Polly
+ ↓
+🔊 Speech
+🎯 AIF-C01 Exam Traps
+Scenario 1
+
+A company has thousands of recorded customer-support calls and wants to convert them into searchable text.
+
+✅ Amazon Transcribe
+
+Scenario 2
+
+A company wants to convert English documentation into Japanese.
+
+✅ Amazon Translate
+
+Scenario 3
+
+A company wants to determine whether customer comments are positive, negative, or neutral.
+
+✅ Amazon Comprehend
+
+Scenario 4
+
+An application receives text and needs to generate natural-sounding spoken audio.
+
+✅ Amazon Polly

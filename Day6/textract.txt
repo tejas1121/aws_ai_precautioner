@@ -1,0 +1,300 @@
+Amazon Textract is a fully managed AWS AI service that automatically extracts text and structured data from documents.
+
+Simple definition
+
+Amazon Textract = Extract information from scanned documents, forms, and tables. 📄 → 📝
+
+Unlike simple OCR, Textract can understand the structure of a document, such as forms and tables.
+
+How Textract works
+📄 Document
+   ↓
+Amazon Textract
+   ↓
+Text + Structure + Data
+   ↓
+Application
+
+For example, give Textract a scanned invoice:
+
+┌─────────────────────────────┐
+│       ABC STORE             │
+│                             │
+│ Product     Qty    Price    │
+│ Laptop       1    ₹60,000   │
+│ Mouse        2     ₹2,000   │
+│                             │
+│ Total: ₹62,000              │
+└─────────────────────────────┘
+
+Textract can extract:
+
+ABC STORE
+
+Product | Qty | Price
+Laptop  | 1   | ₹60,000
+Mouse   | 2   | ₹2,000
+
+Total: ₹62,000
+1. OCR / Text Detection
+
+Textract can extract printed text from documents.
+
+Example:
+
+Scanned document
+       ↓
+     Textract
+       ↓
+Extracted text
+
+This is useful when documents aren't available as machine-readable text.
+
+2. Forms ⭐
+
+Textract can extract key-value pairs from forms.
+
+For example:
+
+Name:     Tejas
+Email:    tejas@example.com
+Phone:    9876543210
+
+Textract can understand the relationship:
+
+Name  → Tejas
+Email → tejas@example.com
+Phone → 9876543210
+Exam clue
+
+"Extract form fields / key-value pairs from documents."
+
+→ Amazon Textract
+
+3. Tables ⭐
+
+Textract can identify and extract information from tables.
+
+Example:
+
+Product       Quantity     Price
+--------------------------------
+Laptop           1        ₹60,000
+Mouse            2         ₹2,000
+
+Instead of treating the entire page as plain text, Textract can preserve the table structure.
+
+Exam clue
+
+"Extract data from tables in invoices."
+
+→ Amazon Textract
+
+4. Analyze Documents
+
+Textract provides APIs for analyzing documents and extracting different types of information.
+
+Depending on the API/use case, it can detect:
+
+Text
+Forms
+Tables
+Selection elements such as checkboxes
+Layout-related information
+
+Example:
+
+Loan application
+      ↓
+Textract
+      ↓
+Name
+Address
+Income
+☑ Employment status
+☐ Other option
+Textract vs Rekognition ⭐⭐⭐
+
+This is very important for AIF-C01.
+
+Both can work with images, so the question wording matters.
+
+Amazon Textract
+
+Designed primarily for:
+
+Documents → text + structured data
+
+Examples:
+
+Invoices
+Tax forms
+Loan applications
+Receipts
+Scanned documents
+Tables
+Forms
+Amazon Rekognition
+
+Designed primarily for:
+
+Images/videos → visual understanding
+
+Examples:
+
+Detect people
+Detect objects
+Detect faces
+Analyze images/videos
+Content moderation
+Detect text in images/video
+Compare
+Requirement	Service
+Extract table from invoice	Textract
+Extract form fields	Textract
+Extract text from scanned document	Textract
+Detect a person in an image	Rekognition
+Detect faces	Rekognition
+Identify objects in video	Rekognition
+Moderate image/video content	Rekognition
+🧠 Shortcut
+
+Textract = Documents 📄
+Rekognition = Vision 👁️
+
+Textract vs Comprehend
+
+Another possible exam trap.
+
+Textract
+
+Extracts information from documents.
+
+📄 Invoice
+ ↓
+Textract
+ ↓
+"Total = ₹62,000"
+Comprehend
+
+Analyzes text that you already have.
+
+📝 "The service was terrible."
+ ↓
+Comprehend
+ ↓
+Sentiment = Negative
+
+So:
+
+Textract gets the text/data OUT of the document.
+Comprehend analyzes the text.
+
+They can even be used together:
+
+📄 Customer document
+       ↓
+   Textract
+       ↓
+Extracted text
+       ↓
+   Comprehend
+       ↓
+Sentiment / Entities / Key phrases
+Textract vs Traditional OCR
+
+A useful conceptual distinction:
+
+Traditional OCR:
+
+Mainly recognizes characters/text.
+
+Textract:
+
+Extracts text and understands document structures such as forms and tables.
+
+For AIF-C01, if the scenario specifically mentions forms, tables, key-value pairs, invoices, receipts, or structured document extraction, Textract is usually the stronger answer.
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+A bank receives thousands of scanned loan applications and wants to automatically extract customer names, addresses, and other form fields.
+
+✅ Amazon Textract
+
+Scenario 2
+
+An accounting company wants to extract line items and totals from invoices.
+
+✅ Amazon Textract
+
+Scenario 3
+
+A company wants to identify people and vehicles in security-camera footage.
+
+✅ Amazon Rekognition
+
+Scenario 4
+
+A company wants to determine whether extracted customer comments are positive or negative.
+
+✅ Amazon Comprehend
+
+Scenario 5
+
+A company wants to convert a recorded customer call into text.
+
+✅ Amazon Transcribe
+
+🧠 Final AWS AI Services Map
+📄 DOCUMENTS
+     ↓
+Amazon Textract
+     ↓
+Text / Forms / Tables
+
+📷 IMAGE / 🎥 VIDEO
+     ↓
+Amazon Rekognition
+     ↓
+Objects / Faces / Visual content
+
+🎤 SPEECH
+     ↓
+Amazon Transcribe
+     ↓
+Text
+
+📝 TEXT
+     ↓
+Amazon Comprehend
+     ↓
+Sentiment / Entities / Key phrases
+
+📝 TEXT
+     ↓
+Amazon Translate
+     ↓
+Another language
+
+📝 TEXT
+     ↓
+Amazon Polly
+     ↓
+🔊 Speech
+
+💬 CONVERSATION
+     ↓
+Amazon Lex
+     ↓
+Chatbot / Intent / Slots
+
+👤 USER BEHAVIOR
+     ↓
+Amazon Personalize
+     ↓
+Recommendations
+
+Most important memory point for Textract:
+
+If AWS needs to extract structured information from a document → think Amazon Textract.

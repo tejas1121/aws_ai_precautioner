@@ -1,0 +1,145 @@
+Kiro is an AI-powered development environment from AWS designed to help developers build software using spec-driven, agentic development.
+
+For your AIF-C01 exam, the important thing is understanding what Kiro is used for, rather than learning how to use it.
+
+Simple definition
+
+Kiro = AWS AI-powered IDE that uses AI agents to help developers build software from requirements through implementation and testing.
+
+Think of it as:
+
+Developer gives requirement
+        ↓
+      Kiro
+        ↓
+Understand requirement
+        ↓
+Create specification
+        ↓
+Plan implementation
+        ↓
+Generate/modify code
+        ↓
+Test / iterate
+Why is Kiro different?
+
+The important idea is spec-driven development.
+
+Instead of simply saying:
+
+"Write me a login page."
+
+You can give a more complete requirement:
+
+"Build a login system with email/password authentication, validation, error handling, and tests."
+
+Kiro can help turn that requirement into structured development artifacts such as:
+
+Requirement
+    ↓
+Specification
+    ↓
+Implementation plan
+    ↓
+Code
+    ↓
+Tests
+
+This makes the development process more structured than simply asking an AI to generate a piece of code.
+
+Kiro is Agentic AI ⭐
+
+Kiro is associated with agentic software development.
+
+An AI coding assistant might primarily do:
+
+Developer → "Write this function"
+             ↓
+          AI
+             ↓
+         Code
+
+An agentic development environment can work through multiple steps:
+
+Goal
+ ↓
+Understand
+ ↓
+Plan
+ ↓
+Modify multiple files
+ ↓
+Run tests
+ ↓
+Inspect results
+ ↓
+Fix problems
+ ↓
+Repeat
+
+The important concept is:
+
+Agentic AI can perform multi-step tasks toward a goal rather than only generating a single response.
+
+Kiro vs Amazon Q Developer ⭐⭐⭐
+
+Since you studied Amazon Q Developer, this distinction is important.
+
+Amazon Q Developer	Kiro
+AI coding assistant	AI-powered development environment
+Code generation	End-to-end development workflow
+Code explanation	Specification-driven development
+Debugging	Planning + implementation + testing
+AWS development assistance	Agentic software development
+Works in supported IDEs	Dedicated AI IDE
+Simple way to remember
+
+Q Developer = AI coding assistant
+Kiro = AI development environment focused on agentic/spec-driven development
+
+There is some overlap: both can help with coding, debugging, and software development.
+
+Kiro and Specifications
+
+A specification describes what the software should do.
+
+For example:
+
+Feature:
+User Login
+
+Requirements:
+- User enters email and password
+- Validate input
+- Show error for invalid credentials
+- Lock account after repeated failures
+
+Kiro can use this structured requirement to help produce an implementation plan and corresponding code/tests.
+
+This helps reduce the problem of:
+
+"AI generated code, but it didn't really understand what I wanted."
+
+🎯 AIF-C01 Exam Perspective
+
+AWS's current AIF-C01 objectives include Kiro among the AWS AI services/features you should recognize.
+
+You don't need to memorize programming details.
+
+If the exam says:
+
+A developer wants an AI-powered environment that can transform software requirements into specifications, plans, code, and tests.
+
+✅ Kiro
+
+If it says:
+
+A developer wants an AI assistant for generating, explaining, debugging, or completing code.
+
+✅ Amazon Q Developer
+
+If it says:
+
+A business user wants to create a generative-AI application without extensive coding.
+
+→ Amazon Q Apps

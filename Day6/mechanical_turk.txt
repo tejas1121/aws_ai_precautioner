@@ -1,0 +1,184 @@
+Amazon Mechanical Turk (MTurk)
+
+Amazon Mechanical Turk is a crowdsourcing platform that connects businesses with people who perform human intelligence tasks (HITs) that are difficult for computers to do reliably.
+
+Simple definition
+
+Amazon Mechanical Turk = Humans perform small tasks that help organizations collect, label, or validate data.
+
+Think of it as:
+
+Company
+   ↓
+Posts task
+   ↓
+Mechanical Turk
+   ↓
+Human workers
+   ↓
+Complete task
+   ↓
+Results
+Why is Mechanical Turk useful for AI/ML? ⭐
+
+ML models need high-quality training data.
+
+But raw data often needs humans to label or validate it.
+
+For example, suppose you have 100,000 images:
+
+Image
+ ↓
+Human worker
+ ↓
+"Cat"
+"Dog"
+"Car"
+"Person"
+
+These labels can then be used as training data for a supervised ML model.
+
+Human Intelligence Tasks (HITs)
+
+A task posted on Mechanical Turk is called a Human Intelligence Task (HIT).
+
+Examples:
+
+Label images
+Categorize text
+Transcribe short audio
+Validate information
+Answer surveys
+Identify objects
+Compare search results
+Check whether an ML-generated result is correct
+
+Example:
+
+HIT:
+"Is there a person in this image?"
+
+        ↓
+
+Human worker
+
+        ↓
+
+YES
+Mechanical Turk in an ML Pipeline
+
+A common scenario:
+
+Raw Data
+   ↓
+Mechanical Turk
+   ↓
+Human labeling
+   ↓
+Labeled Dataset
+   ↓
+ML Model Training
+   ↓
+Model
+Example
+
+A company wants to build an image classifier for:
+
+cats vs dogs.
+
+It has 50,000 unlabeled images.
+
+Mechanical Turk can be used to have humans label them:
+
+Image 1 → Cat
+Image 2 → Dog
+Image 3 → Cat
+...
+
+Then:
+
+Labeled images
+      ↓
+Supervised learning
+      ↓
+Cat/Dog classifier
+Mechanical Turk vs Amazon SageMaker Ground Truth
+
+This is an important distinction for the exam.
+
+Mechanical Turk
+
+Crowdsourcing platform providing access to human workers.
+
+SageMaker Ground Truth
+
+AWS service for data labeling workflows, which can use human labelers, including Mechanical Turk in appropriate workflows.
+
+Conceptually:
+
+Data
+ ↓
+SageMaker Ground Truth
+ ↓
+Labeling workflow
+ ↓
+Human labelers
+ ↓
+Labeled dataset
+
+So if the question specifically asks for:
+
+A crowdsourcing platform where humans perform small tasks
+
+→ Amazon Mechanical Turk
+
+If it asks for:
+
+An AWS service to build and manage data-labeling workflows
+
+→ Amazon SageMaker Ground Truth
+
+Mechanical Turk vs Amazon Comprehend
+
+Don't confuse human data labeling with automatic NLP.
+
+Mechanical Turk
+Task → HUMAN → Result
+Comprehend
+Text → ML/NLP SERVICE → Analysis
+
+For example:
+
+"Have humans classify 10,000 customer comments into categories."
+
+→ Mechanical Turk
+
+"Automatically determine sentiment in customer comments."
+
+→ Amazon Comprehend
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+A company needs thousands of images manually labeled as "car," "person," or "building" to create training data.
+
+✅ Amazon Mechanical Turk
+
+Scenario 2
+
+A company needs humans to verify whether AI-generated answers are correct.
+
+✅ Mechanical Turk
+
+Scenario 3
+
+A company needs an automated service to identify sentiment in customer reviews.
+
+❌ Mechanical Turk
+✅ Amazon Comprehend
+
+Scenario 4
+
+A company needs an AWS-managed service to create and manage data-labeling workflows.
+
+✅ Amazon SageMaker Ground Truth

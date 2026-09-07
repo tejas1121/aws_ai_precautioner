@@ -1,0 +1,196 @@
+AWS provides specialized versions of Transcribe and Comprehend for healthcare.
+
+The easiest way to understand them is:
+
+Transcribe Medical = Medical speech → text 🩺🎤
+Comprehend Medical = Medical text → medical insights 🩺📝
+
+1. Amazon Transcribe Medical
+
+Amazon Transcribe Medical is designed to automatically convert medical speech into text.
+
+Example
+
+A doctor says:
+
+"Patient has a history of hypertension and takes 10 milligrams of medication daily."
+
+🎤 Doctor's speech
+       ↓
+Amazon Transcribe Medical
+       ↓
+📝 Medical transcript
+
+It is designed to recognize medical terminology better than a general speech-to-text system.
+
+Common use cases
+Doctor-patient conversations
+Clinical documentation
+Medical dictation
+Healthcare call-center conversations
+Generating medical transcripts
+Key exam idea
+
+If the input is audio/speech and the requirement is transcription:
+
+🎤 Transcribe Medical
+
+2. Amazon Comprehend Medical
+
+Amazon Comprehend Medical uses NLP/ML to extract medical information and relationships from unstructured medical text.
+
+Suppose you already have:
+
+"The patient was diagnosed with diabetes and prescribed 500 mg of Metformin."
+
+Comprehend Medical can identify medical entities such as:
+
+Diabetes       → Medical condition
+Metformin      → Medication
+500 mg         → Dosage
+
+So:
+
+📝 Medical text
+       ↓
+Amazon Comprehend Medical
+       ↓
+Medical entities + relationships + attributes
+What can Comprehend Medical identify?
+
+It can extract information such as:
+
+Medical conditions
+Medications
+Dosages
+Symptoms
+Anatomy
+Procedures
+Protected health information (PHI) in appropriate contexts
+Relationships and attributes associated with medical entities
+Example
+"The patient has severe chest pain and was prescribed
+Aspirin 100 mg."
+
+        ↓
+
+Comprehend Medical
+
+        ↓
+
+Condition → chest pain
+Medication → Aspirin
+Dosage → 100 mg
+⭐ The BIG Difference
+
+This is the most important thing to remember for AIF-C01.
+
+	Transcribe Medical	Comprehend Medical
+Input	🎤 Speech/audio	📝 Medical text
+Main job	Speech → text	Analyze medical text
+Output	Transcript	Medical entities/insights
+Example	Doctor dictation → transcript	Transcript → diseases/medications
+Technology	Speech recognition / ASR	NLP
+Think	"What did the doctor say?"	"What medical information is in what the doctor said?"
+🔥 They can work together
+
+This is an excellent scenario to understand:
+
+        👨‍⚕️ Doctor speaks
+               ↓
+       🎤 Audio / Speech
+               ↓
+    Amazon Transcribe Medical
+               ↓
+       📝 Medical Text
+               ↓
+    Amazon Comprehend Medical
+               ↓
+ ┌─────────────┼─────────────┐
+ ↓             ↓             ↓
+Disease     Medication    Dosage
+Example
+
+Doctor says:
+
+"The patient has diabetes and is taking Metformin 500 mg."
+
+Step 1 — Transcribe Medical
+
+Converts speech into:
+
+"The patient has diabetes and is taking Metformin 500 mg."
+
+Step 2 — Comprehend Medical
+
+Extracts:
+
+Condition → Diabetes
+Medication → Metformin
+Dosage → 500 mg
+General vs Medical versions
+
+You should also understand this:
+
+Amazon Transcribe
+        ↓
+General speech → text
+
+Amazon Transcribe Medical
+        ↓
+Medical speech → text
+
+And:
+
+Amazon Comprehend
+        ↓
+General text analysis
+
+Amazon Comprehend Medical
+        ↓
+Medical text analysis
+Example
+
+"The customer is extremely unhappy with the service."
+
+→ Comprehend
+
+"The patient has hypertension and takes Lisinopril."
+
+→ Comprehend Medical
+
+🎯 AIF-C01 Exam Traps
+Q: Convert a doctor's recorded conversation into text.
+
+✅ Amazon Transcribe Medical
+
+Q: Extract diseases, medications, and dosages from a clinical note.
+
+✅ Amazon Comprehend Medical
+
+Q: Convert a doctor's speech into text and then identify medical conditions in the transcript.
+
+✅ Transcribe Medical → Comprehend Medical
+
+Q: Determine whether a normal customer review is positive or negative.
+
+✅ Amazon Comprehend
+
+Not Comprehend Medical.
+
+🧠 Ultimate Memory Trick
+
+Think of a doctor:
+
+👨‍⚕️ SPEAKS
+     ↓
+Transcribe Medical
+     ↓
+📝 WRITES IT DOWN
+     ↓
+Comprehend Medical
+     ↓
+🧠 UNDERSTANDS THE MEDICAL INFORMATION
+
+Transcribe Medical = Hear the doctor 🎤
+Comprehend Medical = Understand the doctor's text 🧠

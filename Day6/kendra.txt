@@ -1,0 +1,228 @@
+Amazon Kendra
+
+Amazon Kendra is a fully managed intelligent enterprise search service from AWS.
+
+Simple definition
+
+Amazon Kendra = AI-powered search that helps employees find relevant information across an organization's documents and data sources. 🔎
+
+Think of it as an enterprise search engine that understands natural-language questions better than traditional keyword search.
+
+Why do we need Kendra?
+
+Suppose a company has thousands of documents:
+
+Company Documents
+├── HR policies
+├── Product manuals
+├── FAQs
+├── AWS documentation
+├── Support documents
+├── Internal wiki
+└── PDFs
+
+An employee asks:
+
+"How many days of parental leave do employees get?"
+
+Instead of searching for exact keywords, Kendra can understand the question and retrieve the most relevant information.
+
+Natural-language question
+          ↓
+      Amazon Kendra
+          ↓
+Search organizational data
+          ↓
+Relevant documents/passages
+1. Intelligent Search ⭐
+
+Kendra uses machine learning and natural-language understanding to improve search results.
+
+Traditional search might depend heavily on exact keywords.
+
+Kendra can understand the meaning and intent behind a query.
+
+Example:
+
+"How do I reset my company laptop password?"
+
+Even if the document says:
+
+"Procedure for recovering forgotten corporate credentials"
+
+Kendra can recognize that this document is relevant.
+
+Exam clue
+
+"Employees need intelligent search across enterprise documents."
+
+→ Amazon Kendra
+
+2. Natural-Language Questions
+
+Users can ask questions in a natural way.
+
+Example:
+
+"What is the company's work-from-home policy?"
+
+rather than:
+
+WFH policy PDF
+
+Kendra retrieves relevant information from connected data sources.
+
+3. Data Sources / Connectors
+
+Kendra can connect to organizational repositories and index their content.
+
+Conceptually:
+
+S3
+SharePoint
+Confluence
+File systems
+Databases
+   │
+   ↓
+Amazon Kendra
+   │
+   ↓
+Enterprise Search
+
+The exact supported connectors can vary as AWS updates the service, so for AIF-C01 focus on the concept:
+
+Kendra connects to enterprise data sources and indexes them for intelligent search.
+
+4. Relevance Ranking
+
+Kendra doesn't simply return documents containing the most matching keywords.
+
+It uses AI/ML techniques to determine which results are most relevant to the user's query.
+
+Example:
+
+Query:
+"How do I claim travel expenses?"
+
+             ↓
+          Kendra
+
+1. Travel reimbursement policy   ← Most relevant
+2. Business travel guidelines
+3. General HR handbook
+4. Office facilities policy
+Kendra vs Amazon Comprehend ⭐⭐⭐
+
+Both use NLP, but their purposes are different.
+
+Amazon Kendra	Amazon Comprehend
+Search enterprise information	Analyze text
+Retrieves relevant documents	Extracts insights
+Search engine	NLP analysis
+Question/query → relevant results	Text → sentiment/entities/etc.
+Enterprise knowledge discovery	Sentiment, entities, key phrases, PII
+Example
+
+"Find the company document that explains expense reimbursement."
+
+→ Kendra
+
+"Determine whether this customer review is positive."
+
+→ Comprehend
+
+Kendra vs Bedrock Knowledge Bases ⭐⭐⭐
+
+This distinction is especially useful because you've already studied Amazon Bedrock.
+
+Amazon Kendra
+
+Primary purpose:
+
+Enterprise intelligent search
+
+Question
+   ↓
+Kendra
+   ↓
+Relevant search results
+Bedrock Knowledge Bases
+
+Primary purpose:
+
+Provide retrieved organizational information to a foundation model for RAG.
+
+User question
+     ↓
+Knowledge Base
+     ↓
+Retrieve relevant chunks
+     ↓
+Foundation Model
+     ↓
+Generated answer
+
+So:
+
+Kendra → Search 🔎
+Bedrock Knowledge Bases → RAG / Generate answers using retrieved data 🤖
+
+There can be overlap in use cases, but the primary service purpose is the key exam distinction.
+
+Kendra vs Amazon Q Business
+
+Another important distinction:
+
+Kendra
+
+Provides the intelligent search capability.
+
+Amazon Q Business
+
+Provides a generative AI assistant for business users, which can use organizational data and permissions to answer questions and assist employees.
+
+Conceptually:
+
+Enterprise data
+      ↓
+Search / retrieval capabilities
+      ↓
+Amazon Q Business
+      ↓
+Conversational AI assistant
+
+So don't select Kendra simply because the question mentions "company data."
+
+Look for the actual task.
+
+🎯 AIF-C01 Exam Scenarios
+Scenario 1
+
+An organization wants employees to search thousands of internal documents using natural-language queries.
+
+✅ Amazon Kendra
+
+Scenario 2
+
+A company wants an intelligent search engine that ranks relevant enterprise documents.
+
+✅ Amazon Kendra
+
+Scenario 3
+
+A company wants to determine the sentiment of customer reviews.
+
+✅ Amazon Comprehend
+
+Scenario 4
+
+A company wants an LLM to generate answers using its private company documents.
+
+→ Amazon Bedrock Knowledge Bases / RAG
+
+Scenario 5
+
+A business wants a generative AI assistant that employees can use to ask questions about company information.
+
+→ Amazon Q Business
