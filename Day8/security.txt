@@ -1,0 +1,524 @@
+1. Security and Privacy in AI
+
+When building an AI system, you need to protect both:
+
+Data
+
+and
+
+AI system/model
+
+from unauthorized access, leakage, manipulation, and misuse.
+
+Think:
+
+                    AI Security
+                        │
+        ┌───────────────┼────────────────┐
+        ↓               ↓                ↓
+     Data            Access           AI System
+   Protection        Control          Protection
+        ↓               ↓                ↓
+ Encryption          IAM          Guardrails
+ Privacy             Roles        Monitoring
+2. Security vs Privacy
+
+They are related but different.
+
+Security
+
+Protects systems and data from:
+
+Unauthorized access
+Attacks
+Modification
+Data theft
+Destruction
+
+Example:
+
+Only authorized employees can access an S3 bucket.
+
+Privacy
+
+Focuses on how personal/sensitive information is collected, used, stored, and shared.
+
+Example:
+
+A customer’s medical information should not be unnecessarily exposed to an AI model.
+
+Memory
+
+Security = protect data/systems
+Privacy = protect people's information and its proper use
+
+3. Security Techniques for AI Systems
+① Identity and Access Management
+
+Use IAM to control:
+
+Who can access which AWS resources and what actions they can perform.
+
+Example:
+
+Data Scientist
+     ↓
+IAM Role
+     ↓
+SageMaker
+     ↓
+Only required S3 data
+
+Use least privilege:
+
+Give users/services only the permissions they actually need.
+
+4. Encryption
+
+Encryption protects data from unauthorized access.
+
+Encryption at rest
+
+Data stored somewhere is encrypted.
+
+Examples:
+
+S3 objects
+Databases
+Model artifacts
+Stored Data
+   ↓
+Encryption
+   ↓
+Encrypted Data
+Encryption in transit
+
+Protects data while moving between systems.
+
+Application
+    ↓
+Encrypted connection
+    ↓
+AWS Service
+Memory
+
+At rest = stored
+In transit = moving
+
+5. Network Security
+
+AI applications can also require network isolation.
+
+Examples include:
+
+VPC
+Security groups
+Private connectivity
+VPC endpoints / AWS PrivateLink
+Network isolation
+
+You already studied SageMaker Network Isolation:
+
+Prevents a training container from making network calls.
+
+6. Data Privacy Techniques
+
+Common techniques include:
+
+Data minimization
+
+Only collect/use the data actually required.
+
+Instead of sending:
+
+Name
+Address
+Phone
+DOB
+Email
+Medical history
+Salary
+
+if the AI only needs age range:
+
+Age group
+
+Use only what's necessary.
+
+Anonymization
+
+Remove identifying information so individuals cannot reasonably be identified.
+
+Example:
+
+Tejas Burkul → Customer_12345
+
+However, simply replacing a name with an ID isn't always true anonymization if the person can still be re-identified.
+
+Pseudonymization
+
+Replace identifying information with pseudonyms/identifiers while retaining the ability to associate the data with the original person under controlled conditions.
+
+Exam distinction:
+
+Anonymization → identification is intended to be removed
+Pseudonymization → identifiers are replaced but linkage may still be possible
+
+PII detection
+
+Amazon Comprehend can detect PII in text.
+
+Amazon Macie can discover sensitive data in Amazon S3.
+
+Bedrock Guardrails can help detect/filter PII in GenAI interactions depending on configuration.
+
+7. Monitoring AI Systems
+
+AI security isn't finished after deployment.
+
+You need to continuously monitor the system.
+
+Monitor things such as:
+
+Data quality
+Data drift
+Model quality
+Unexpected behavior
+Security events
+Access activity
+Bias where appropriate
+System performance
+SageMaker Model Monitor
+
+You already studied this:
+
+Model Monitor → monitor deployed ML models and detect issues such as data quality/drift and model quality degradation when applicable.
+
+Example:
+
+Training Data
+     ↓
+    Model
+     ↓
+Production Endpoint
+     ↓
+New Data
+     ↓
+Model Monitor
+     ↓
+Drift detected?
+   ↙       ↘
+ YES       NO
+ ↓          ↓
+Investigate Continue
+8. Why Monitoring Matters
+
+Suppose your fraud model initially performs well.
+
+After six months:
+
+Training environment
+        ↓
+Customer behavior changes
+        ↓
+Input distribution changes
+        ↓
+Model performance decreases
+
+The model may still be running normally from an infrastructure perspective, but its ML behavior has degraded.
+
+That's why AI systems need continuous monitoring.
+
+9. AWS Shared Responsibility Model ⭐⭐⭐
+
+This is one of the most important AWS security concepts.
+
+The fundamental idea:
+
+AWS is responsible for security OF the cloud. The customer is responsible for security IN the cloud.
+
+AWS responsibility
+
+AWS manages security of the underlying infrastructure:
+
+Physical data centers
+Physical servers
+Networking infrastructure
+Hardware
+Managed-service infrastructure
+
+Think:
+
+AWS
+ ↓
+"Is the underlying cloud infrastructure secure?"
+Customer responsibility
+
+The customer is responsible for how they configure and use AWS services.
+
+Examples:
+
+IAM permissions
+Data
+Encryption configuration
+Application security
+Access policies
+Security configurations
+How AI services are used
+
+Think:
+
+Customer
+ ↓
+"Am I using/configuring the cloud securely?"
+10. Shared Responsibility Changes by Service
+
+The exact division depends on the AWS service.
+
+For a managed service, AWS manages more of the underlying infrastructure.
+
+For example:
+
+Amazon Bedrock
+       ↓
+AWS manages underlying infrastructure
+       +
+Customer manages:
+- Prompts
+- Data
+- IAM
+- Application
+- Configuration
+Exam trap
+
+❌ "AWS handles all security because it is a managed service."
+
+Wrong.
+
+Managed service does not eliminate customer security responsibilities.
+
+11. Secure Data Engineering Best Practices
+
+Even though implementing data engineering pipelines is outside the hands-on scope of AIF-C01, you should understand the security best practices conceptually.
+
+① Least privilege
+
+Only give a data pipeline access to the data it actually needs.
+
+Pipeline
+   ↓
+Required S3 bucket
+   ✓
+
+Unrelated databases
+   ✗
+② Encrypt data
+
+Use encryption for:
+
+Data at rest
+Data in transit
+③ Protect credentials
+
+Don't hard-code credentials inside:
+
+Source code
+Scripts
+Notebooks
+Configuration files
+
+Use appropriate AWS identity/credential mechanisms.
+
+④ Control access
+
+Use:
+
+IAM roles
+IAM policies
+Resource policies
+Appropriate authentication/authorization
+⑤ Data classification
+
+Classify data according to sensitivity.
+
+Example:
+
+Public
+ ↓
+Internal
+ ↓
+Confidential
+ ↓
+Highly sensitive
+
+Then apply appropriate controls.
+
+⑥ Data validation
+
+Before using data for ML:
+
+Validate formats
+Check missing values
+Detect unexpected values
+Check quality
+Detect anomalies
+
+Bad data can create both model-quality and security/compliance problems.
+
+⑦ Data lineage
+
+You just studied this.
+
+Track:
+
+Source
+ ↓
+Transformation
+ ↓
+Storage
+ ↓
+Training
+ ↓
+Model
+ ↓
+Output
+
+This improves:
+
+Auditing
+Troubleshooting
+Compliance
+Data quality
+⑧ Minimize sensitive data
+
+Don't put sensitive information into an AI pipeline if it isn't necessary.
+
+This reduces:
+
+Privacy risk
+Exposure risk
+Compliance risk
+12. Security Best-Practice Architecture
+
+A simplified secure AI architecture:
+
+             User
+               ↓
+       Authentication
+               ↓
+              IAM
+               ↓
+        AI Application
+               ↓
+      ┌────────┴────────┐
+      ↓                 ↓
+   Guardrails       Authorized
+      ↓              Data Access
+      │                 ↓
+      │            Secure Storage
+      │                 ↓
+      └──────→ Foundation Model
+                    ↓
+                 Output
+                    ↓
+                Monitoring
+
+Security should exist throughout the lifecycle, not just at the model.
+
+13. Important AWS Security Services
+Service / Capability	Main purpose
+IAM	Identity and access control
+AWS KMS	Encryption key management
+Amazon Macie	Discover/classify sensitive data in S3
+AWS PrivateLink	Private connectivity to supported AWS services
+Bedrock Guardrails	GenAI input/output safety controls
+SageMaker Model Monitor	Monitor deployed ML models
+SageMaker Clarify	Bias + explainability
+SageMaker Model Cards	Model documentation/governance
+SageMaker Network Isolation	Restrict training-container network access
+🧠 AIF-C01 Exam Traps
+Trap 1
+
+"AWS is responsible for protecting customer data."
+
+Too broad.
+
+AWS secures the underlying cloud infrastructure, while customers have responsibilities for their data and configuration.
+
+Trap 2
+
+"Encryption protects against unauthorized users accessing data."
+
+Generally yes, but encryption alone isn't sufficient. You also need proper access control and key management.
+
+Trap 3
+
+"Model Monitor detects model bias."
+
+Not its primary purpose.
+
+Clarify → bias + explainability
+
+Model Monitor → production monitoring/drift/model quality
+
+Trap 4
+
+"Macie encrypts sensitive data."
+
+❌ Not its primary purpose.
+
+Macie → discovers/classifies sensitive data in S3.
+
+Trap 5
+
+"Network Isolation encrypts training data."
+
+❌ No.
+
+Network Isolation → restricts network access from the training container.
+
+Trap 6
+
+"Security and privacy are the same."
+
+❌
+
+Security protects systems/data.
+
+Privacy governs the appropriate handling and protection of people's information.
+
+🔥 Final Memory Map
+SECURITY
+│
+├── IAM → Who can access?
+├── Encryption → Protect data
+├── VPC/PrivateLink → Network security
+├── Network Isolation → Restrict training container
+└── Monitoring → Detect problems
+
+PRIVACY
+│
+├── Minimize data
+├── Protect PII
+├── Control access
+├── Anonymize/pseudonymize where appropriate
+└── Follow applicable requirements
+
+AI MONITORING
+│
+└── Model Monitor → production behavior/drift
+
+RESPONSIBLE AI
+│
+├── Clarify → Bias + Explainability
+├── Model Cards → Documentation
+└── Guardrails → GenAI safety
+
+SHARED RESPONSIBILITY
+│
+├── AWS → Security OF the cloud
+└── Customer → Security IN the cloud
+
+The most important exam mental model:
+
+IAM controls access. Encryption protects data. Macie finds sensitive data. PrivateLink protects network connectivity. Network Isolation restricts training-container networking. Model Monitor watches production ML behavior. Clarify checks bias/explainability. Guardrails control GenAI safety.

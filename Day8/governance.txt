@@ -1,0 +1,514 @@
+1. What is AI Governance?
+
+AI governance is the set of policies, processes, controls, and responsibilities used to ensure that AI systems are developed and used safely, responsibly, ethically, and in compliance with requirements.
+
+Think of it as:
+
+Governance = rules + controls + responsibility for managing AI
+
+For example, an organization may establish rules such as:
+
+Who can create AI applications?
+Which data can be used?
+Who approves a model before production?
+How should models be monitored?
+What happens when a model becomes inaccurate?
+How are AI risks documented?
+Who is accountable for an AI system?
+2. Importance of AI Governance
+
+Why do we need governance?
+
+① Risk Management
+
+AI can create risks such as:
+
+Bias
+Hallucination
+Privacy violations
+Security vulnerabilities
+Incorrect decisions
+
+Governance establishes processes to identify, assess, and manage these risks.
+
+② Compliance
+
+Governance helps organizations ensure that AI usage follows:
+
+Laws
+Regulations
+Industry standards
+Internal policies
+③ Accountability
+
+There should be clear ownership.
+
+For example:
+
+AI Model
+   ↓
+Model Owner
+   ↓
+Responsible for:
+- Performance
+- Risk
+- Monitoring
+- Updates
+
+Without governance, it can be unclear who is responsible when something goes wrong.
+
+④ Consistency
+
+Imagine 20 teams building AI applications independently.
+
+Without governance:
+
+Team A → one security policy
+Team B → another policy
+Team C → no documentation
+Team D → different data rules
+
+Governance establishes common standards.
+
+⑤ Trust
+
+Good governance improves confidence that AI systems are:
+
+Reliable
+Fair
+Secure
+Transparent
+Properly managed
+3. Governance Tools
+
+Governance isn't just a document. Organizations use tools and mechanisms to implement it.
+
+For AWS/SageMaker, important examples you've already studied include:
+
+SageMaker Model Cards
+
+Document:
+
+Intended use
+Limitations
+Performance
+Risks
+Bias considerations
+
+→ Documentation/governance
+
+SageMaker Model Registry
+
+Manages:
+
+Model versions
+Model lifecycle
+Approval status
+Deployment-related governance
+
+→ Model lifecycle governance
+
+SageMaker Model Monitor
+
+Monitors deployed models for issues such as:
+
+Data quality changes
+Data drift
+Model quality degradation where applicable
+
+→ Operational governance/monitoring
+
+SageMaker Clarify
+
+Helps identify:
+
+Bias
+Explainability information
+
+→ Responsible AI governance
+
+IAM
+
+Controls:
+
+Who can access what?
+
+→ Access governance
+
+Amazon Macie
+
+Helps discover and classify sensitive data in Amazon S3.
+
+→ Data governance/privacy
+
+4. Governance Strategies
+
+A governance strategy defines how an organization will manage AI systematically.
+
+A typical strategy includes:
+
+Identify AI system
+       ↓
+Assess risk
+       ↓
+Define policies
+       ↓
+Control data/access
+       ↓
+Evaluate model
+       ↓
+Approve model
+       ↓
+Deploy
+       ↓
+Monitor
+       ↓
+Audit
+       ↓
+Improve / Retire
+Important elements
+
+1. Policies
+
+Define acceptable AI usage.
+
+2. Roles and responsibilities
+
+Determine who owns and approves systems.
+
+3. Risk assessment
+
+Identify potential risks before deployment.
+
+4. Documentation
+
+Document models, datasets, intended use, limitations, evaluations, etc.
+
+5. Monitoring
+
+Continuously monitor deployed systems.
+
+6. Human oversight
+
+Keep humans involved when appropriate, especially for high-impact decisions.
+
+7. Access control
+
+Use least privilege and appropriate IAM controls.
+
+5. Data Governance
+
+Now we move from AI governance to data governance.
+
+Definition
+
+Data governance is the framework for managing data so that it is:
+
+Available
+Accurate
+Consistent
+Secure
+Properly used
+Properly managed throughout its lifecycle
+
+Think:
+
+Data Governance = rules and responsibilities for managing data
+
+6. Why Data Governance Matters for AI
+
+AI models are heavily dependent on their data.
+
+Bad data
+   ↓
+Bad training
+   ↓
+Bad model
+   ↓
+Bad decisions
+
+This is essentially:
+
+Garbage in → garbage out
+
+Poor data governance can cause:
+
+Biased models
+Incorrect predictions
+Privacy violations
+Poor data quality
+Compliance problems
+Data leakage
+7. Data Governance Strategies
+
+A good data governance strategy addresses several areas.
+
+Data Quality
+
+Ensure data is:
+
+Accurate
+Complete
+Consistent
+Timely
+Valid
+
+Example:
+
+Age = -25
+
+→ Data quality problem.
+
+Data Security
+
+Control who can access data.
+
+Example:
+
+Employee
+   ↓
+IAM
+   ↓
+Authorized data only
+Data Privacy
+
+Protect personal and sensitive information.
+
+Examples:
+
+PII
+Medical information
+Financial information
+Data Classification
+
+Categorize data based on sensitivity.
+
+For example:
+
+Public
+Internal
+Confidential
+Highly Confidential
+
+This helps determine appropriate controls.
+
+Data Lifecycle Management
+
+Data has a lifecycle:
+
+Create
+ ↓
+Store
+ ↓
+Use
+ ↓
+Share
+ ↓
+Archive
+ ↓
+Delete
+
+Governance defines how data should be handled at each stage.
+
+8. Data Management
+
+Data management is the broader practice of collecting, storing, organizing, processing, protecting, and maintaining data.
+
+For example:
+
+Data Sources
+    ↓
+Collection
+    ↓
+Storage
+    ↓
+Processing
+    ↓
+Analysis / ML
+    ↓
+Archiving / Deletion
+Governance vs Management
+
+This distinction is important.
+
+Data Governance
+
+What rules should we follow? Who is responsible?
+
+Data Management
+
+How do we actually collect, store, process, protect, and maintain the data?
+
+Example:
+
+Governance:
+
+Customer medical data must only be accessible to authorized employees.
+
+Management:
+
+Configure the storage system and IAM permissions so only those employees can access it.
+
+9. Data Lineage ⭐
+
+This is a very important concept.
+
+Data lineage means tracking the origin, movement, transformations, and destination of data throughout its lifecycle.
+
+In simple words:
+
+Where did this data come from, what happened to it, and where did it go?
+
+Example
+
+Suppose an ML model predicts customer churn.
+
+The data may travel like this:
+
+CRM Database
+     ↓
+Customer Data
+     ↓
+ETL / Transformation
+     ↓
+S3 Dataset
+     ↓
+Feature Engineering
+     ↓
+Training Dataset
+     ↓
+ML Model
+     ↓
+Prediction
+
+Data lineage allows you to trace this journey.
+
+10. Why Data Lineage Matters
+① Troubleshooting
+
+Suppose the model suddenly performs poorly.
+
+You can trace:
+
+Model
+ ↓
+Training data
+ ↓
+Transformation
+ ↓
+Original source
+
+and identify where the problem originated.
+
+② Compliance
+
+If an organization needs to know:
+
+"Where did this customer's information go?"
+
+Data lineage can help trace its movement and transformations.
+
+③ Data Quality
+
+If a dataset contains incorrect values, lineage helps identify:
+
+Which source or transformation introduced the problem?
+
+④ Impact Analysis
+
+Suppose a database column changes.
+
+Lineage helps determine:
+
+Which datasets, models, reports, or applications depend on this column?
+
+11. Data Lineage vs Data Lifecycle
+
+Don't confuse them.
+
+Data Lifecycle
+
+Describes stages of data:
+
+Create → Store → Use → Archive → Delete
+Data Lineage
+
+Describes data's journey and transformations:
+
+Source
+ ↓
+Transformation
+ ↓
+Dataset
+ ↓
+Model
+ ↓
+Output
+
+Memory:
+
+Lifecycle = what stages data goes through
+
+Lineage = where data came from and where it went
+
+🧠 AIF-C01 Exam Map
+AI Governance
+│
+├── Policies
+├── Risk management
+├── Accountability
+├── Documentation
+├── Monitoring
+├── Human oversight
+└── Compliance
+
+Data Governance
+│
+├── Data quality
+├── Data security
+├── Data privacy
+├── Data classification
+├── Access control
+└── Data lifecycle
+
+Data Management
+│
+├── Collect
+├── Store
+├── Process
+├── Organize
+├── Protect
+└── Maintain
+
+Data Lineage
+│
+└── Track:
+    Source → Movement → Transformation → Destination
+🔥 Most important distinctions
+
+AI Governance
+→ Rules and controls for AI systems
+
+Data Governance
+→ Rules and controls for data
+
+Data Management
+→ Actually handling/managing data
+
+Data Lineage
+→ Trace the data journey
+
+Model Card
+→ Document model information, intended use, limitations, risks
+
+Model Registry
+→ Manage model versions/lifecycle
+
+Model Monitor
+→ Monitor deployed model/data behavior
+
+Clarify
+→ Bias + explainability
+
+IAM
+→ Access control

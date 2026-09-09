@@ -1,0 +1,390 @@
+1. What is Compliance?
+
+Compliance means making sure an organization follows applicable:
+
+Laws and regulations
+Industry standards
+Internal policies
+Contractual requirements
+
+For AI systems, compliance asks:
+
+“Are we using and managing AI in accordance with the rules that apply to our organization and use case?”
+
+Example
+
+A hospital uses AI to analyze patient information.
+
+It may need to consider:
+
+Privacy requirements
+Data protection requirements
+Access controls
+Data retention
+Auditability
+Applicable healthcare regulations
+
+So simply having an accurate AI model isn't enough.
+
+2. AI Compliance Challenges
+
+AI creates some additional compliance challenges because models can be complex and their behavior can change.
+
+① Data Privacy
+
+AI systems may process:
+
+PII
+Financial data
+Medical data
+Customer information
+
+The organization needs to know:
+
+What data is being used, where it is stored, who can access it, and how it is protected?
+
+② Data Residency / Location
+
+Some regulations or organizational policies may require data to remain in particular:
+
+Countries
+Regions
+Geographic locations
+
+For example, an organization may have restrictions on where customer data can be processed.
+
+AWS Regions become important here.
+
+③ Transparency
+
+Organizations may need to explain:
+
+What the AI system does
+What data it uses
+Its limitations
+How it is intended to be used
+
+This becomes especially important for high-impact decisions.
+
+④ Bias and Fairness
+
+An AI system could produce systematically different outcomes for different groups.
+
+Therefore organizations may need to:
+
+Evaluate bias
+Document findings
+Monitor the model
+Take corrective action
+
+This connects directly to SageMaker Clarify.
+
+⑤ Explainability
+
+For some applications, simply saying:
+
+"The AI rejected your application"
+
+may not be sufficient.
+
+Organizations may need to understand and communicate why a decision was made.
+
+⑥ Auditability
+
+Organizations may need records showing:
+
+Which model/version was used
+Who accessed it
+What data was used
+What changes were made
+What decisions/actions occurred
+
+This is important for investigations and regulatory audits.
+
+⑦ Model Lifecycle Management
+
+AI models can change over time.
+
+Organizations therefore need to manage:
+
+Development
+    ↓
+Testing
+    ↓
+Approval
+    ↓
+Deployment
+    ↓
+Monitoring
+    ↓
+Update / Retraining
+
+This is where things like SageMaker Model Registry and Model Cards become useful.
+
+3. AWS Compliance
+
+AWS provides infrastructure and services that can help organizations meet their own compliance obligations.
+
+Important distinction:
+
+AWS being compliant does NOT automatically make your application compliant.
+
+This is a major exam concept.
+
+Shared Responsibility Model
+
+Think:
+
+AWS
+ ↓
+Security OF the cloud
+
+Customer
+ ↓
+Security IN the cloud
+
+AWS is responsible for the underlying infrastructure.
+
+The customer is responsible for things such as:
+
+Data
+IAM configuration
+Application configuration
+Access permissions
+How AWS services are used
+
+Therefore:
+
+AWS may provide compliant services and security capabilities, but you still have responsibilities.
+
+4. AWS Compliance Resources
+
+AWS provides resources that help customers understand compliance requirements and AWS's compliance posture.
+
+Examples include:
+
+AWS compliance programs
+Compliance certifications
+Compliance reports
+Security/compliance documentation
+AWS Artifact
+AWS Artifact
+
+AWS Artifact provides access to AWS compliance-related documentation and reports.
+
+Think:
+
+Artifact → AWS compliance documents
+
+Don't confuse it with Model Cards.
+
+5. Model Cards
+
+You already encountered this in the SageMaker module, but it becomes especially important here.
+
+A Model Card is documentation about an ML model.
+
+It can contain information such as:
+
+Model purpose
+Intended use
+Limitations
+Performance
+Evaluation results
+Bias considerations
+Risk information
+Training/evaluation information
+
+Example:
+
+Model Card
+│
+├── Model purpose
+├── Intended use
+├── Out-of-scope use
+├── Performance
+├── Evaluation
+├── Limitations
+├── Bias considerations
+└── Risk information
+6. Why Model Cards Matter for Compliance
+
+Suppose a company deploys a model for loan approval.
+
+A Model Card can document:
+
+Purpose: Credit-risk prediction
+
+Intended use: Assist trained financial analysts
+
+Limitation: Not designed for autonomous loan approval
+
+Performance: X% on evaluation dataset
+
+Fairness: Bias evaluation performed
+
+This creates documentation and transparency around the model.
+
+It helps organizations with:
+
+Governance
+Risk assessment
+Auditing
+Responsible AI
+Appropriate use
+Communication of limitations
+Important
+
+A Model Card doesn't make a model compliant by itself.
+
+It is a documentation/governance mechanism that can support compliance.
+
+7. Model Card vs Service Card
+
+This is an important exam distinction.
+
+	Model Card	Service Card
+Describes	ML model	AI service
+Focus	Model behavior/use	Service capabilities/use
+Intended use	✅	✅
+Limitations	✅	✅
+Responsible AI considerations	✅	✅
+Performance information	Model-specific	Service-specific
+Memory shortcut
+
+Model Card → “Tell me about this MODEL.”
+
+Service Card → “Tell me about this AWS AI SERVICE.”
+
+8. Compliance vs Security vs Governance
+
+This distinction is extremely useful.
+
+Security
+
+Protect the system and data.
+
+Examples:
+
+Encryption
+IAM
+Network controls
+Access control
+Compliance
+
+Follow applicable laws, regulations, standards, and requirements.
+
+Examples:
+
+Data protection requirements
+Industry regulations
+Audit requirements
+Governance
+
+Define and control how AI is developed, deployed, used, and managed.
+
+Examples:
+
+Approval processes
+Model documentation
+Risk management
+Model lifecycle policies
+Access policies
+
+Think:
+
+Security
+   ↓
+Protect
+
+Compliance
+   ↓
+Follow rules
+
+Governance
+   ↓
+Control/manage AI
+
+They overlap, but they aren't the same thing.
+
+🧠 AIF-C01 Exam Traps
+Trap 1
+
+"AWS is compliant, therefore the customer's AI application is automatically compliant."
+
+❌ Wrong.
+
+Customer still has responsibilities.
+
+Trap 2
+
+"Model Cards enforce security."
+
+❌ Wrong.
+
+Model Cards primarily provide documentation and transparency.
+
+Trap 3
+
+"Model Cards prevent model bias."
+
+❌ Wrong.
+
+They can document bias considerations/evaluation, but documentation isn't itself bias mitigation.
+
+Trap 4
+
+"Model Registry and Model Cards are the same."
+
+❌ Wrong.
+
+Model Registry → manages model versions/lifecycle.
+
+Model Cards → documents model information, intended use, limitations, risks, etc.
+
+Trap 5
+
+"Compliance means the model must be accurate."
+
+❌ Not necessarily.
+
+Accuracy is one aspect of model performance. Compliance can involve privacy, security, governance, transparency, data handling, auditing, regulatory requirements, and more.
+
+🔑 Final Memory Map
+Responsible AI
+       │
+       ├── Fairness
+       ├── Transparency
+       ├── Explainability
+       ├── Privacy
+       ├── Safety
+       └── Accountability
+
+Compliance
+       │
+       ├── Laws
+       ├── Regulations
+       ├── Standards
+       └── Organizational requirements
+
+Governance
+       │
+       ├── Policies
+       ├── Approval
+       ├── Documentation
+       ├── Risk management
+       └── Lifecycle management
+
+AWS
+       │
+       ├── Artifact → Compliance documents
+       ├── Model Cards → Model documentation
+       ├── Clarify → Bias + explainability
+       ├── Guardrails → GenAI safety controls
+       └── IAM → Access control
+
+Exam shortcut:
+Compliance = “Are we following the rules?”
+Governance = “Are we controlling/managing AI properly?”
+Security = “Are we protecting it?”
+Model Card = “Have we documented what this model is, how it performs, and its limitations?”
