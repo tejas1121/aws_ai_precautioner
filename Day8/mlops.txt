@@ -1,0 +1,325 @@
+Since you're preparing for AIF-C01, think of MLOps as the operational side of machine learning: how an ML model moves from development into production and continues to be managed reliably.
+
+1. What is MLOps?
+
+MLOps = Machine Learning Operations
+
+It combines:
+
+Machine Learning → build and train models
+DevOps → automate deployment, testing, monitoring, CI/CD
+Data management → manage training and production data
+
+The goal is to make ML systems repeatable, deployable, monitorable, and maintainable.
+
+A simple flow:
+
+Data
+  ↓
+Data Preparation
+  ↓
+Model Training
+  ↓
+Model Evaluation
+  ↓
+Model Registration
+  ↓
+Deployment
+  ↓
+Inference
+  ↓
+Monitoring
+  ↓
+Retraining / Improvement
+  ↺
+2. Why do we need MLOps?
+
+A model that works well in a notebook isn't necessarily ready for production.
+
+Suppose you build a fraud detection model.
+
+Initially:
+
+Accuracy = 95%
+
+After six months, fraud patterns change. The model may become less accurate.
+
+MLOps provides mechanisms to:
+
+monitor model performance
+detect data drift
+manage model versions
+automate retraining
+safely deploy new versions
+track experiments
+roll back bad versions
+
+So:
+
+MLOps manages the ML model throughout its production lifecycle.
+
+3. MLOps vs DevOps
+
+This is an important conceptual distinction.
+
+DevOps	MLOps
+Software applications	ML systems
+Code is primary artifact	Code + data + model
+CI/CD	CI/CD + ML pipelines
+Application testing	Model + data + application testing
+Monitor application	Monitor application + data + model
+Deployment	Model deployment
+Version code	Version code, models, datasets/configurations
+Key difference
+
+Traditional software:
+
+Code → Build → Test → Deploy → Monitor
+
+ML:
+
+Data + Code
+     ↓
+Training
+     ↓
+Model
+     ↓
+Evaluation
+     ↓
+Deployment
+     ↓
+Monitoring
+     ↓
+Retraining
+4. Important MLOps concepts for AIF-C01
+Model Versioning
+
+You may have:
+
+Fraud Model v1
+Fraud Model v2
+Fraud Model v3
+
+Model versioning allows you to track and manage different versions.
+
+AWS: SageMaker Model Registry
+
+Experiment Tracking
+
+During training you may try:
+
+Model A → learning rate 0.01 → accuracy 91%
+Model B → learning rate 0.001 → accuracy 94%
+Model C → learning rate 0.005 → accuracy 93%
+
+You need to record:
+
+parameters
+hyperparameters
+metrics
+artifacts
+model versions
+
+AWS: MLflow can be used for experiment tracking and ML lifecycle management.
+
+Model Monitoring
+
+After deployment, you need to check whether the model continues working correctly.
+
+For example:
+
+Before deployment:
+Accuracy = 95%
+
+After 6 months:
+Accuracy = 82%
+
+Something may have changed.
+
+AWS: SageMaker Model Monitor
+
+It can help monitor things such as:
+
+data quality
+data drift
+model quality, where ground-truth labels are available
+Data Drift
+
+Data drift occurs when the distribution of input data changes over time.
+
+Example:
+
+Training data:
+
+Customers mostly age 20–40
+
+Production data later:
+
+Customers mostly age 50–70
+
+The input distribution changed.
+
+That can cause model performance to degrade.
+
+Model Drift
+
+Model performance can degrade because the relationship between inputs and the target changes over time.
+
+Example:
+
+A fraud model learned:
+
+Pattern X → likely fraud
+
+Attackers change their behavior:
+
+Pattern X is no longer common
+Pattern Y becomes common
+
+The model may become less effective.
+
+5. Continuous Training
+
+One of the important ideas in MLOps is continuous training.
+
+New Data
+   ↓
+Data Validation
+   ↓
+Retrain Model
+   ↓
+Evaluate
+   ↓
+If good → Deploy
+   ↓
+Monitor
+
+If the new model performs worse:
+
+Reject new model
+      ↓
+Keep existing production model
+
+This is an important production concept.
+
+6. CI/CD in MLOps
+CI — Continuous Integration
+
+Automatically:
+
+Developer changes code
+        ↓
+Build
+        ↓
+Test
+        ↓
+Validate
+CD — Continuous Delivery/Deployment
+
+Automatically move validated changes toward production.
+
+For ML:
+
+Code/Data
+   ↓
+Train
+   ↓
+Evaluate
+   ↓
+Register
+   ↓
+Deploy
+
+This is often called CI/CD/CT in MLOps:
+
+CI → Continuous Integration
+CD → Continuous Delivery/Deployment
+CT → Continuous Training
+7. AWS SageMaker MLOps services
+
+Since you've already studied SageMaker, connect the concepts like this:
+
+MLOps requirement	AWS capability
+Develop ML	SageMaker Studio
+Prepare data	Data Wrangler
+Label data	Ground Truth
+Train models	SageMaker Training
+Track experiments	MLflow
+Evaluate bias/explainability	SageMaker Clarify
+Register models	Model Registry
+Automate workflows	SageMaker Pipelines
+Deploy models	SageMaker endpoints
+Monitor production	Model Monitor
+Find pretrained models	JumpStart
+
+This table is very exam-relevant.
+
+8. MLOps vs ML lifecycle
+
+Don't confuse these.
+
+ML lifecycle
+
+Focuses on:
+
+How a model is created and used.
+
+Data → Train → Evaluate → Deploy → Inference
+MLOps
+
+Focuses on:
+
+How to operate and continuously manage that ML lifecycle in production.
+
+Version
+   ↓
+Automate
+   ↓
+Test
+   ↓
+Deploy
+   ↓
+Monitor
+   ↓
+Retrain
+   ↓
+Repeat
+Exam shortcut
+
+ML = build the model
+MLOps = reliably run and maintain the model in production
+
+AIF-C01 exam traps
+
+Q: Which service helps maintain versions and lifecycle status of ML models?
+
+→ SageMaker Model Registry
+
+Q: Which service monitors deployed models for data drift?
+
+→ SageMaker Model Monitor
+
+Q: Which capability automates ML workflow steps?
+
+→ SageMaker Pipelines
+
+Q: Which tool tracks experiments, parameters, metrics and artifacts?
+
+→ MLflow
+
+Q: Which service detects bias and provides explainability capabilities?
+
+→ SageMaker Clarify
+
+Q: Which service labels training data?
+
+→ SageMaker Ground Truth
+
+The main distinction to memorize is:
+
+Registry = manage versions
+Monitor = watch production
+Pipelines = automate workflow
+MLflow = track experiments
+Clarify = bias + explainability
+Ground Truth = labeling
