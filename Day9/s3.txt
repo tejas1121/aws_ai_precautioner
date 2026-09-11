@@ -1,0 +1,412 @@
+1. What is Amazon S3?
+
+Amazon S3 (Simple Storage Service) is AWS's object storage service.
+
+It is used to store:
+
+Images
+Videos
+Documents
+Logs
+Backups
+Datasets
+ML training data
+GenAI/RAG documents
+
+Think:
+
+Application
+     ↓
+    S3
+     ↓
+ ┌──────────────┐
+ │ Documents    │
+ │ Images       │
+ │ Datasets     │
+ │ Logs         │
+ └──────────────┘
+2. S3 Bucket
+
+A bucket is a container for objects.
+
+S3
+│
+└── Bucket: my-company-data
+       │
+       ├── document.pdf
+       ├── image.jpg
+       ├── training-data.csv
+       └── report.json
+
+The bucket is not the file itself.
+
+Bucket = container
+Object = stored data
+
+3. S3 Object
+
+An object consists conceptually of:
+
+Object
+ ├── Data
+ ├── Key
+ └── Metadata
+Key
+
+The key identifies the object within the bucket.
+
+Example:
+
+training/images/cat.jpg
+
+S3 doesn't actually use traditional folders in the filesystem sense. What looks like folders is generally part of the object's key name.
+
+4. S3 and ML/AI
+
+S3 is extremely important in AI/ML architectures.
+
+Training
+Training Dataset
+       ↓
+      S3
+       ↓
+SageMaker Training
+       ↓
+     Model
+RAG
+Company Documents
+       ↓
+      S3
+       ↓
+Knowledge Base
+       ↓
+Embeddings
+       ↓
+Vector Store
+       ↓
+Foundation Model
+
+So if an AIF-C01 question says:
+
+"Store large amounts of training data or enterprise documents"
+
+S3 is often the answer.
+
+5. S3 Security ⭐⭐⭐
+
+Now connect S3 with the IAM concepts we just learned.
+
+There are several important security mechanisms.
+
+IAM policies
+
+You can give an IAM identity permissions to access S3.
+
+IAM User/Role
+      ↓
+IAM Policy
+      ↓
+S3
+
+Example:
+
+Allow s3:GetObject
+
+means the identity can read objects where the policy applies.
+
+6. S3 Bucket Policy ⭐⭐⭐
+
+A bucket policy is a resource-based policy attached to an S3 bucket.
+
+S3 Bucket
+    ↓
+Bucket Policy
+    ↓
+Who can access this bucket?
+
+This is different from an identity-based IAM policy.
+
+Remember
+IAM Policy
+Identity → What can it do?
+
+Bucket Policy
+Resource → Who can access it?
+
+Both can participate in determining whether access is allowed.
+
+7. IAM Policy vs Bucket Policy
+
+This is a common exam distinction.
+
+Identity-based
+IAM Role
+   ↓
+Policy
+   ↓
+Allow S3 GetObject
+Resource-based
+S3 Bucket
+   ↓
+Bucket Policy
+   ↓
+Allow specific principal
+
+Shortcut:
+
+Identity policy → attached to identity
+Bucket policy → attached to S3 bucket
+
+8. S3 Block Public Access ⭐⭐⭐
+
+S3 can be configured to block public access.
+
+This is an important security control.
+
+For sensitive company/AI data:
+
+S3 Bucket
+   ↓
+Block Public Access
+   ↓
+Prevent unintended public exposure
+
+For example, you don't want:
+
+Company confidential documents
+          ↓
+        S3
+          ↓
+      Public Internet ❌
+
+Instead:
+
+Authorized application
+        ↓
+       IAM
+        ↓
+       S3
+9. Encryption
+
+S3 supports encryption of objects.
+
+Two broad concepts:
+
+Encryption at rest
+
+Protects stored data.
+
+Data → encrypted → S3
+
+AWS commonly uses AWS KMS for customer-controlled encryption-key management in relevant configurations.
+
+Encryption in transit
+
+Protects data while moving between systems, typically using TLS/HTTPS.
+
+Remember:
+
+At rest → stored data
+In transit → moving data
+
+10. Versioning
+
+S3 Versioning keeps multiple versions of an object.
+
+Example:
+
+report.pdf
+   ↓
+Version 1
+   ↓
+Version 2
+   ↓
+Version 3
+
+Useful for:
+
+Accidental deletion protection
+Recovering previous versions
+Data protection
+Auditing changes
+Important
+
+Versioning is not the same as IAM/model versioning.
+
+For example:
+
+SageMaker Model Registry
+→ ML model versions
+
+S3 Versioning
+→ object versions
+
+11. Lifecycle Management
+
+S3 Lifecycle rules automate what happens to objects over time.
+
+Example:
+
+New object
+   ↓
+S3 Standard
+   ↓
+After 30 days
+   ↓
+Infrequent Access
+   ↓
+After 180 days
+   ↓
+Archive
+   ↓
+Eventually delete
+
+Useful for:
+
+Cost optimization
+Data retention
+Automatic deletion/archiving
+12. S3 Storage Classes
+
+You don't need to memorize every detail for AIF-C01, but understand the principle.
+
+Different storage classes optimize for different access patterns.
+
+Frequently accessed
+        ↓
+S3 Standard
+
+Infrequently accessed
+        ↓
+S3 IA
+
+Archive
+        ↓
+S3 Glacier classes
+Exam idea
+
+If data is rarely accessed and needs long-term archival:
+
+→ S3 Glacier storage classes
+
+If data is frequently accessed:
+
+→ S3 Standard
+
+13. S3 Durability vs Availability
+
+These terms are often confused.
+
+Durability
+
+How likely is data to remain intact without loss?
+
+Availability
+
+How often is the service/data accessible when requested?
+
+Think:
+
+Durability → Don't lose my data
+Availability → Let me access my data
+
+S3 is designed for very high durability.
+
+14. S3 vs EBS vs EFS
+
+A useful AWS comparison:
+
+Service	Main purpose
+S3	Object storage
+EBS	Block storage for EC2
+EFS	Managed shared file storage
+
+For ML datasets:
+
+S3 is commonly used.
+
+15. S3 in a GenAI Security Scenario
+
+Suppose a company has:
+
+Confidential PDFs
+      ↓
+     S3
+      ↓
+Bedrock Knowledge Base
+      ↓
+RAG
+      ↓
+LLM
+
+Security controls could include:
+
+IAM
+ ↓
+Who can access?
+
+Bucket Policy
+ ↓
+Who can access the bucket?
+
+Block Public Access
+ ↓
+Prevent public exposure
+
+Encryption/KMS
+ ↓
+Protect stored data
+
+Macie
+ ↓
+Discover/classify sensitive data
+
+Guardrails
+ ↓
+Control model inputs/outputs
+
+Notice how these controls solve different problems.
+
+🔥 AIF-C01 traps
+Q: "Store documents for a Knowledge Base."
+
+→ S3 can be a data source.
+
+Q: "Control who can access S3."
+
+→ IAM / bucket policies
+
+Q: "Prevent accidental public exposure."
+
+→ S3 Block Public Access
+
+Q: "Encrypt stored S3 data."
+
+→ S3 encryption / KMS where applicable
+
+Q: "Discover sensitive data in S3."
+
+→ Amazon Macie
+
+Q: "Keep previous versions of S3 objects."
+
+→ S3 Versioning
+
+Q: "Automatically archive/delete objects."
+
+→ S3 Lifecycle
+
+Q: "ML model versions."
+
+→ SageMaker Model Registry, not S3 Versioning.
+
+🧠 One-line memory
+
+S3 = store objects
+IAM = control identities/permissions
+Bucket Policy = resource-based access control
+Block Public Access = prevent public exposure
+KMS = encryption/key management
+Macie = discover sensitive data
+Versioning = previous object versions
+Lifecycle = automatically transition/delete data
