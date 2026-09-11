@@ -1,0 +1,574 @@
+the deeper understanding needed for scenario questions.
+
+AWS IAM
+
+IAM = Identity and Access Management
+
+IAM answers two fundamental questions:
+
+Who are you? → Identity
+What are you allowed to do? → Permissions
+
+For example:
+
+Developer
+   ↓
+IAM Identity
+   ↓
+Permissions
+   ↓
+Can access S3
+Cannot access billing
+
+IAM is a global AWS service.
+
+1. IAM User
+
+An IAM user represents a specific identity that needs long-term access to AWS resources.
+
+Example:
+
+Company
+ ├── Tejas
+ ├── Rahul
+ └── Priya
+
+You could create:
+
+IAM User: Tejas
+IAM User: Rahul
+IAM User: Priya
+
+Each user can have credentials and permissions.
+
+IAM user can have
+Username
+Console password
+Access keys
+Permissions through policies
+
+For example:
+
+Tejas
+ ↓
+IAM User
+ ↓
+Policy
+ ↓
+Allow: s3:GetObject
+
+This means Tejas can read objects from the permitted S3 resources.
+
+2. IAM Role ⭐
+
+An IAM role is an identity with permissions that can be assumed temporarily.
+
+This is extremely important.
+
+Unlike a traditional IAM user, a role is generally not associated with permanent credentials.
+
+Example:
+
+EC2
+ ↓
+Assume IAM Role
+ ↓
+Temporary credentials
+ ↓
+Access S3
+Real-world example
+
+Suppose your EC2 server needs to read files from S3.
+
+❌ Bad approach:
+
+EC2
+ ↓
+Store IAM user's access key
+ ↓
+Access S3
+
+If the credentials leak, someone can potentially use them.
+
+✅ Better approach:
+
+EC2
+ ↓
+IAM Role
+ ↓
+Temporary credentials
+ ↓
+S3
+
+AWS automatically provides temporary credentials to the EC2 instance through the role.
+
+3. User vs Role
+
+This distinction is extremely important for AIF-C01.
+
+IAM User	IAM Role
+Represents an identity	Represents an assumable identity
+Often associated with a person/application	Often assumed by users, AWS services, applications
+Can have long-term credentials	Uses temporary credentials when assumed
+Password/access keys may be used	Temporary credentials
+Example: employee	Example: EC2 role
+Exam shortcut
+
+User = identity that exists
+Role = identity that can be assumed
+
+4. IAM Policy ⭐⭐⭐
+
+Now we get to the most important part.
+
+A policy defines permissions.
+
+It essentially says:
+
+Who/what can do what to which resource under which conditions?
+
+Example:
+
+Allow
+S3
+GetObject
+bucket/my-bucket/*
+
+Conceptually:
+
+Principal
+   ↓
+Action
+   ↓
+Resource
+   ↓
+Effect
+5. Policy Structure
+
+An IAM policy is written in JSON.
+
+Example:
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::my-bucket/*"
+    }
+  ]
+}
+
+Let's break it down.
+
+Effect
+Allow
+
+or
+
+Deny
+
+It determines whether the action is permitted or denied.
+
+Action
+"s3:GetObject"
+
+What operation is being requested?
+
+Examples:
+
+s3:GetObject
+s3:PutObject
+s3:DeleteObject
+Resource
+arn:aws:s3:::my-bucket/*
+
+Which AWS resource does the permission apply to?
+
+Condition
+
+Policies can also contain conditions.
+
+For example:
+
+Allow access only from a particular IP
+
+or:
+
+Allow only when MFA is present
+
+So conceptually:
+
+Effect
++
+Action
++
+Resource
++
+Condition
+6. Identity-Based Policies
+
+An identity-based policy is attached to an identity such as:
+
+IAM user
+IAM group
+IAM role
+
+Example:
+
+IAM User
+   ↓
+Identity Policy
+   ↓
+Allow S3 GetObject
+
+There are two common types:
+
+Managed policies
+
+Reusable policies managed separately.
+
+They can be:
+
+AWS managed policies
+Customer managed policies
+Inline policies
+
+Policy embedded directly into one user, group, or role.
+
+For AIF-C01, the main thing is understanding that identity-based policies grant permissions to identities.
+
+7. Resource-Based Policies
+
+Some AWS resources can have policies attached directly to the resource.
+
+Example:
+
+S3 Bucket
+ ↓
+Bucket Policy
+
+Instead of saying:
+
+"This user can access the bucket"
+
+the resource policy can say:
+
+"This bucket allows this principal to access it."
+
+Example:
+
+S3 Bucket
+   ↓
+Bucket Policy
+   ↓
+Allow specific principal
+Important distinction
+
+Identity-based policy:
+
+Identity → permissions
+
+Resource-based policy:
+
+Resource → who can access it
+8. IAM Groups
+
+An IAM group is a collection of IAM users.
+
+Example:
+
+Developers Group
+ ├── Tejas
+ ├── Rahul
+ └── Priya
+
+Attach a policy to the group:
+
+Developers Group
+       ↓
+S3 Read Policy
+       ↓
+All users in group
+
+This makes permission management easier.
+
+Instead of:
+
+Tejas → policy
+Rahul → policy
+Priya → policy
+
+you can do:
+
+Developers
+    ↓
+Policy
+
+and put the users into the group.
+
+Important
+
+An IAM group cannot be assumed like a role.
+
+9. IAM Role Trust Policy ⭐⭐⭐
+
+This is a slightly more advanced concept and very important for understanding roles.
+
+An IAM role has two different permission concepts:
+
+1. Trust policy
+
+Answers:
+
+Who is allowed to assume this role?
+
+Example:
+
+EC2
+ ↓
+Can assume
+ ↓
+S3AccessRole
+
+The trust policy establishes that relationship.
+
+2. Permissions policy
+
+Answers:
+
+What can the role do after it is assumed?
+
+Example:
+
+S3AccessRole
+ ↓
+Permissions policy
+ ↓
+s3:GetObject
+This distinction is extremely important
+             IAM ROLE
+                 │
+       ┌─────────┴─────────┐
+       ↓                   ↓
+ Trust Policy       Permissions Policy
+       ↓                   ↓
+ WHO can assume?       WHAT can it do?
+Memory trick
+
+Trust = WHO
+Permissions = WHAT
+
+10. Example: EC2 + S3
+
+Suppose an EC2 instance needs to read files from S3.
+
+Architecture:
+
+              AWS
+               │
+          ┌────┴────┐
+          │   EC2   │
+          └────┬────┘
+               │
+          assumes role
+               ↓
+        ┌──────────────┐
+        │ IAM Role     │
+        │ S3ReadRole   │
+        └──────┬───────┘
+               │
+       Permissions Policy
+               ↓
+        s3:GetObject
+               ↓
+          S3 Bucket
+
+The trust policy says:
+
+EC2 is allowed to assume this role.
+
+The permissions policy says:
+
+Once assumed, the role can read objects from this S3 bucket.
+
+11. Least Privilege ⭐⭐⭐
+
+This is one of the most important IAM principles for your exam.
+
+Least privilege means:
+
+Give an identity only the permissions it actually needs.
+
+Suppose an application only needs to read S3 objects.
+
+❌ Bad:
+
+AdministratorAccess
+
+✅ Better:
+
+s3:GetObject
+
+on the required bucket.
+
+Why?
+
+If credentials are compromised:
+
+Excessive permissions
+        ↓
+Large blast radius
+
+Whereas:
+
+Least privilege
+        ↓
+Limited permissions
+        ↓
+Limited damage
+12. Explicit Deny ⭐⭐⭐
+
+IAM has an important rule:
+
+Explicit Deny overrides Allow.
+
+Example:
+
+Policy 1:
+Allow s3:GetObject
+
+Policy 2:
+Deny s3:GetObject
+
+Final result:
+
+❌ Access denied
+
+Think:
+
+Explicit Deny
+      ↓
+OVERRIDES
+      ↓
+Allow
+
+This is a classic exam question.
+
+13. Authentication vs Authorization
+
+Another very common trap.
+
+Authentication
+
+Who are you?
+
+Example:
+
+Username + password
+MFA
+Authorization
+
+What are you allowed to do?
+
+Example:
+
+Can read S3
+Cannot delete S3 objects
+
+IAM handles both identity and authorization.
+
+Memory:
+
+Authentication = WHO
+Authorization = WHAT
+
+Don't confuse this with the role trust-policy shortcut:
+
+Trust policy = who can assume a specific role.
+
+14. IAM and AI Security
+
+Now connect this to the Responsible AI/Security material we just studied.
+
+Suppose an AI agent needs to access:
+
+S3
+DynamoDB
+Payment API
+
+IAM can control the AWS permissions of the agent/application identity.
+
+AI Agent
+   ↓
+IAM Role
+   ↓
+Limited permissions
+   ↓
+AWS resources
+
+Then you can have another layer:
+
+IAM
+ ↓
+Can the identity access the resource?
+
+and:
+
+AgentCore Policy
+ ↓
+Is the agent allowed to perform this particular action?
+
+and:
+
+Guardrails
+ ↓
+Is the model's input/output safe?
+
+These are different security layers.
+
+🧠 Final IAM mental model
+                    IAM
+                     │
+        ┌────────────┼────────────┐
+        ↓            ↓            ↓
+      User         Group         Role
+        │            │            │
+        │            │       Trust Policy
+        │            │            │
+        └────────────┴────────────┤
+                                  ↓
+                         Permissions Policy
+                                  ↓
+                         AWS Resources
+
+And remember:
+
+USER
+
+Who is the identity?
+
+GROUP
+
+Which users should share permissions?
+
+ROLE
+
+Which identity/service can temporarily assume permissions?
+
+TRUST POLICY
+
+Who can assume the role?
+
+PERMISSIONS POLICY
+
+What can the role/user do?
+
+LEAST PRIVILEGE
+
+Give only required permissions.
+
+EXPLICIT DENY
+
+Deny overrides Allow.

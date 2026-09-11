@@ -1,0 +1,603 @@
+5. Agentic AI Fundamentals
+1. What are AI Agents?
+Basic idea
+
+An AI agent is an AI system that can:
+
+Understand a goal → reason/plan → use tools → observe results → take further actions → complete the goal.
+
+A normal LLM typically works like:
+
+User
+ ↓
+Prompt
+ ↓
+LLM
+ ↓
+Response
+
+An agent works more like:
+
+User Goal
+    ↓
+   Agent
+    ↓
+Understand / Plan
+    ↓
+Choose Action
+    ↓
+Use Tool
+    ↓
+Observe Result
+    ↓
+Reason Again
+    ↓
+More Actions if needed
+    ↓
+Final Answer
+Example
+
+User says:
+
+"Find my order #1234 and cancel it."
+
+A normal LLM may respond:
+
+"I can't access your orders."
+
+An AI agent could:
+
+1. Understand request
+2. Identify order lookup is required
+3. Call Order API
+4. Find order #1234
+5. Check whether cancellation is allowed
+6. Call cancellation API
+7. Observe result
+8. Tell user whether cancellation succeeded
+
+The important point is that the agent isn't merely generating text.
+
+It can take actions using tools.
+
+Agent = Model + Tools + Instructions + Context + Loop
+
+A useful conceptual model is:
+
+                 ┌───────────────┐
+                 │   AI Agent    │
+                 │               │
+                 │ Foundation    │
+                 │ Model         │
+                 │      +        │
+                 │ Instructions  │
+                 │      +        │
+                 │ Tools         │
+                 │      +        │
+                 │ Memory/Context│
+                 └───────┬───────┘
+                         │
+              ┌──────────┼──────────┐
+              ↓          ↓          ↓
+           Search      API       Database
+
+The foundation model provides reasoning/generation capabilities, while tools allow the agent to interact with the outside world.
+
+2. Agent Workflow
+
+An agent generally follows an iterative loop.
+
+        ┌──────────────────┐
+        │   User's Goal    │
+        └────────┬─────────┘
+                 ↓
+        ┌──────────────────┐
+        │ Understand Goal  │
+        └────────┬─────────┘
+                 ↓
+        ┌──────────────────┐
+        │ Plan / Reason    │
+        └────────┬─────────┘
+                 ↓
+        ┌──────────────────┐
+        │ Select Tool      │
+        └────────┬─────────┘
+                 ↓
+        ┌──────────────────┐
+        │ Execute Tool     │
+        └────────┬─────────┘
+                 ↓
+        ┌──────────────────┐
+        │ Observe Result   │
+        └────────┬─────────┘
+                 ↓
+          Goal completed?
+           ↙          ↘
+         No            Yes
+         ↓              ↓
+   Plan again       Final answer
+
+This is why agentic systems are often described as iterative or autonomous.
+
+Example
+
+Goal:
+
+"Book me the cheapest flight to Delhi tomorrow."
+
+The agent may:
+
+Understand destination/date.
+Search available flights.
+Compare prices.
+Select an appropriate flight.
+Ask for confirmation if required.
+Book through an API.
+Return confirmation.
+
+The agent may need several reason → act → observe cycles.
+
+3. Planning and Reasoning
+
+An agent needs to determine:
+
+What steps should I take to accomplish the goal?
+
+Suppose:
+
+"Analyze this company's sales data and email me a summary."
+
+Possible plan:
+
+1. Access sales data
+2. Analyze data
+3. Generate summary
+4. Create email
+5. Send email
+
+The agent decides which tools/actions are needed and in what order.
+
+Planning vs simple generation
+
+LLM:
+
+"Here's how you could analyze the data..."
+
+Agent:
+
+"I'll analyze the data using the available tools and produce the result."
+
+Important
+
+Planning doesn't necessarily mean the agent generates a perfect fixed plan once.
+
+Modern agents can re-plan based on tool results.
+
+Example:
+
+Plan
+ ↓
+Tool result says data unavailable
+ ↓
+Re-plan
+ ↓
+Use another data source
+ ↓
+Continue
+4. Tool Use
+
+This is one of the most important agent concepts.
+
+A tool allows an agent to interact with an external system.
+
+Examples:
+
+Search API
+Calculator
+Database
+Weather API
+Payment API
+Email API
+Calendar API
+Company CRM
+
+Without tools:
+
+Agent → Generate response
+
+With tools:
+
+Agent
+ ↓
+Choose tool
+ ↓
+Tool executes
+ ↓
+Result returned
+ ↓
+Agent reasons using result
+Example
+
+User:
+
+"What's the weather in Pune?"
+
+Agent:
+
+Reason:
+I need current weather.
+
+Tool:
+Weather API
+
+Result:
+28°C, cloudy
+
+Response:
+"Pune is currently 28°C and cloudy."
+
+The LLM itself doesn't magically know the current weather. The tool supplies the external information.
+
+5. Memory
+
+Memory allows an agent to retain information across interactions or during a task.
+
+Example:
+
+Without memory
+
+User:
+
+My name is Rahul.
+
+Later:
+
+What's my name?
+
+Agent may not know unless that information is still present in its context.
+
+With memory
+Conversation
+   ↓
+Important information
+   ↓
+Memory
+   ↓
+Future interaction
+
+Agent can potentially remember:
+
+Name → Rahul
+Preference → vegetarian
+Preferred language → English
+Two useful categories
+
+Short-term / conversational memory
+
+Information needed during the current task/conversation.
+
+Long-term memory
+
+Information retained for future interactions.
+
+6. Context Engineering ⭐
+
+This is a newer AIF-C01 concept and worth understanding carefully.
+
+Prompt engineering
+
+Prompt engineering focuses primarily on:
+
+How do I write better instructions for the model?
+
+Example:
+
+"You are a customer-support assistant.
+Answer concisely and use bullet points."
+Context engineering
+
+Context engineering is broader:
+
+How do I provide the model/agent with the right information, instructions, tools, memory, and other context at the right time?
+
+Think:
+
+Prompt
+  +
+Relevant documents
+  +
+Conversation history
+  +
+Memory
+  +
+Tool results
+  +
+User information
+  +
+System instructions
+  ↓
+Useful context for the model
+Example
+
+Customer asks:
+
+"Why was my order rejected?"
+
+A good agent may need:
+
+System instructions
++
+Customer identity
++
+Order history
++
+Current order status
++
+Company refund policy
++
+Previous conversation
+
+Selecting and organizing the right context is context engineering.
+
+Exam shortcut
+
+Prompt engineering = optimize the instructions.
+Context engineering = optimize the information/context supplied to the model.
+
+7. Multi-Agent Systems
+
+Instead of one agent doing everything, multiple specialized agents can collaborate.
+
+Example:
+
+                    Supervisor Agent
+                         │
+          ┌──────────────┼──────────────┐
+          ↓              ↓              ↓
+     Research Agent  Finance Agent  Writing Agent
+          │              │              │
+       Search          Analysis        Report
+
+Suppose the user asks:
+
+"Analyze this company and prepare an investment report."
+
+Different agents could handle:
+
+Research Agent → gathers information
+Financial Agent → analyzes financial data
+Risk Agent → identifies risks
+Writer Agent → produces final report
+Why use multiple agents?
+Specialization
+Parallel processing
+Separation of responsibilities
+Complex workflows
+
+But it introduces additional challenges:
+
+Coordination
+Communication
+Security
+Cost
+More complex debugging
+Conflicting outputs
+8. Agent Communication Patterns
+
+When multiple agents work together, they need a way to communicate.
+
+Common conceptual patterns include:
+
+Sequential
+Agent A
+  ↓
+Agent B
+  ↓
+Agent C
+
+Example:
+
+Research → Analysis → Writing
+
+Parallel
+          Supervisor
+         /     |     \
+        ↓      ↓      ↓
+      Agent A Agent B Agent C
+        \      |      /
+         ↓     ↓     ↓
+          Aggregator
+
+Agents work simultaneously and results are combined.
+
+Useful when tasks are independent.
+
+Hierarchical
+          Manager Agent
+          /           \
+         ↓             ↓
+   Research Agent   Finance Agent
+      /     \           |
+     ↓       ↓          ↓
+  Search   Docs      Calculator
+
+A higher-level agent coordinates specialized agents.
+
+9. MCP — Model Context Protocol ⭐⭐⭐
+
+MCP = Model Context Protocol
+
+Think of MCP as a standardized way for AI applications/agents to connect to external tools and data sources.
+
+Instead of every AI application creating a completely different integration for every tool:
+
+Agent → Custom integration → Database
+Agent → Another custom integration → GitHub
+Agent → Another custom integration → Files
+
+MCP provides a standardized protocol/interface.
+
+Conceptually:
+
+             AI Application / Agent
+                      │
+                     MCP
+                      │
+        ┌─────────────┼─────────────┐
+        ↓             ↓             ↓
+     Database       Files        External Tool
+Why MCP?
+
+It can make tool/context integration:
+
+More standardized
+More reusable
+Easier to integrate
+Easier to discover/use across compatible systems
+Very important distinction
+
+MCP is not an AI model.
+
+It is a protocol for connecting AI systems with tools/context.
+
+10. Workflow Orchestration
+
+Orchestration means:
+
+Coordinating multiple steps, tools, agents, and processes to complete a larger workflow.
+
+Example:
+
+User Request
+     ↓
+Orchestrator
+     ↓
+Retrieve Data
+     ↓
+Analyze
+     ↓
+Call Specialist Agent
+     ↓
+Validate
+     ↓
+Generate Response
+
+The orchestrator determines:
+
+What happens
+In what order
+Which component performs each task
+How results move between steps
+What happens when something fails
+Example
+
+Insurance claim:
+
+Claim received
+      ↓
+Document extraction
+      ↓
+Fraud analysis
+      ↓
+Policy verification
+      ↓
+Risk assessment
+      ↓
+Human approval
+      ↓
+Payment
+
+The orchestration layer coordinates this workflow.
+
+🧠 Put everything together
+
+This is the mental model I want you to remember:
+
+                         USER GOAL
+                             │
+                             ↓
+                       ┌───────────┐
+                       │ AI AGENT  │
+                       └─────┬─────┘
+                             │
+                    ┌────────┴────────┐
+                    ↓                 ↓
+                Planning          Context
+                /Reasoning       Engineering
+                    │                 │
+                    └────────┬────────┘
+                             ↓
+                        Choose Tool
+                             │
+                             ↓
+                         MCP / Tools
+                             │
+                             ↓
+                      External System
+                             │
+                             ↓
+                         Tool Result
+                             │
+                             ↓
+                      Agent Reasons Again
+                             │
+                    ┌────────┴────────┐
+                    ↓                 ↓
+                 Memory          More Tools
+                    │                 │
+                    └────────┬────────┘
+                             ↓
+                         Final Result
+
+For complex tasks:
+
+                    Orchestrator
+                         │
+             ┌───────────┼───────────┐
+             ↓           ↓           ↓
+          Agent A     Agent B     Agent C
+             │           │           │
+             └───────────┼───────────┘
+                         ↓
+                       Result
+🎯 AIF-C01 memory shortcuts
+Concept	Think
+AI Agent	Goal → reason → act
+Agent workflow	Reason → tool → observe → repeat
+Planning	Decide steps
+Tool use	Take actions/access external systems
+Memory	Remember information
+Context engineering	Give the model the right context
+Multi-agent	Multiple specialized agents
+Communication patterns	How agents coordinate
+MCP	Standardized AI ↔ tools/context connection
+Orchestration	Coordinate the whole workflow
+One critical distinction
+
+Agent ≠ chatbot.
+
+A chatbot can simply:
+
+Question → Answer
+
+An agent can:
+
+Goal
+ ↓
+Reason
+ ↓
+Plan
+ ↓
+Use tools
+ ↓
+Observe
+ ↓
+Re-plan
+ ↓
+Act
+ ↓
+Complete goal
+
+That distinction is likely to matter in scenario questions.
+
+Next, we should move into Amazon Bedrock AgentCore, because now you have the conceptual foundation needed to understand why AgentCore has separate components such as Runtime, Identity, Policy, Memory, Gateway, Observability, and Evaluations.s
