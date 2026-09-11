@@ -1,0 +1,386 @@
+1. What is Amazon EC2?
+
+EC2 = Elastic Compute Cloud
+
+It provides virtual servers (instances) in AWS.
+
+Think:
+
+Your application
+      ↓
+   EC2 instance
+      ↓
+ Virtual server
+      ↓
+CPU + RAM + Storage + Network
+
+You choose the compute capacity you need and run applications on it.
+
+2. EC2 Instance
+
+An EC2 instance is a virtual machine running in AWS.
+
+For example:
+
+EC2 Instance
+├── CPU
+├── Memory
+├── Operating System
+├── Network
+└── Storage
+
+You can run:
+
+Web applications
+APIs
+Backend services
+Databases (though managed DBs are usually preferred)
+ML inference applications
+Development environments
+3. Instance Types ⭐
+
+EC2 offers different instance families optimized for different workloads.
+
+Conceptually:
+
+Type	Optimized for
+General purpose	Balanced CPU/memory
+Compute optimized	High CPU
+Memory optimized	Large memory
+Storage optimized	High storage I/O
+Accelerated computing	GPU/AI workloads
+
+For AI/ML:
+
+CPU instance → traditional/general workloads
+
+GPU instance → deep learning / accelerated inference
+
+Specialized accelerator → AI-specific workloads
+Example
+
+If you're running a large deep-learning inference workload that benefits from GPU acceleration:
+
+→ choose an appropriate GPU-enabled EC2 instance.
+
+4. AMI ⭐
+
+AMI = Amazon Machine Image
+
+An AMI is a template used to launch EC2 instances.
+
+It can contain:
+
+Operating system
+Software
+Configuration
+Required applications
+
+Think:
+
+AMI
+ ↓
+Template
+ ↓
+Launch
+ ↓
+EC2 Instance
+
+Example:
+
+Ubuntu AMI
+     ↓
+EC2
+     ↓
+Ubuntu virtual server
+Memory shortcut
+
+AMI = template for an EC2 instance
+
+5. Security Groups ⭐⭐⭐
+
+A Security Group acts as a virtual firewall for EC2 instances.
+
+It controls network traffic at the instance level.
+
+Example:
+
+Internet
+   ↓
+Security Group
+   ↓
+EC2
+
+You can specify rules such as:
+
+SSH    → TCP 22
+HTTP   → TCP 80
+HTTPS  → TCP 443
+
+For example:
+
+Inbound:
+TCP 443 → Allow
+TCP 22  → Allow from specific admin IP
+6. Security Group vs IAM
+
+Very important distinction.
+
+IAM
+
+Controls:
+
+Who can perform AWS API actions/access AWS resources?
+
+User/Role
+   ↓
+IAM
+   ↓
+AWS permissions
+Security Group
+
+Controls:
+
+What network traffic can reach/leave the EC2 instance?
+
+Network traffic
+      ↓
+Security Group
+      ↓
+EC2
+
+So:
+
+IAM = permissions
+Security Group = network traffic
+
+Don't mix them.
+
+7. IAM Role with EC2 ⭐⭐⭐
+
+This connects directly to what we just learned.
+
+Suppose your EC2 application needs to read an S3 bucket.
+
+Bad approach
+EC2
+ ↓
+Hard-coded IAM access keys ❌
+ ↓
+S3
+Recommended approach
+EC2
+ ↓
+IAM Role
+ ↓
+Temporary credentials
+ ↓
+S3
+
+The role might have:
+
+s3:GetObject
+
+for a specific bucket.
+
+This follows least privilege.
+
+Exam question pattern
+
+An EC2 application needs access to S3 without storing long-term credentials.
+
+Answer:
+
+IAM role attached to the EC2 instance.
+
+8. EBS
+
+EBS = Elastic Block Store
+
+It provides persistent block storage for EC2.
+
+Think:
+
+EC2
+ │
+ └── EBS volume
+       ↓
+   Persistent storage
+
+Examples:
+
+OS disk
+Application files
+Databases running on EC2
+S3 vs EBS
+S3	EBS
+Object storage	Block storage
+Access through APIs	Attached to EC2
+Great for datasets/files	Great for instance disks
+Highly scalable object storage	Persistent volume for EC2
+Memory
+
+S3 = objects
+EBS = blocks
+
+9. Elastic IP
+
+An Elastic IP is a static public IPv4 address that can be associated with an EC2 instance or network interface.
+
+Normally, public IP addresses can change when an instance is stopped and started.
+
+Elastic IP can provide a persistent public IPv4 address.
+
+For modern architectures, however, it's often preferable to put services behind load balancers rather than relying directly on a fixed public IP.
+
+10. EC2 Auto Scaling ⭐⭐
+
+You don't always want one EC2 instance.
+
+Suppose traffic increases:
+
+Normal traffic:
+EC2 × 2
+
+High traffic:
+EC2 × 6
+
+EC2 Auto Scaling can automatically adjust the number of instances based on defined conditions.
+
+Traffic increases
+       ↓
+Auto Scaling
+       ↓
+Launch instances
+
+When demand decreases:
+
+Traffic decreases
+       ↓
+Auto Scaling
+       ↓
+Terminate unnecessary instances
+
+Benefits:
+
+Scalability
+Availability
+Cost optimization
+11. Load Balancer + EC2
+
+A common architecture:
+
+                 Users
+                   ↓
+            Load Balancer
+             /     |     \
+            ↓      ↓      ↓
+          EC2    EC2    EC2
+
+The load balancer distributes traffic across instances.
+
+This improves:
+
+Availability
+Scalability
+Fault tolerance
+12. EC2 and AI/ML
+
+EC2 can be used for AI workloads when you need control over the compute environment.
+
+For example:
+
+S3
+ ↓
+Training data
+ ↓
+EC2 GPU instance
+ ↓
+ML workload
+ ↓
+Model
+
+But if the question asks for a fully managed ML platform for building, training and deploying models, that's generally:
+
+→ Amazon SageMaker AI
+
+EC2 vs SageMaker
+EC2	SageMaker
+Virtual compute	Managed ML platform
+More infrastructure control	More managed ML capabilities
+You manage more setup	AWS manages much of ML infrastructure
+Can run ML software	Built specifically for ML lifecycle
+13. EC2 Security Layers
+
+A useful mental model:
+
+                 EC2
+                  │
+      ┌───────────┼───────────┐
+      ↓           ↓           ↓
+     IAM      Security      Encryption
+     Role       Group        / EBS
+      ↓           ↓           ↓
+ AWS access    Network       Data
+ permissions    traffic      protection
+IAM Role
+
+Who/what can access AWS resources?
+
+Security Group
+
+What network traffic is allowed?
+
+Encryption
+
+Can someone read the stored data without the key?
+
+These solve different problems.
+
+🔥 AIF-C01 exam traps
+"EC2 needs S3 access."
+
+→ IAM role, not hard-coded access keys.
+
+"Restrict inbound traffic to EC2."
+
+→ Security Group
+
+"Template used to launch EC2."
+
+→ AMI
+
+"Persistent block storage for EC2."
+
+→ EBS
+
+"Automatically add/remove EC2 instances based on demand."
+
+→ Auto Scaling
+
+"Distribute traffic across multiple EC2 instances."
+
+→ Elastic Load Balancing
+
+"Managed ML platform rather than raw virtual servers."
+
+→ SageMaker AI
+
+"GPU-based compute for AI workloads."
+
+→ Accelerated computing EC2 instances
+
+🧠 The 7 things to remember
+
+EC2 = virtual server
+AMI = instance template
+Security Group = network firewall
+IAM Role = AWS permissions for applications/services
+EBS = block storage
+Auto Scaling = adjust instance count
+Load Balancer = distribute traffic
+
+And the most important security distinction:
+
+IAM → authorization to AWS resources/actions
+Security Group → network traffic to/from EC2

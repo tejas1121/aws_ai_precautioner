@@ -1,0 +1,466 @@
+AWS Lambda is a serverless, event-driven compute service that runs your code without you managing servers.
+
+Think:
+
+Event
+  ↓
+Lambda Function
+  ↓
+Code executes
+  ↓
+Result
+
+You provide the code; AWS manages the underlying servers.
+
+1. What does "serverless" mean?
+
+It doesn't mean there are no servers.
+
+It means:
+
+You don't have to provision or manage the servers yourself.
+
+AWS handles:
+
+Servers
+Operating system infrastructure
+Capacity management
+Scaling
+Much of the infrastructure maintenance
+
+You mainly focus on your function/code.
+
+2. Lambda Function
+
+The unit of execution is a Lambda function.
+
+Example:
+
+Lambda Function
+      ↓
+Python code
+      ↓
+Process image
+      ↓
+Save result to S3
+
+You can write Lambda functions in supported runtimes such as Python, Node.js, Java, etc.
+
+3. Event-Driven Architecture ⭐⭐⭐
+
+Lambda is commonly triggered by events.
+
+For example:
+
+S3
+ ↓
+Object uploaded
+ ↓
+Lambda
+ ↓
+Process image
+
+Other possible event sources include:
+
+Amazon S3
+Amazon API Gateway
+Amazon EventBridge
+Amazon SQS
+Amazon SNS
+Amazon DynamoDB
+
+Conceptually:
+
+Event Source
+     ↓
+Lambda
+     ↓
+Business Logic
+4. Your Previous Image-Processing Project
+
+You actually worked with this architecture before.
+
+Your serverless image-processing pipeline was roughly:
+
+User
+ ↓
+S3
+ ↓
+API Gateway
+ ↓
+Lambda
+ ↓
+Image Processing
+ ↓
+S3 output bucket
+
+Lambda could use a library such as Pillow to process the image.
+
+This is a classic Lambda use case.
+
+5. Lambda + API Gateway
+
+Lambda can be used as a backend for APIs.
+
+Client
+  ↓
+API Gateway
+  ↓
+Lambda
+  ↓
+Database / S3 / Other AWS services
+
+For example:
+
+POST /upload
+       ↓
+API Gateway
+       ↓
+Lambda
+       ↓
+Process request
+       ↓
+Response
+
+This allows you to build a serverless API without maintaining an EC2 server.
+
+6. Lambda Scaling ⭐⭐⭐
+
+One of Lambda's major advantages is automatic scaling.
+
+Suppose:
+
+10 requests
+   ↓
+Lambda
+
+Later:
+
+10,000 requests
+   ↓
+Lambda
+
+AWS can create multiple concurrent executions to handle the workload, subject to Lambda quotas/concurrency limits.
+
+Conceptually:
+
+                Lambda
+              /   |   \
+             ↓    ↓    ↓
+           Exec Exec Exec
+             ... many ...
+
+You don't manually launch EC2 instances for each request.
+
+7. Lambda is Stateless ⭐⭐
+
+Lambda execution environments should generally be treated as stateless.
+
+Don't rely on local memory/storage as permanent application state.
+
+If you need persistent data:
+
+Lambda
+  ↓
+S3 / DynamoDB / RDS
+
+For example:
+
+Lambda
+ ↓
+Store file → S3
+Store record → DynamoDB
+8. Lambda Execution Role ⭐⭐⭐
+
+This connects directly to the IAM topic we just studied.
+
+Suppose Lambda needs to read from S3.
+
+You shouldn't put an IAM user's long-term access keys into the Lambda code.
+
+❌ Bad:
+
+Lambda
+ ↓
+Hard-coded access key ❌
+ ↓
+S3
+
+✅ Recommended:
+
+Lambda
+ ↓
+IAM Execution Role
+ ↓
+Permissions
+ ↓
+S3
+
+The execution role defines what AWS resources the Lambda function can access.
+
+Example:
+
+Lambda Role
+     ↓
+Allow
+     ↓
+s3:GetObject
+     ↓
+Specific S3 bucket
+Remember
+
+Lambda execution role = permissions the Lambda function gets when it runs.
+
+9. Lambda vs EC2 ⭐⭐⭐
+
+This is very important.
+
+Lambda	EC2
+Serverless	Virtual server
+Run functions	Run applications/OS
+Event-driven	General-purpose compute
+AWS manages infrastructure	You manage more infrastructure
+Automatic scaling	Configure scaling yourself
+Pay based on execution/usage	Pay for provisioned instance usage
+Short-lived/stateless execution model	Long-running workloads possible
+When Lambda?
+
+"Run this code when an event occurs."
+
+When EC2?
+
+"I need a virtual server and control over the operating environment."
+
+10. Lambda vs SageMaker
+
+Since you're studying AI:
+
+Lambda
+
+Best for:
+
+Event-driven processing
+API logic
+Lightweight transformations
+Automation
+Serverless workflows
+SageMaker
+
+Best for:
+
+ML development
+Training
+Model deployment
+ML inference
+Model monitoring
+ML lifecycle
+
+So:
+
+Lambda executes functions.
+SageMaker manages the ML lifecycle.
+
+Lambda can still be part of an AI architecture.
+
+11. Lambda and AI/GenAI
+
+Lambda can act as the glue/orchestration layer around AI services.
+
+Example:
+
+User
+ ↓
+API Gateway
+ ↓
+Lambda
+ ↓
+Amazon Bedrock
+ ↓
+Foundation Model
+ ↓
+Lambda
+ ↓
+Response
+
+Lambda could:
+
+Validate input
+Call Bedrock
+Process the response
+Access DynamoDB
+Access S3
+Apply business logic
+
+The foundation model is not Lambda.
+
+Lambda is the compute/function layer around it.
+
+12. Lambda Pricing Concept ⭐⭐
+
+Lambda generally follows a pay-for-use model.
+
+You are charged based on factors such as:
+
+Number of requests
+Compute duration
+Allocated memory/resources
+
+This differs from an always-running EC2 instance where you generally pay for the instance's running capacity.
+
+Exam shortcut
+
+Lambda → pay for execution/usage
+EC2 → pay for provisioned compute capacity
+
+Exact pricing isn't usually the focus of AIF-C01.
+
+13. Lambda Layers
+
+A Lambda Layer allows you to package reusable code/dependencies separately from your function code.
+
+Conceptually:
+
+Lambda Function
+      +
+Lambda Layer
+      ↓
+Execution
+
+Example:
+
+Function code
+      +
+Pillow library
+      ↓
+Image processing
+
+This is relevant to the issue you previously encountered with the Pillow/PIL dependency.
+
+A layer can contain libraries/dependencies needed by the function.
+
+14. Lambda Environment Variables
+
+You can use environment variables to provide configuration values to a Lambda function.
+
+Example:
+
+DATABASE_URL
+BUCKET_NAME
+API_CONFIG
+
+But don't treat ordinary environment variables as a secure replacement for a secrets-management system.
+
+For sensitive credentials/secrets, AWS services such as Secrets Manager are more appropriate.
+
+15. Lambda Timeout
+
+Lambda functions have a maximum execution duration.
+
+Therefore, Lambda is not the natural choice for workloads requiring arbitrarily long-running processes.
+
+If you have:
+
+Very long-running workload
+
+you may need another compute/service architecture.
+
+Exam idea
+
+If the question emphasizes:
+
+short-lived, event-driven execution
+
+→ Lambda is a strong candidate.
+
+16. Lambda + Security
+
+Security architecture:
+
+User
+ ↓
+API Gateway
+ ↓
+Lambda
+ ↓
+IAM Execution Role
+ ↓
+S3 / DynamoDB / Bedrock
+
+Possible controls:
+
+IAM execution role
+Least privilege
+Encryption
+API authentication/authorization
+VPC/network controls where needed
+Logging/monitoring
+
+Again:
+
+IAM controls what Lambda can access.
+
+🔥 AIF-C01 Exam Traps
+Q: "Execute code when an S3 object is uploaded."
+
+→ Lambda
+
+Q: "Run backend logic without managing servers."
+
+→ Lambda
+
+Q: "Need a virtual machine with OS-level control."
+
+→ EC2
+
+Q: "Lambda needs access to S3."
+
+→ Lambda execution role
+
+Q: "Need persistent object storage."
+
+→ S3
+
+Q: "Need to run ML training."
+
+→ SageMaker AI, not Lambda
+
+Q: "Need to invoke a foundation model from serverless application logic."
+
+→ Lambda can call Amazon Bedrock
+
+Q: "Need reusable dependencies for multiple Lambda functions."
+
+→ Lambda Layers
+
+🧠 The core memory
+EC2
+→ Virtual server
+→ More infrastructure control
+
+Lambda
+→ Serverless function
+→ Event-driven
+→ Automatic scaling
+→ Pay for execution
+
+IAM Role
+→ Permissions for Lambda
+
+S3
+→ Object storage
+
+API Gateway
+→ API entry point
+
+Bedrock
+→ Foundation model access
+
+The architecture to remember for AIF-C01 is:
+
+API Gateway → Lambda → Bedrock
+
+and:
+
+Lambda → IAM Execution Role → AWS resources
+
+Those two patterns cover a lot of AWS AI/security scenario questions.
