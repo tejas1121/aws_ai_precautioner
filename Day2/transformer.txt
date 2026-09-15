@@ -1,0 +1,473 @@
+Transformer is one of the most important architectures behind modern LLMs and foundation models. For AIF-C01, you need to understand the conceptual architecture, attention, encoder/decoder, and why Transformers are useful—not the mathematics.
+
+1. What is a Transformer?
+
+A Transformer is a deep learning architecture designed primarily for processing sequential data, especially language.
+
+It was introduced in the paper "Attention Is All You Need" and became the foundation for models such as:
+
+GPT
+BERT
+T5
+Many modern LLMs
+
+The key innovation is:
+
+Self-attention
+
+Instead of processing a sentence strictly one word at a time like a traditional RNN, a Transformer can consider relationships between different tokens.
+
+2. Why Were Transformers Needed?
+
+Before Transformers, RNNs/LSTMs were commonly used for language.
+
+Consider:
+
+"The student went to the bank because he needed to deposit money."
+
+To understand "bank", the model needs to consider surrounding words such as "deposit money."
+
+Traditional recurrent architectures process sequences step-by-step and can struggle with long-range dependencies.
+
+Transformers use attention to directly model relationships between tokens.
+
+3. Basic Transformer Architecture
+
+The original Transformer has two major components:
+
+                TRANSFORMER
+                    │
+          ┌─────────┴─────────┐
+          ↓                   ↓
+       ENCODER             DECODER
+          │                   │
+          ↓                   ↓
+    Understand input     Generate output
+Encoder
+
+Primarily responsible for understanding/representing the input.
+
+Decoder
+
+Primarily responsible for generating output.
+
+4. Encoder
+
+A simplified encoder layer contains:
+
+Input Tokens
+     ↓
+Input Embeddings
+     ↓
+Positional Information
+     ↓
+Self-Attention
+     ↓
+Feed-Forward Network
+     ↓
+Output Representation
+
+Multiple encoder layers can be stacked.
+
+What does the encoder do?
+
+It creates contextual representations of the input.
+
+For example:
+
+"I went to the bank."
+
+The representation of bank can incorporate surrounding context.
+
+5. Decoder
+
+A simplified decoder contains:
+
+Previous Output Tokens
+        ↓
+Output Embeddings
+        ↓
+Masked Self-Attention
+        ↓
+Cross-Attention
+        ↓
+Feed-Forward Network
+        ↓
+Next Token
+
+The decoder generates output step by step.
+
+For example:
+
+"The"
+ ↓
+"The cat"
+ ↓
+"The cat sat"
+ ↓
+"The cat sat on"
+...
+
+Each step predicts the next token based on the available context.
+
+6. Self-Attention ⭐
+
+This is the most important Transformer concept.
+
+Self-attention allows each token to determine which other tokens in the input are relevant to it.
+
+Example:
+
+"The animal didn't cross the road because it was tired."
+
+The model needs to determine what "it" refers to.
+
+Attention helps establish relationships between tokens.
+
+Conceptually:
+
+The animal didn't cross the road because it was tired
+ ↑        ↑                              ↑
+ └──────────── attention relationship ──┘
+
+The model assigns different levels of importance to different tokens.
+
+Simple definition for exam
+
+Self-attention allows a model to determine the relevance of different tokens to one another when processing a sequence.
+
+7. Query, Key, Value
+
+You may encounter Q, K, V in AIF-C01 material.
+
+Attention uses:
+
+Query (Q)
+Key (K)
+Value (V)
+
+Think of it like a search system:
+
+Query
+
+"What information am I looking for?"
+
+Key
+
+"What does each piece of information represent?"
+
+Value
+
+"What information should I retrieve?"
+
+Conceptually:
+
+Query
+  ↓
+Compare with Keys
+  ↓
+Attention scores
+  ↓
+Weight Values
+  ↓
+Contextual representation
+
+You generally do not need to calculate Q/K/V matrices for AIF-C01.
+
+8. Attention Scores
+
+The model calculates how relevant different tokens are to each other.
+
+For example:
+
+"The cat sat on the mat."
+
+           cat   sat   mat
+"cat"      HIGH  HIGH  LOW
+"mat"      LOW   LOW   HIGH
+
+These relationships help produce contextual representations.
+
+9. Positional Encoding / Positional Information
+
+There is an important issue:
+
+Transformers process tokens in parallel and don't inherently know the order of tokens just from the token identities.
+
+Consider:
+
+"Dog bites man"
+
+vs.
+
+"Man bites dog"
+
+Same words, completely different meaning.
+
+The model needs information about position/order.
+
+Transformers therefore incorporate positional information into token representations.
+
+Memory
+
+Attention = relationships
+
+Positional information = order
+
+10. Feed-Forward Network
+
+After attention, the representation passes through a feed-forward neural network.
+
+Simplified:
+
+Input
+ ↓
+Attention
+ ↓
+Feed-Forward Network
+ ↓
+Output
+
+The feed-forward layers perform additional transformations on the representations.
+
+For AIF-C01, don't worry about the detailed matrix mathematics.
+
+11. Residual Connections & Layer Normalization
+
+Transformer layers commonly use:
+
+Residual/skip connections
+
+Allow information from earlier layers to flow forward more easily.
+
+Conceptually:
+
+Input ───────────────┐
+  ↓                  │
+Attention            │
+  ↓                  │
+Add ←────────────────┘
+
+This helps train deep networks.
+
+Layer normalization
+
+Helps stabilize the neural network's activations and training.
+
+You may see:
+
+Attention → Add & Norm → Feed Forward → Add & Norm
+
+That's the conceptual structure you should recognize.
+
+12. Encoder-Only vs Decoder-Only vs Encoder-Decoder
+
+This is exam-relevant.
+
+Encoder-only
+
+Primarily focused on understanding/representing input.
+
+Example:
+
+BERT
+
+Common uses:
+
+Classification
+Sentiment analysis
+Search
+Entity recognition
+Decoder-only
+
+Primarily focused on generating text.
+
+Example:
+
+GPT
+
+Common uses:
+
+Text generation
+Chat
+Code generation
+Completion
+
+This is the architecture family you'll commonly associate with modern generative LLMs.
+
+Encoder-decoder
+
+Uses both components.
+
+Commonly useful for:
+
+Translation
+Summarization
+Sequence-to-sequence tasks
+
+Example:
+
+T5
+
+13. GPT vs BERT
+
+This distinction is very useful for your exam.
+
+	GPT	BERT
+Architecture	Decoder-only Transformer	Encoder-only Transformer
+Main strength	Generation	Understanding
+Typical task	Text generation	Classification/understanding
+Attention	Causal/masked self-attention	Bidirectional self-attention
+Generative chatbot	✅	❌ Primarily not designed for open-ended generation
+Memory
+
+GPT → Generate
+
+BERT → Understand
+
+14. Why Transformers Are Powerful
+Parallel processing
+
+Unlike traditional RNNs, Transformers can process many input tokens in parallel during training.
+
+This makes large-scale training much more efficient.
+
+Long-range relationships
+
+Attention can directly connect tokens that are far apart.
+
+Scalability
+
+Transformer architecture scales effectively to very large models and datasets.
+
+This helped enable modern:
+
+LLMs
+Foundation models
+Generative AI
+15. Transformer vs RNN
+Transformer	RNN
+Attention-based	Recurrent/hidden-state based
+Parallelizable during training	Sequential processing
+Handles long-range relationships well	Can struggle with long dependencies
+Foundation of many modern LLMs	Older/common sequential architecture
+Highly scalable	More difficult to scale efficiently
+Exam scenario
+
+"An organization wants a modern architecture for a large language model that can efficiently capture relationships between distant tokens."
+
+Think:
+
+Transformer
+
+16. Transformer and Next-Token Prediction
+
+For a decoder-based LLM such as GPT:
+
+Prompt
+ ↓
+Tokenization
+ ↓
+Transformer
+ ↓
+Predict next token
+ ↓
+Add token to sequence
+ ↓
+Predict next token
+ ↓
+...
+
+Example:
+
+"The AWS service is"
+             ↓
+          "Amazon"
+             ↓
+"The AWS service is Amazon"
+             ↓
+          "Bedrock"
+
+This is why GPT-style models are called autoregressive: generated tokens become part of the context for subsequent predictions.
+
+17. Transformer ≠ LLM
+
+Important distinction:
+
+Transformer = architecture
+
+LLM = large language model
+
+An LLM can be built using the Transformer architecture.
+
+For example:
+
+GPT is a Transformer-based LLM.
+
+Similarly:
+
+BERT is a Transformer-based language model.
+
+So don't answer "Transformer" when the question asks for a model, and don't answer "LLM" when the question asks for an architecture.
+
+18. AIF-C01 Exam Traps 🚨
+Trap 1
+
+Transformers process every token strictly one after another.
+
+❌ That's characteristic of recurrent architectures. Transformers enable parallel processing during training.
+
+Trap 2
+
+Attention means the model gives equal importance to every token.
+
+❌ Attention calculates different relevance/weights.
+
+Trap 3
+
+BERT is primarily an autoregressive text-generation model.
+
+❌ BERT is primarily an encoder-based language understanding model.
+
+Trap 4
+
+GPT uses an encoder-only architecture.
+
+❌ GPT is associated with decoder-only Transformers.
+
+Trap 5
+
+Transformer and foundation model are the same thing.
+
+❌
+
+Transformer = architecture
+
+Foundation model = pretrained model
+
+🧠 Final Memory Map
+
+Remember this:
+
+                 TRANSFORMER
+                      │
+          ┌───────────┴───────────┐
+          ↓                       ↓
+       ENCODER                 DECODER
+     Understand               Generate
+          │                       │
+          └────── ATTENTION ──────┘
+                      │
+              Contextual meaning
+
+And the three architectures:
+
+BERT → Encoder-only → Understanding
+
+GPT → Decoder-only → Generation
+
+T5 → Encoder-decoder → Sequence-to-sequence
+
+One-line exam definition
+
+A Transformer is an attention-based neural-network architecture that efficiently models relationships between tokens and forms the foundation of many modern language and generative AI models.
