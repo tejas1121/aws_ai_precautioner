@@ -1,0 +1,120 @@
+1. What does Audit Manager do?
+
+Suppose your organization needs to demonstrate that its AWS environment follows a compliance framework.
+
+Audit Manager can:
+
+Collect evidence from AWS services
+Organize that evidence
+Map evidence to compliance controls
+Help prepare audit assessments
+
+Conceptually:
+
+AWS environment
+      ↓
+AWS Audit Manager
+      ↓
+Collect evidence
+      ↓
+Compliance controls
+      ↓
+Audit assessment
+2. Simple example
+
+Suppose an organization needs evidence that:
+
+"Access to AWS resources is properly controlled."
+
+Audit Manager can help collect relevant evidence from AWS activity/configuration and organize it for the audit process.
+
+It doesn't replace the auditor and doesn't automatically make your organization compliant.
+
+3. Audit Manager vs AWS Artifact
+
+🚨 Very important distinction.
+
+Service	Think
+AWS Artifact	Get AWS's compliance reports/documents
+AWS Audit Manager	Collect/manage your environment's evidence for audits
+Example
+
+"We need AWS SOC 2 reports."
+
+→ Artifact
+
+"We need to collect evidence from our AWS environment for an audit."
+
+→ Audit Manager
+
+4. Audit Manager vs AWS Config
+
+These are also easy to confuse.
+
+AWS Config
+
+Is my AWS resource configured according to a rule?
+
+Example:
+
+S3 bucket
+   ↓
+Config rule
+   ↓
+Compliant / Non-compliant
+Audit Manager
+
+Can I collect and organize evidence needed to demonstrate compliance during an audit?
+
+Evidence
+   ↓
+Audit Manager
+   ↓
+Assessment / audit preparation
+
+So:
+
+Config → configuration compliance
+
+Audit Manager → audit evidence
+
+5. Audit Manager vs CloudTrail
+CloudTrail
+
+Records AWS API activity.
+
+"What action happened?"
+
+Audit Manager
+
+Can use evidence from AWS sources as part of an audit assessment.
+
+"What evidence do we have for this compliance control?"
+
+🧠 Memory trick
+Audit Manager = AUDIT
+
+If you see:
+
+Audit preparation
+Evidence collection
+Compliance controls
+Audit assessments
+Automated evidence collection
+
+→ AWS Audit Manager
+
+🔥 D5 service map
+If question says...	Answer
+Encryption keys	KMS
+AWS API activity	CloudTrail
+Resource configuration/compliance	Config
+Software vulnerabilities	Inspector
+Sensitive data in S3	Macie
+Threat/malicious activity detection	GuardDuty
+AWS compliance reports	Artifact
+Evidence for your audits	Audit Manager
+Access/permissions	IAM
+One-line definition
+
+AWS Audit Manager automates evidence collection and helps organize assessments against compliance frameworks, making audit preparation easier.
