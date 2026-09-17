@@ -1,0 +1,283 @@
+1. What is AWS KMS?
+
+AWS Key Management Service (KMS) is a managed AWS service used to create, manage, and control cryptographic keys.
+
+Simple idea:
+
+KMS = manages encryption keys
+
+If your application needs to encrypt sensitive data, KMS can manage the keys used for that encryption.
+
+Example
+
+Suppose you have:
+
+Customer data
+     ↓
+Encryption
+     ↓
+Encrypted data
+
+The encryption requires a cryptographic key.
+
+Instead of manually creating and protecting that key yourself:
+
+Application → AWS KMS → Encryption key
+
+KMS handles the key-management side.
+
+2. Why is KMS important for AI?
+
+AI applications often handle sensitive data:
+
+Customer information
+PII
+Financial data
+Medical information
+Training datasets
+Documents used by RAG/Knowledge Bases
+Model artifacts
+
+You may need to encrypt this data at rest.
+
+For example:
+
+S3
+ └── Customer documents
+        ↓
+   Encryption
+        ↑
+      KMS
+
+So an AIF-C01 question might say:
+
+An organization wants to protect sensitive AI training data stored in Amazon S3 using encryption keys that it can control. Which AWS service should it use?
+
+Answer → AWS KMS
+
+3. KMS vs Encryption
+
+This distinction is important.
+
+Encryption is the process of converting readable data into protected ciphertext.
+
+KMS is the AWS service that manages cryptographic keys used by encryption.
+
+Think:
+
+🔒 Encryption = the protection process
+🔑 KMS = key management
+
+KMS itself isn't simply "the encryption service."
+
+4. What is a KMS key?
+
+A KMS key is a cryptographic key managed through AWS KMS.
+
+At the exam level, remember:
+
+KMS
+ ↓
+Create/manage/control keys
+ ↓
+AWS services use those keys
+ ↓
+Data gets encrypted/decrypted
+
+Many AWS services integrate with KMS.
+
+Examples include:
+
+S3
+EBS
+RDS
+Lambda
+SageMaker
+CloudWatch Logs
+
+So you may see:
+
+"Encrypt data at rest using a customer-managed key."
+
+Think:
+
+KMS
+
+5. AWS-managed vs customer-managed KMS keys
+
+You should know this distinction.
+
+AWS managed key
+
+AWS creates/manages the key for a particular AWS service.
+
+Example:
+
+AWS service
+    ↓
+AWS-managed KMS key
+
+You have less control over the key.
+
+Customer managed key
+
+You create/manage the KMS key yourself.
+
+You get more control over things such as:
+
+Key policies
+Permissions
+Rotation configuration
+Lifecycle
+Usage
+
+Exam clue:
+
+"Customer wants more control over encryption keys."
+
+Think:
+
+Customer-managed KMS key
+
+6. Encryption at rest vs in transit
+
+Another common exam distinction.
+
+Encryption at rest
+
+Data is stored somewhere.
+
+S3
+RDS
+EBS
+Database
+   ↓
+Encrypted data
+
+KMS is commonly involved in managing the keys for encryption at rest.
+
+Encryption in transit
+
+Data is moving across a network.
+
+Client
+  ↓
+Encrypted connection
+  ↓
+AWS service
+
+Typically associated with TLS/SSL, not simply KMS.
+
+Exam trap
+
+Data is being transmitted securely between a client and server.
+
+Don't automatically choose KMS.
+
+Think:
+
+TLS → encryption in transit
+
+7. KMS vs Macie
+
+You already encountered this in D5.
+
+Service	Main purpose
+KMS	Manage encryption keys
+Macie	Discover/classify sensitive data in S3
+
+Example:
+
+Find PII in S3 → Macie
+
+Encrypt S3 data using managed keys → KMS
+
+8. KMS vs IAM
+
+Another important distinction:
+
+Service	Question it answers
+IAM	Who is allowed to access something?
+KMS	How are encryption keys managed?
+
+They can work together.
+
+User/Application
+       ↓
+      IAM
+       ↓
+Permission to use KMS key
+       ↓
+      KMS
+       ↓
+Encryption key
+
+So:
+
+IAM = authorization
+
+KMS = cryptographic key management
+
+9. KMS + S3 example
+
+Imagine an AI company stores training data:
+
+             ┌─────────────┐
+             │   Amazon S3 │
+             │ Training    │
+             │ Data        │
+             └──────┬──────┘
+                    │
+                 Encrypt
+                    │
+                    ▼
+              ┌───────────┐
+              │    KMS    │
+              │    Key    │
+              └───────────┘
+
+The data is encrypted at rest, while KMS manages the key.
+
+This is exactly the kind of conceptual relationship AIF-C01 can test.
+
+🧠 AIF-C01 Memory Trick
+
+Remember:
+
+KMS = KEY
+
+Key
+Management
+Service
+
+If the question contains:
+
+encryption keys
+manage cryptographic keys
+customer-managed encryption key
+encrypt data at rest
+key rotation/control
+protect keys
+
+→ KMS
+
+⚠️ Exam traps
+
+Q: Detect sensitive PII in S3
+→ ❌ KMS
+→ ✅ Macie
+
+Q: Control who can access S3
+→ ❌ KMS
+→ ✅ IAM
+
+Q: Secure network traffic
+→ ❌ KMS
+→ ✅ TLS/SSL
+
+Q: Obtain AWS compliance reports
+→ ❌ KMS
+→ ✅ AWS Artifact
+
+Q: Manage encryption keys
+→ ✅ KMS
