@@ -1,0 +1,81 @@
+🧭 AWS Trusted Advisor — AIF-C01
+
+AWS Trusted Advisor = recommendations for improving your AWS environment.
+
+Trusted Advisor checks your AWS environment and gives recommendations for best practices.
+
+It can help identify opportunities related to:
+
+Cost optimization
+Performance
+Security
+Fault tolerance
+Service quotas
+Operational excellence
+Example
+
+Suppose you have AWS resources with security configurations that could be improved.
+
+Trusted Advisor can provide recommendations such as:
+
+AWS Environment
+      ↓
+Trusted Advisor
+      ↓
+Checks
+      ↓
+Recommendations
+      ↓
+Improve security / cost / reliability / performance
+
+It is primarily a recommendation/advisory service rather than something that automatically fixes your environment.
+
+Trusted Advisor vs AWS Config
+
+This distinction matters.
+
+Service	Main purpose
+Trusted Advisor	Gives recommendations based on AWS best practices
+AWS Config	Tracks/evaluates resource configurations and compliance rules
+Example
+
+"Which AWS service can recommend ways to reduce unnecessary AWS costs?"
+
+→ Trusted Advisor
+
+"Which service checks whether an S3 bucket configuration complies with a defined rule?"
+
+→ AWS Config
+
+Trusted Advisor vs Audit Manager
+Service	Think
+Trusted Advisor	Recommendations
+Audit Manager	Audit evidence
+Artifact	AWS compliance reports
+
+So:
+
+Trusted Advisor → How can I improve my AWS environment?
+
+Audit Manager → What evidence do I have for my audit?
+
+Artifact → What compliance documentation does AWS provide?
+
+🧠 Memory trick
+
+Trusted Advisor = AWS expert giving you advice.
+
+If the question says:
+
+Best-practice recommendations
+Reduce AWS costs
+Improve security
+Improve fault tolerance
+Improve performance
+Service quota recommendations
+
+→ Trusted Advisor
+
+One-line definition
+
+AWS Trusted Advisor provides recommendations to help optimize AWS environments across areas such as cost, security, performance, fault tolerance, service quotas, and operational excellence.
