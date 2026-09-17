@@ -1,0 +1,74 @@
+📄 AWS Artifact — AIF-C01
+
+This one is very short. The main thing is to understand what Artifact is not.
+
+AWS Artifact = access AWS compliance reports and agreements.
+
+1. What does AWS Artifact do?
+
+AWS Artifact provides access to AWS security and compliance documentation.
+
+Examples include reports and certifications related to:
+
+SOC
+ISO
+PCI DSS
+Other AWS compliance documentation
+
+Think:
+
+AWS compliance evidence
+        ↓
+   AWS Artifact
+        ↓
+Reports / documents / agreements
+2. Why would a company use it?
+
+Suppose a company is building an AI application that handles customer information.
+
+Its compliance team asks:
+
+"Can we get AWS's compliance documentation to help demonstrate that the AWS services we're using meet relevant requirements?"
+
+They can use AWS Artifact to access AWS's compliance reports and documentation.
+
+3. Artifact does NOT make your application compliant
+
+🚨 This is the biggest exam trap.
+
+AWS Artifact provides AWS compliance information.
+
+It does not mean:
+
+"I used Artifact, therefore my application is compliant."
+
+The customer still has their own responsibilities under the AWS Shared Responsibility Model.
+
+4. Artifact vs CloudTrail
+
+These can appear together in governance questions.
+
+Service	Purpose
+AWS Artifact	AWS compliance reports/documentation
+AWS CloudTrail	Record AWS API activity for auditing
+Example
+
+"Obtain AWS SOC reports."
+
+→ Artifact
+
+"Determine who changed an IAM policy."
+
+→ CloudTrail
+
+5. Artifact vs IAM
+Service	Purpose
+IAM	Identity and access control
+Artifact	Compliance documentation
+
+Artifact doesn't manage permissions.
+
+6. Artifact vs KMS
+Service	Purpose
+KMS	Encryption key management
+Artifact	Compliance reports/documentation
