@@ -1,0 +1,154 @@
+AWS Config = resource configuration and compliance tracking.
+
+AWS Config tells you how your AWS resources are configured, how their configurations change over time, and whether they comply with defined rules.
+
+1. What does AWS Config do?
+
+Suppose you have an S3 bucket and someone changes its configuration.
+
+AWS Config can record the configuration state and changes:
+
+S3 Bucket
+   ↓
+AWS Config
+   ↓
+Configuration history
+   ↓
+"Who/what changed the configuration?"
+
+It can also evaluate resources against configuration rules.
+
+2. Configuration compliance
+
+Imagine your organization has a rule:
+
+"S3 buckets must not be publicly accessible."
+
+AWS Config can evaluate the resource against a rule and identify whether it is compliant.
+
+S3 Bucket
+    ↓
+AWS Config Rule
+    ↓
+Public access?
+    ↓
+❌ NON-COMPLIANT
+
+So:
+
+Config = configuration + compliance
+
+3. AWS Config vs CloudTrail
+
+🚨 Very important distinction.
+
+They can both appear in the same question.
+
+CloudTrail
+
+Records API activity/actions.
+
+"Who called PutBucketPolicy?"
+
+→ CloudTrail
+
+AWS Config
+
+Tracks the resource's configuration state and changes.
+
+"Is this S3 bucket configured according to our security rule?"
+
+→ AWS Config
+
+Think:
+
+CloudTrail = WHO DID WHAT
+
+Config = WHAT IS THE RESOURCE CONFIGURED LIKE
+
+4. AWS Config vs Inspector
+Service	Main question
+AWS Config	Is the resource configured correctly/compliantly?
+Inspector	Does the workload have vulnerabilities?
+
+Example:
+
+S3 bucket is publicly accessible against company policy
+
+→ Config
+
+EC2 has a vulnerable software package
+
+→ Inspector
+
+5. AWS Config vs Security Hub
+
+At AIF-C01 level:
+
+Config → resource configuration/compliance
+Security Hub → centralized view of security findings and security posture
+
+Don't confuse them.
+
+6. Why is Config relevant to AI?
+
+AI applications use many AWS resources:
+
+AI Application
+ ├── S3
+ ├── IAM
+ ├── EC2
+ ├── Lambda
+ └── SageMaker
+        ↓
+     AWS Config
+        ↓
+Configuration / compliance
+
+For example, an organization could have policies requiring certain resources to follow specific security configurations.
+
+Config helps identify resources that don't meet those configuration requirements.
+
+🧠 Memory trick
+CONFIG → Configuration
+
+If the question contains:
+
+Resource configuration
+Configuration history
+Configuration changes
+Compliance with configuration rules
+"Is this resource configured correctly?"
+
+→ AWS Config
+
+🔥 Exam scenarios
+
+Q: An organization wants to determine whether its S3 buckets comply with a rule requiring public access to be disabled.
+
+→ AWS Config
+
+Q: Security team wants to know which IAM/API action changed an S3 bucket policy.
+
+→ CloudTrail
+
+Q: Security team wants to identify vulnerabilities in an EC2 instance.
+
+→ Amazon Inspector
+
+Q: Security team wants to discover sensitive PII in S3.
+
+→ Amazon Macie
+
+The D5 security-service map
+IAM        → Access
+KMS        → Encryption keys
+CloudTrail → API activity
+Config     → Configuration/compliance
+Inspector  → Vulnerabilities
+Macie      → Sensitive data
+GuardDuty  → Threat detection
+Artifact   → AWS compliance reports
+One-line definition
+
+AWS Config continuously records and evaluates the configuration of AWS resources, helping organizations assess configuration compliance and track configuration changes.

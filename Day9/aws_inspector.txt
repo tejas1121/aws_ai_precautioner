@@ -1,0 +1,59 @@
+Yes, Amazon Inspector is worth knowing at a conceptual level for D5 security.
+
+Amazon Inspector = automated vulnerability management/scanning for AWS workloads.
+
+It helps identify software vulnerabilities and unintended network exposure in supported AWS resources.
+
+What does it look for?
+
+Think:
+
+AWS workload
+    ↓
+Amazon Inspector
+    ↓
+Security findings
+    ↓
+Vulnerabilities / exposure
+
+It can help identify vulnerabilities in things such as:
+
+EC2 instances
+Container images
+Lambda functions
+Inspector vs other security services
+
+This is where the exam can trick you.
+
+Service	Purpose
+Inspector	Find vulnerabilities/security findings
+GuardDuty	Detect suspicious/malicious activity
+Macie	Discover sensitive data in S3
+CloudTrail	Record AWS API activity
+IAM	Access control
+KMS	Encryption key management
+Artifact	AWS compliance reports
+Easy memory
+
+Inspector → "Is there a vulnerability?"
+
+GuardDuty → "Is something suspicious happening?"
+
+Macie → "Is sensitive data exposed/stored?"
+
+Example
+
+Question:
+An organization wants to automatically identify software vulnerabilities in its EC2 instances.
+
+→ Amazon Inspector ✅
+
+Question:
+An organization wants to detect potentially malicious activity in its AWS account.
+
+→ Amazon GuardDuty ✅
+
+Question:
+An organization wants to discover PII stored in S3.
+
+→ Amazon Macie ✅
