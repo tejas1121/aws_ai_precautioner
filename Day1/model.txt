@@ -1,0 +1,62 @@
+Generative Model Selection
+
+This addresses your VAE vs Transformer mistake.
+
+The key is not memorizing definitions alone. The exam gives you a requirement, and you identify the model architecture.
+
+Transformer → Text generation ⭐
+
+Best association:
+
+Text, language, conversations, summaries, translation, code
+
+LLMs such as GPT-style models use the Transformer architecture.
+
+Question clue:
+
+Generate thousands of unique product descriptions.
+
+→ Transformer
+
+Diffusion → Image generation ⭐
+
+Best association:
+
+Generate or modify images
+
+Example:
+
+Generate realistic product images from text prompts.
+
+→ Diffusion model
+
+GAN → Synthetic realistic data
+
+GAN = Generator + Discriminator
+
+Common association:
+
+Generate realistic synthetic images/data.
+
+The generator tries to create realistic samples while the discriminator tries to distinguish real from generated samples.
+
+VAE → Latent representation + generation
+
+VAE learns a latent representation of data and can generate new samples from that latent space.
+
+Common uses:
+
+Data generation
+Representation learning
+Reconstruction
+Anomaly detection
+🔥 Exam shortcut
+Requirement	Likely answer
+Generate paragraphs/text	Transformer
+Generate code	Transformer
+Chatbot/LLM	Transformer
+Generate images	Diffusion
+Image generation from noise	Diffusion
+Generate realistic synthetic images/data	GAN
+Learn latent representation	VAE
+Reconstruct/generate from latent space	VAE
