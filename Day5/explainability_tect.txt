@@ -1,0 +1,186 @@
+Topic 6 — Explainability Techniques 🔍
+
+This is the gap behind your Partial Dependence Plot (PDP) question.
+
+The core idea:
+
+Explainability = understanding why/how an ML model produces its predictions.
+
+For AIF-C01, focus on recognizing the technique from the scenario.
+
+1. Feature Importance
+
+Answers:
+
+"Which features are most influential on the model's predictions?"
+
+Example:
+
+A loan model predicts whether someone gets a loan.
+
+Feature             Importance
+──────────────────────────────
+Credit score           45%
+Income                 25%
+Debt ratio             20%
+Age                    10%
+
+This tells stakeholders which features matter most.
+
+Exam clue
+
+"Identify the most important features."
+
+→ Feature importance
+
+2. Partial Dependence Plot (PDP) ⭐
+
+PDP shows how a particular feature affects the model's average prediction, while averaging over the other features.
+
+Example:
+
+"How does increasing house size affect the model's predicted house price?"
+
+A PDP could show:
+
+Predicted price
+     ↑
+     │          /
+     │        /
+     │      /
+     │    /
+     │___/____________→ House size
+
+It helps explain the relationship between a feature and the model's prediction.
+
+Exam clue
+
+"Show how a feature affects predictions."
+
+→ PDP
+
+3. SHAP ⭐⭐⭐
+
+SHAP = SHapley Additive exPlanations
+
+SHAP explains the contribution of features to a prediction.
+
+It can answer:
+
+"Why did the model make THIS particular prediction?"
+
+Example:
+
+A model predicts:
+
+Loan = Denied
+
+SHAP might show:
+
+Credit score       → + approval
+High debt          → - approval
+Low income         → - approval
+Previous default   → - approval
+
+So SHAP helps determine how individual features contributed to a prediction.
+
+Exam clue
+
+"Explain why a specific prediction was made."
+
+→ SHAP is a strong candidate.
+
+4. LIME ⭐
+
+LIME = Local Interpretable Model-agnostic Explanations
+
+LIME explains an individual prediction locally by approximating the complex model with a simpler interpretable model around that particular instance.
+
+Think:
+
+LIME → Local explanation
+
+Example:
+
+Why did the model classify this particular email as spam?
+
+LIME can identify which features of that email contributed to the classification.
+
+Exam clue
+
+"Explain an individual prediction locally."
+
+→ LIME
+
+🔥 SHAP vs LIME
+
+This is where questions can get tricky.
+
+Both can explain individual predictions.
+
+	SHAP	LIME
+Main idea	Feature contribution based on Shapley values	Local approximation
+Explanation	Individual predictions + broader feature attribution	Individual/local prediction
+Key word	Contribution	Local
+
+For exam questions, don't rely solely on one keyword. Read the whole requirement.
+
+5. Interpretability vs Explainability
+
+These terms are related but shouldn't be treated as identical.
+
+Interpretability
+
+The model itself is relatively easy to understand.
+
+Examples:
+
+Linear regression
+Decision tree
+
+You can inspect the model's structure/parameters directly.
+
+Explainability
+
+Methods are used to explain predictions from potentially complex/black-box models.
+
+Examples:
+
+SHAP
+LIME
+PDP
+
+Think:
+
+Simple model
+   ↓
+Naturally understandable
+   ↓
+Interpretability
+
+Complex model
+   ↓
+Need explanation techniques
+   ↓
+Explainability
+🧠 Your exam cheat sheet
+Scenario	Likely concept
+"Which features are most important?"	Feature importance
+"How does feature X affect average predictions?"	PDP
+"Why did this particular prediction happen?"	SHAP / LIME
+"Provide a local explanation of an individual prediction"	LIME
+"Show feature contributions to a prediction"	SHAP
+"Model is inherently easy to understand"	Interpretability
+"Explain a black-box model"	Explainability
+⚠️ Your PDP question
+
+The question you showed earlier essentially asked for a method to provide transparency/explainability to stakeholders about the trained model.
+
+The options included:
+
+Training code
+Partial Dependence Plots
+Training data
+Convergence tables
+
+PDP was the appropriate choice because it provides a visual explanation of how model features influence predictions.
