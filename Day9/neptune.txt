@@ -1,0 +1,182 @@
+Topic 7 — Generative AI Evaluation Metrics 📊
+
+This is another area where the exam can give you a scenario and ask which evaluation method fits.
+
+The key is to identify what you're trying to measure.
+
+1. BLEU
+
+BLEU = Bilingual Evaluation Understudy
+
+Primarily measures how closely generated text matches a reference text, based largely on n-gram overlap.
+
+Common association:
+
+Machine translation
+
+Example:
+
+Reference:
+"The cat is sitting on the mat."
+
+Generated:
+"The cat sits on the mat."
+
+There is significant word/phrase overlap → potentially a good BLEU score.
+
+Exam clue
+
+"Evaluate machine translation against reference translations."
+
+→ BLEU
+
+2. ROUGE
+
+ROUGE = Recall-Oriented Understudy for Gisting Evaluation
+
+Commonly associated with text summarization.
+
+It compares generated summaries against reference summaries using measures such as word/phrase overlap.
+
+Exam clue
+
+"Evaluate whether a generated summary resembles the reference summary."
+
+→ ROUGE
+
+3. BERTScore
+
+BERTScore uses contextual embeddings to compare generated text with reference text.
+
+Unlike simple word overlap, it can recognize that different words can have similar meanings.
+
+Example:
+
+Reference: "The automobile is fast."
+
+Generated: "The car is quick."
+
+A simple lexical metric may see less overlap, while a semantic metric can recognize similarity.
+
+Exam clue
+
+"Evaluate semantic similarity between generated and reference text."
+
+→ BERTScore
+
+4. Perplexity
+
+Perplexity measures how well a language model predicts a sequence of tokens.
+
+Simplified:
+
+Lower perplexity generally means the model finds the text more predictable.
+
+It is useful for evaluating language-model fluency/prediction performance, but it does not directly establish factual correctness.
+
+⚠️ Important
+
+If the question says:
+
+"Which metric determines whether the answer is factually correct?"
+
+Don't choose perplexity.
+
+5. Faithfulness ⭐
+
+This is extremely important for RAG.
+
+Faithfulness asks:
+
+"Is the generated answer supported by the provided context/source?"
+
+Example:
+
+Knowledge base says:
+
+"The product warranty is 2 years."
+
+Model answers:
+
+"The product warranty is 5 years."
+
+The answer is not faithful to the source.
+
+Exam clue
+
+"Ensure generated answers are grounded in retrieved documents."
+
+→ Faithfulness
+
+6. Factual correctness
+
+This asks whether the generated answer is factually accurate.
+
+For a question-answering system:
+
+"What is the capital of France?"
+
+Generated:
+
+"Paris."
+
+→ Factually correct.
+
+If:
+
+"London."
+
+→ Factually incorrect.
+
+Your earlier question
+
+"Which metric is most appropriate for evaluating a question-answering system that should produce factually correct responses?"
+
+→ Faithfulness or factual correctness ✅
+
+7. Human evaluation
+
+Sometimes automated metrics aren't enough.
+
+Human evaluators can assess:
+
+Accuracy
+Relevance
+Helpfulness
+Coherence
+Safety
+Fluency
+Overall quality
+Exam clue
+
+"Experts manually assess whether responses are useful, accurate, and appropriate."
+
+→ Human evaluation
+
+🔥 The exam cheat sheet
+Requirement	Think
+Translation quality	BLEU
+Summarization / reference overlap	ROUGE
+Semantic similarity	BERTScore
+Language-model predictability	Perplexity
+Answer supported by retrieved context	Faithfulness
+Answer factually correct	Factual correctness
+Human judgment of quality	Human evaluation
+One major trap
+
+Don't confuse:
+
+Text similarity ≠ factual correctness
+
+For example:
+
+Reference:
+"The Earth is approximately 4.5 billion years old."
+
+Generated:
+"The Earth is approximately 4.5 billion years old and
+was discovered by Alexander the Great."
+
+The generated answer may have high textual similarity, but it contains a false claim.
+
+That's why evaluation needs to consider the actual requirement.

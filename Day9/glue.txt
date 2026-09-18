@@ -1,0 +1,128 @@
+Topic 15 — AWS Glue 🛠️
+
+Amazon Glue = serverless data integration and ETL service.
+
+For AIF-C01, the main thing is recognizing when a scenario is asking for data preparation/transformation.
+
+1. ETL
+
+ETL = Extract → Transform → Load
+
+Data sources
+    ↓
+  Extract
+    ↓
+  Transform
+    ↓
+    Load
+    ↓
+Data warehouse / data lake
+
+Example:
+
+Customer data is stored in multiple sources. The company needs to clean, transform, and combine the data before using it for ML.
+
+→ AWS Glue
+
+2. Glue Data Catalog ⭐
+
+The Glue Data Catalog stores metadata about datasets.
+
+It helps you understand:
+
+What datasets exist
+Where the data is located
+What the schema looks like
+Tables and columns
+Data types
+
+Think:
+
+Glue Catalog = metadata catalog
+
+Example:
+
+S3
+ │
+ ├── customers.csv
+ ├── orders.csv
+ └── products.csv
+
+       ↓
+
+Glue Data Catalog
+       ↓
+Metadata / schemas
+
+The actual data doesn't have to be stored in the Catalog. The Catalog stores metadata about the data.
+
+3. Glue vs S3
+
+This is important.
+
+S3
+
+Stores the actual data
+
+Glue
+
+Discovers, catalogs, transforms, and integrates data
+
+S3 → actual files/data
+Glue → metadata + ETL
+4. Glue vs Athena
+
+Another common exam trap.
+
+Athena
+
+Query data directly using SQL
+
+Example:
+
+"Run SQL queries on CSV files stored in S3 without moving the data."
+
+→ Athena
+
+Glue
+
+Prepare/transform/integrate the data
+
+Example:
+
+"Clean and transform the CSV data before loading it into a data warehouse."
+
+→ Glue
+
+They can work together:
+
+S3
+ ↓
+Glue Catalog
+ ↓
+Athena
+ ↓
+SQL query
+5. Glue vs SageMaker Data Wrangler
+
+Both can involve data preparation, but their typical emphasis differs.
+
+Glue
+
+Large-scale data integration and ETL.
+
+"Combine data from multiple sources and transform it."
+
+→ Glue
+
+SageMaker Data Wrangler
+
+Data preparation specifically within an ML workflow.
+
+It provides capabilities for:
+
+Data selection
+Transformation
+Visualization
+Feature engineering
+Preparing data for ML
